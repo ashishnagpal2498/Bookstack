@@ -12,6 +12,10 @@ Group project for 5709 Advanced Web services. Initial phase of the project.
     - Name:- Aiwin Charalil Manuel
     - Branch Name:- Aiwin_Charalil_Manuel
 
+3. Member 3
+    - Name:- Jinal Dave
+    - Branch Name:- jinal-dave
+
 **Note: Please make sure to add your name and branch details in the above section while making a contribution.**            
 
 ## Repository Setup Instructions        
