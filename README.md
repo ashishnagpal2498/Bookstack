@@ -1,12 +1,13 @@
-# CSCI 5709 Grp-13
+CSCI 5709 Grp-13
 
-## Description
+Description
 Group project for 5709 Advanced Web services. Initial phase of the project.
 
-## Contributors
-1. Member 1   
+Contributors
+
+1. Member 1
     - Name:- Ashish Nagpal
-    - Branch Name:- ashish-nagpal 
+    - Branch Name:- ashish-nagpal
 
 2. Member 2
     - Name:- Aiwin Charalil Manuel
@@ -24,9 +25,11 @@ Group project for 5709 Advanced Web services. Initial phase of the project.
     - Name:- Arihant Dugar
     - Branch Name:- arihant-dugar
 
+6. Member 6
+    - Name:- Yogish Honnadevipura Gopalakrishna
+    - Branch Name:- yogish
+
 **Note: Please make sure to add your name and branch details in the above section while making a contribution.**            
 
 ## Repository Setup Instructions        
-
-
 
