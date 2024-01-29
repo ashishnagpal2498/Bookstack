@@ -20,6 +20,10 @@ Group project for 5709 Advanced Web services. Initial phase of the project.
     - Name:- Abhinav Acharya Tirumala Vinjamuri
     - Branch Name:- Abhinav_Acharya
 
+5. Member 5
+    - Name:- Arihant Dugar
+    - Branch Name:- arihant-dugar
+
 **Note: Please make sure to add your name and branch details in the above section while making a contribution.**            
 
 ## Repository Setup Instructions        
