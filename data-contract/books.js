@@ -1,0 +1,35 @@
+[
+    {
+        id: "1",
+        title: "The Shawshank Redemption",
+        genre: "Drama",
+        year: "1994",
+        author: "Frank Darabont",
+        image: "path/to/image",
+        description: "Lorem ipsum dolor sit amet, consectetur",
+        date_available: "12/02/24",
+        available: "true",
+    },
+    {
+        id: "1",
+        title: "The Shawshank Redemption",
+        genre: "Drama",
+        year: "1994",
+        author: "Frank Darabont",
+        image: "path/to/image",
+        description: "Lorem ipsum dolor sit amet, consectetur",
+        date_available: "12/02/24",
+        available: "true",
+    },
+    {
+        id: "1",
+        title: "The Shawshank Redemption",
+        genre: "Drama",
+        year: "1994",
+        author: "Frank Darabont",
+        image: "path/to/image",
+        description: "Lorem ipsum dolor sit amet, consectetur",
+        date_available: "12/02/24",
+        available: "true",
+    }
+]
