@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  box-sizing:border-box
+}
+
+.container-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.container-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container-content-center {
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
