@@ -1,0 +1,30 @@
+.about-container {
+    padding: 25px;
+    background-color: #FCEAC6;
+    color: var(--white-color);
+    text-align: center;
+    height: 100vh;
+  }
+  
+  .about-container h1 {
+    color: black;
+    margin-top: 1px;
+  }
+  
+  .about-container p {
+    padding-top: 10px;
+    margin: 0%;
+    line-height: 1.6;
+    color: black;
+    text-align: center;
+    padding-left: 200px;
+    padding-right: 200px 
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .about-container {
+      padding: 15px;
+    }
+  }
+  
