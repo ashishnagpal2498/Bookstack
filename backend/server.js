@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
@@ -15,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
-// Schema and Model
+// Contact Schema and Model
 const ContactSchema = new mongoose.Schema({
   email: String,
   phone: String,
@@ -24,7 +25,14 @@ const ContactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model('Contact', ContactSchema);
 
-// Routes
+// FAQ Schema and Model
+const FaqSchema = new mongoose.Schema({
+  question: String,
+  answer: String,
+});
+const Faq = mongoose.model('Faq', FaqSchema);
+
+// Contact Route
 app.post('/api/contact', async (req, res) => {
   try {
     const newContact = new Contact(req.body);
@@ -35,5 +43,14 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+// FAQ Route to fetch FAQs
+app.get('/faqs', async (req, res) => {
+  try {
+    const faqs = await Faq.find();
+    res.json(faqs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

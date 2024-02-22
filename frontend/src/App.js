@@ -5,6 +5,7 @@ import { Navigation } from './components/layouts/Navigation';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/ContactUs';
+import Faq from './pages/Faq';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<Home />}/>
         <Route path="/about" element={<About />}/>
         <Route path="/contactus" element={<Contact />}/>
+        <Route path="/faq" element={<Faq />}/>
 
         
       </Routes>
