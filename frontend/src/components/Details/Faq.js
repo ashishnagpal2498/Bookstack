@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../stylesheets/faq.css';
+import '../../stylesheets/faq.css';
 
 const Faq = () => {
     const [faqs, setFaqs] = useState([]);
@@ -8,7 +8,7 @@ const Faq = () => {
 
     useEffect(() => {
         const fetchFAQs = async () => {
-            const response = await fetch('http://localhost:5000/faqs');
+            const response = await fetch('http://localhost:3000/faqs');
             const data = await response.json();
             setFaqs(data);
         };

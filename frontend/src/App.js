@@ -1,27 +1,29 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navigation } from './components/layouts/Navigation';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/ContactUs';
-import Faq from './pages/Faq';
+import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
+import { isAuthenticated } from './util';
+import Navbar from './components/Navbar';
+import { LateFeeSystemSearch, LateFeeSystemUserDetails } from './components/LateFeeSystem/AdminSide';
+import Home from './components/Details/Home';
+import About from './components/Details/About';
+import Contact from './components/Details/ContactUs';
+import Faq from './components/Details/Faq';
+import  Favorites  from './components/Favorites/Favorites';
 
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-    <Navigation/>
+    <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/about" element={<About />}/>
         <Route path="/contactus" element={<Contact />}/>
-        <Route path="/faq" element={<Faq />}/>
 
         
       </Routes>
-    </BrowserRouter>
+    </Router>
 
   );
 }

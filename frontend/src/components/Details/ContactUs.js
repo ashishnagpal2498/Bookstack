@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/contactus.css';
+import '../../stylesheets/contactus.css';
 
 const ContactUs = () => {
   const handleSubmit = async (event) => {
