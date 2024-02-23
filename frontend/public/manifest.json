@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "BookStack",
+  "name": "BookStack - An online book library",
   "icons": [
     {
       "src": "favicon.ico",
