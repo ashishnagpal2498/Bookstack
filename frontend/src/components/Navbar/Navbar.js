@@ -32,7 +32,7 @@ function Navbar() {
           <li><a href="/">Favorites</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/contactus">Contact Us</a></li>
-          {user ? <li><a href="#">Late Fee System</a></li> : null}
+          {user ? <li><a href="/adminLateFeeSystemSearch">Late Fee System</a></li> : null}
         </ul>
 
         <ul className="menu menu-auth">
