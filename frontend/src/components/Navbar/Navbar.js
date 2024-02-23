@@ -29,7 +29,7 @@ function Navbar() {
         <ul className="menu">
           <li><a href="/">Home</a></li>
           <li><a href="#">Books</a></li>
-          <li><a href="/">Favorites</a></li>
+          <li><a href="/favorites">Favorites</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/contactus">Contact Us</a></li>
           {user ? <li><a href="/adminLateFeeSystemSearch">Late Fee System</a></li> : null}
