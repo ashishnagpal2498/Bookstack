@@ -9,6 +9,8 @@ import About from './components/Details/About';
 import Contact from './components/Details/ContactUs';
 import Faq from './components/Details/Faq';
 import  Favorites  from './components/Favorites/Favorites';
+import BookLibrary from './components/Books/BookLibrary';
+import BookDetail from './components/Books/BookDetail';
 
 
 const App = () => {
@@ -19,7 +21,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path ="/books" element={<BookLibrary />} />
         <Route path="/contactus" element={<Contact />} />
+        <Route path='/book/:bookId' element={<BookDetail />} />
         <Route path="/adminLateFeeSystemSearch" element={isAuthenticated() ? <LateFeeSystemSearch /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/adminLateFeeSystemUserDetails" element={isAuthenticated() ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/faq" element={<Faq />}/>
