@@ -44,7 +44,58 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+// FAQ Route to fetch FAQs
+app.get('/faqs', async (req, res) => {
+  try {
+    const faqs = await Faq.find();
+    res.json(faqs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// adding to favorites
+app.post('/api/favorites', async (req, res) => {
+    try {
+      const { username, bookName } = req.body;
+      const newFavorite = new Favorite({ username, bookName });
+      await newFavorite.save();
+      res.status(201).json({ message: "Favorite saved successfully." });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  // Delete a favorite
+app.delete('/api/favorites', async (req, res) => {
+  try {
+    const { username, bookName } = req.body;
+    const result = await Favorite.findOneAndDelete({ username, bookName });
+    if (result) {
+      res.status(200).json({ message: "Favorite removed successfully." });
+    } else {
+      res.status(404).json({ message: "Favorite not found." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Check if a favorite exists
+app.get('/api/favorites/check', async (req, res) => {
+  try {
+    const { username, bookName } = req.query; 
+    const favorite = await Favorite.findOne({ username, bookName });
+    if (favorite) {
+      res.json({ isFavorite: true });
+    } else {
+      res.json({ isFavorite: false });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
