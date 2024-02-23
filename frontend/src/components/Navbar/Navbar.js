@@ -7,14 +7,14 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const user = localStorageUtil.getItem('user');
   const navigate = useNavigate();
-  
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   // Comment this code (just for testing)
   const login = () => {
-    localStorageUtil.setItem('user', {"name":"xyz", "role":"admin"})
+    localStorageUtil.setItem('user', { "name": "xyz", "role": "admin" })
   }
 
   const logout = () => {
@@ -29,7 +29,9 @@ function Navbar() {
         <ul className="menu">
           <li><a href="#">Home</a></li>
           <li><a href="#">Books</a></li>
-          <li><a href="#">About Us</a></li>
+          <li><a href="/">Favorites</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contactus">Contact Us</a></li>
           {user ? <li><a href="#">Late Fee System</a></li> : null}
         </ul>
 
