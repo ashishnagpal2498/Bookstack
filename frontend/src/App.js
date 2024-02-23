@@ -7,6 +7,7 @@ import { LateFeeSystemSearch, LateFeeSystemUserDetails } from './components/Late
 import Home from './components/Details/Home';
 import About from './components/Details/About';
 import Contact from './components/Details/ContactUs';
+import Faq from './components/Details/Faq';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/contactus" element={<Contact />} />
         <Route path="/adminLateFeeSystemSearch" element={isAuthenticated() ? <LateFeeSystemSearch /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/adminLateFeeSystemUserDetails" element={isAuthenticated() ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
+        <Route path="/faq" element={<Faq />}/>
       </Routes>
     </Router>
 

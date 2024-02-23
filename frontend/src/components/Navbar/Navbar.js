@@ -36,6 +36,7 @@ function Navbar() {
         </ul>
 
         <ul className="menu menu-auth">
+        <li><a href="/faq">FAQ </a></li>
           {user ? <button onClick={logout}>Logout</button> : <>
             <button onClick={login}><a href="#">Login</a></button>
             <li><a href="#">SignUp</a></li>

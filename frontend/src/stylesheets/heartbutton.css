@@ -1,0 +1,17 @@
+.heart-button {
+    font-size: 24px;
+    color: #ccc; 
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.2s ease;
+  }
+  
+  .heart-button:hover {
+    color: red; 
+  }
+  
+  .heart-button.favorite {
+    color: red; 
+  }
