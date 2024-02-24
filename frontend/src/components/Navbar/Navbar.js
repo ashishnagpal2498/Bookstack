@@ -28,7 +28,7 @@ function Navbar() {
       <div className={`nav-options ${menuOpen ? 'open' : ''}`}>
         <ul className="menu">
           <li><a href="/">Home</a></li>
-          <li><a href="#">Books</a></li>
+          <li><a href="/books">Books</a></li>
           <li><a href="/favorites">Favorites</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/contactus">Contact Us</a></li>
