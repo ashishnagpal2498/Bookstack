@@ -1,7 +1,177 @@
-.home {
-/* 
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
-  }
+.home-container {
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: black;
+}
+
+.home-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px; 
+  background: linear-gradient(to bottom, rgba(49, 47, 47, 0), #312f2f); 
+  pointer-events: none; 
+}
+
+.popular-books-title {
+  font-size: 35px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px;
+  width: 100%;
+}
+.top-sellers-title {
+  font-size: 35px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px;
+  width: 100%;
+}
+
+.recommendations-title {
+  font-size: 35px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px;
+  width: 100%;
+}
+.new-title {
+  font-size: 35px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px;
+  width: 100%;
+}
+
+.genres-title {
+  font-size: 35px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px;
+  width: 100%;
+}
+.language-title {
+  font-size: 35px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px;
+  width: 100%;
+}
+
+.books-container {
+  position: relative;
+  width: 100%;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.books-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: inherit;
+  width: 100%;
+  margin-left: inherit;
+}
+
+.books-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.scroll-btn:first-of-type {
+  left: 0;
+}
+
+.scroll-btn:last-of-type {
+  right: 0;
+}
+.scrolling-wrapper {
+  overflow-x: auto;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  background-color: #000000;
+}
+
+
+.card-block {
+  height: 250px;
+  width: 300px;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.2s ease-in-out;
+  border-radius: 24px;
+  position: relative;
+}
+
+.card-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  opacity: 0.9;
+}
+
+/* Specific card background colors and images */
+.card-1{
+	background-color: #4158D0;
+background-image: url(https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D);
+}
+
+.card-2{
+	background-color: #0093E9;
+background-image: url(https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D);
+}
+
+.card-3{
+	background-color: #00DBDE;
+background-image: url(https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8fA%3D%3D);
+}
+
+.card-4{
+	background-color: #FBAB7E;
+background-image: url(https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8fHw%3D);
+}
+
+.card-5{
+	background-color: #85FFBD;
+background-image: url(https://images.unsplash.com/photo-1495640388908-05fa85288e61?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTV8fHxlbnwwfHx8fHw%3D);
+}
+
+.card-6{
+	background-color: #FA8BFF;
+background-image: url(https://images.unsplash.com/photo-1558901357-ca41e027e43a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTh8fHxlbnwwfHx8fHw%3D);
+}
+
+.card-7{
+	background-color: #FA8BFF;
+background-image: url(https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjB8fHxlbnwwfHx8fHw%3D);
+}
+
+.card-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000; 
+  font-size: 2em; 
+  text-align: center;
+  z-index: 2; 
+  font-weight: bolder;
+
+}
