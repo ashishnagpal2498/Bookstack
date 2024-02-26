@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-d
 import { isAuthenticated } from './util';
 import Navbar from './components/Navbar';
 import { LateFeeSystemSearch, LateFeeSystemUserDetails } from './components/LateFeeSystem/AdminSide';
-import Home from './components/Details/Home';
+import Home from './components/home/Home';
 import About from './components/Details/About';
 import Contact from './components/Details/ContactUs';
 import Faq from './components/Details/Faq';

@@ -1,0 +1,53 @@
+.banner-container {
+    background-size: cover;
+    background-position: center;
+    width: 100%; 
+    height: 50vh; 
+    padding: 20px; 
+    color: white;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    text-align: left;
+  }
+  .banner-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%; 
+    background: linear-gradient(to bottom, transparent, #000000);
+    pointer-events: none;
+  }
+  
+  .banner-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  .banner-subtitle {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    white-space: pre-wrap;
+  }
+  
+  .shop-now-btn {
+    background-color: #f15a29;
+    color: white;
+    width: fit-content;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .shop-now-btn:hover {
+    background-color: #c4461c;
+  }
+  
