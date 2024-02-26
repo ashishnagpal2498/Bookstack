@@ -12,7 +12,11 @@ import  Favorites  from './components/Favorites/Favorites';
 import BookLibrary from './components/Books/BookLibrary';
 import BookDetail from './components/Books/BookDetail';
 import Recommended from './components/Books/Recommended';
-
+import Login from './components/UserAuth/Login.js';
+import Register from './components/UserAuth/Register';
+import Profile from './components/UserAuth/Profile';
+import { ForgetPasswordEmail } from './components/UserAuth/SendEmailPR.js';
+import { ResetPassword } from './components/UserAuth/ResetPassword';
 
 const App = () => {
 
@@ -30,6 +34,11 @@ const App = () => {
         <Route path="/adminLateFeeSystemUserDetails" element={isAuthenticated() ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/faq" element={<Faq />}/>
         <Route path="/favorites" element={<Favorites />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+        <Route path="/profile" element={<Profile />}/>
+        <Route path="/forgetps" element={<ForgetPasswordEmail />}/>
+        <Route path="/resetpassword" element={<ResetPassword />}/>
       </Routes>
     </Router>
 
