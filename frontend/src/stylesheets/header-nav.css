@@ -2,6 +2,8 @@
     --primary-color: rgba(192, 138, 95, 255);
     --white-color: #fff;
     --primary-text: #777;
+    --primary-color-dark: #A06B40;
+    --secondary-color: #835834;
 }
 
 .top-nav {
@@ -123,4 +125,70 @@
     .nav-options.open {
         transform: translateX(0);
     }
+}
+
+
+.dropdown {
+    width: 240px;
+
+    .dropdown-toggle {
+        text-align: end;
+
+        .pull-left {
+            display: contents;
+        }
+    }
+
+    .dropdown-menu {
+        width: 100%;
+    }
+}
+
+.authentication-buttons {
+    text-align: end;
+
+    .signup {
+        color: white;
+    }
+}
+
+.btn {
+    margin-left:10px;
+    color: var(--primary-color);
+}
+
+.nav-link, .navbar-brand {
+    color: white !important;
+    white-space: nowrap !important;
+}
+
+.thumbnail-image {
+    margin-right: 20px;
+}
+
+
+.login.btn-primary {
+    background: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+}
+
+.login.btn-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.signup.btn-outline-primary {
+    border-color: var(--primary-color-dark);
+}
+
+.signup.btn-outline-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.thumbnail-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Add any other styling for the avatar */
 }

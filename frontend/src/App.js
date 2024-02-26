@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
 import { isAuthenticated } from './util';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar.js';
 import { LateFeeSystemSearch, LateFeeSystemUserDetails } from './components/LateFeeSystem/AdminSide';
 import Home from './components/home/Home';
 import About from './components/Details/About';
