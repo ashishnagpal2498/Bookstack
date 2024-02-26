@@ -11,6 +11,7 @@ import Faq from './components/Details/Faq';
 import  Favorites  from './components/Favorites/Favorites';
 import BookLibrary from './components/Books/BookLibrary';
 import BookDetail from './components/Books/BookDetail';
+import Recommended from './components/Books/Recommended';
 import Login from './components/UserAuth/Login.js';
 import Register from './components/UserAuth/Register';
 import Profile from './components/UserAuth/Profile';
@@ -28,6 +29,7 @@ const App = () => {
         <Route path ="/books" element={<BookLibrary />} />
         <Route path="/contactus" element={<Contact />} />
         <Route path='/book/:bookId' element={<BookDetail />} />
+        <Route path="/Recommended" exact element={<Recommended />} />
         <Route path="/adminLateFeeSystemSearch" element={isAuthenticated() ? <LateFeeSystemSearch /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/adminLateFeeSystemUserDetails" element={isAuthenticated() ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/faq" element={<Faq />}/>
