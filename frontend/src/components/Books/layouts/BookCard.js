@@ -7,7 +7,7 @@ const BookCard = ({ books, loading }) => {
     <>
       {books.map((book, index) => (
         <li  key={index}>
-          <Link className={`book-card ${loading? "loading": ''}`} to={`/book/${book._id}`}>
+          <Link className={`book-library-card ${loading? "loading": ''}`} to={`/book/${book._id}`}>
           {loading ?
               <div className="skeleton-book-bg">
                 <div className='skeleton-book-cover'>
