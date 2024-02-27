@@ -17,12 +17,16 @@ import Register from './components/UserAuth/Register';
 import Profile from './components/UserAuth/Profile';
 import { ForgetPasswordEmail } from './components/UserAuth/SendEmailPR.js';
 import { ResetPassword } from './components/UserAuth/ResetPassword';
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import AddBook from './components/BookManagement/AddBook.js';
 import BookManager from './components/BookManagement/BookManager.js';
 
 const App = () => {
 
   return (
+    <>
+    <ToastContainer/>
     <Router>
       <Navbar />
       <Routes>
@@ -45,7 +49,7 @@ const App = () => {
         <Route path="/add-book" element={<AddBook />} />
       </Routes>
     </Router>
-
+</>
   );
 }
 

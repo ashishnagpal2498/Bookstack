@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Rating from 'react-rating'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
+import { toast } from "react-toastify";
 
 function BookSingle() {
   const { bookId } = useParams();
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location])
 
   const [show, setShow] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
 
   const [recommendedbookArray, setRecommendedBookArray] = useState([
     { bookName: "Book1", author: "Author1" },
@@ -145,7 +151,9 @@ function BookSingle() {
                       ></textarea>
                     </div>
                     <div className="my-3">
-                      <Button>Submit</Button>
+                      <Button onClick={()=>{
+                        toast.success("Review added successfully.")
+                      }}>Submit</Button>
                     </div>
                   </div>
                 </div>
@@ -220,11 +228,14 @@ function BookSingle() {
                           recommendedbookArray.map((recommendedBookDetail, index) => {
                             return (
                               <div key={index} className="col-lg-2 col-md-3 col-sm-5 col-6">
-                                <img
-                                  src="https://pngimg.com/d/book_PNG2111.png"
-                                  className="w-100"
-                                  alt="..."
-                                />
+                                <Link to={'/book/' + (index+1)}>
+
+                                  <img
+                                    src="https://pngimg.com/d/book_PNG2111.png"
+                                    className="w-100"
+                                    alt="..."
+                                  />
+                                </Link>
                               </div>
                             )
                           })
@@ -374,7 +385,8 @@ function BookSingle() {
         </div>
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>Book 1</Modal.Title>
+            {/* <Modal.Title>Book 1</Modal.Title> */}
+            <Modal.Title>Customer reviews</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalReviewBody">
             <div className="d-flex align-items-center gap-2">
@@ -392,21 +404,25 @@ function BookSingle() {
               <div className="d-flex align-items-center gap-2">
                 <Rating
                   stop={5}
+                  readonly
                   initialRating={3.5}
                   emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
                   fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
                 />
               </div>
-              <div className="mx-1">( {mostRecent.length} review)</div>
+              <div className="mx-1">( {mostRecent.length} review)
+              <button className="mx-2 btn btn-primary" onClick={()=>{setShowFilter(prev=>!prev)}}>{!showFilter ? "Show Filters": "Hide Filters"}</button>
+              </div>
             </div>
 
-            <div className="d-flex flex-wrap mt-3 justify-content-center">
+
+            <div className={`${showFilter ? "d-flex" : "d-none"} flex-wrap mt-3 justify-content-center`}>
               <div>
                 <i class="fa-solid fa-filter fs-3 mx-sm-2 mx-1"></i>
               </div>
               <div>
                 <a
-                  className={`mx-sm-2 mx-1 ${isReleventOrRecent !== "relevent" ? "flActive" : ""
+                  className={`cursor-pointer mx-sm-2 mx-1 ${isReleventOrRecent !== "relevent" ? "flActive" : ""
                     }`}
                   onClick={handleRecent}
                 >
@@ -415,7 +431,7 @@ function BookSingle() {
               </div>
               <div>
                 <a
-                  className={`mx-sm-2 mx-1 ${isReleventOrRecent === "relevent" ? "flActive" : ""
+                  className={`cursor-pointer mx-sm-2 mx-1 ${isReleventOrRecent === "relevent" ? "flActive" : ""
                     }`}
                   onClick={handlerevelant}
                 >
@@ -437,6 +453,7 @@ function BookSingle() {
                       <div className="d-flex align-items-center gap-2">
                         <Rating
                           stop={5}
+                          readonly
                           initialRating={mostRecentData.ratingValue}
                           emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
                           fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
@@ -461,6 +478,7 @@ function BookSingle() {
                       <div className="d-flex align-items-center gap-2">
                         <Rating
                           stop={5}
+                          readonly
                           initialRating={mostReleventData.ratingValue}
                           emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
                           fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
