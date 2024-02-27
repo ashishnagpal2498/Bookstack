@@ -13,7 +13,7 @@
     padding: 15px 0 !important;
     border-radius: 0;
     font-size: 25px;
-    
+
 }
 
 .filter-heading-icon {
@@ -21,14 +21,15 @@
 
 }
 
-.filter-heading-icon svg{
+.filter-heading-icon svg {
     width: 25px;
 }
 
-.filter-heading-icon ~ h4 {
+.filter-heading-icon~h4 {
     display: inline-block;
     margin: 1em 0 !important;
     font-weight: 500 !important;
+    font-size: 1.2em !important;
 }
 
 .filter-options-list {
@@ -42,29 +43,43 @@
     border-width: 0 3px 3px 0;
     padding: 3px;
     margin: 0 10px;
-    top: 20px;
+    top: 24px;
     position: relative;
     float: right;
-  }
-  
-  .up {
+}
+
+.up {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
-  }
-  
-  .down {
+}
+
+.down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-  }
+}
 
-.filter-options-list > li{
+.filter-options-list>li {
     border-bottom: 1px solid #e8e8e8;
 }
 
-.filter-options-sub-list{
+.filter-options-sub-list {
     padding: 0;
     padding-left: 2em;
     list-style-type: none;
+}
+
+.filter-options-sub-list > li{
+    padding: 5px 0;
+    cursor: default;
+}
+
+.filter-options-sub-list label{
+    cursor: pointer;
+}
+
+.filter-options-sub-list input{
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .close-sidebar-icon {
@@ -72,7 +87,9 @@
     position: relative;
     width: 22px;
     height: 22px;
+    top: 10px;
 }
+
 .close-sidebar-icon svg {
     width: 22px;
     position: absolute;
@@ -84,7 +101,7 @@
     width: 100%;
     flex-wrap: wrap;
     position: sticky;
-    top: 76px;
+    top: 55px;
     padding: 15px 2em;
     margin-bottom: 2em;
     z-index: 5;
@@ -93,6 +110,7 @@
 
 .filter-icon {
     margin-right: 20px;
+    vertical-align: text-bottom;
 }
 
 .filter-icon svg {
@@ -236,7 +254,7 @@
     color: var(--primary-color);
 }
 
-.active-filters{
+.active-filters {
     list-style-type: none;
     flex-basis: 100%;
     display: flex;
@@ -245,18 +263,20 @@
     font-size: 13px;
 }
 
-.active-filters .filter-icon{
+.active-filters .filter-icon {
     margin-right: 5px;
 }
-.active-filters svg{
+
+.active-filters svg {
     width: 10px;
 }
+
 .filter-remove-icon {
     margin-left: 5px;
 }
 
 @media (max-width: 550px) {
-    #filter{
+    #filter {
         width: 100%;
     }
 }
