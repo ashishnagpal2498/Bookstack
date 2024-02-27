@@ -3,7 +3,7 @@ import Search from './Search'
 import FilterBtn from './FilterBtn';
 
 
-export const FilterBar = ({books, filterBooks, openFilterMenu, toggleFilterMenu, selectedFilters, handleFilterCheckbox}) => {
+export const FilterBar = ({onSearch, openFilterMenu, toggleFilterMenu, selectedFilters, handleFilterCheckbox}) => {
 
     const [isActive, setIsActive] = useState(false);
     const [selected, setIsSelected] = useState("Recommended");
@@ -11,11 +11,7 @@ export const FilterBar = ({books, filterBooks, openFilterMenu, toggleFilterMenu,
     const sortOptions = ["Recommended", "Name", "Popularity"]
 
     const onSearchChange = (searchValue) => {
-        
-        let filterData = JSON.parse(JSON.stringify(books)); 
-            filterData = filterData.filter((item) =>
-            JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase()))
-       filterBooks(filterData)
+        onSearch(searchValue)
     };
     return (
         <div className="filter-bar">

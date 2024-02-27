@@ -59,7 +59,7 @@ const BookLibrary = () => {
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     genres: [],
-    authors: [],
+    author: [],
     publishedYear: []
   });
 
@@ -67,12 +67,8 @@ const BookLibrary = () => {
     setOpenFilterMenu(!openFilterMenu);
   };
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000)
+    setTimeout(() => setLoading(false), 5000)
   }, [])
-
-  const filterBooks = (updatedBooks) => {
-    updateFilteredBooks(updatedBooks)
-  }
 
   useEffect(() => {
     setLoading(true);
@@ -108,13 +104,20 @@ const BookLibrary = () => {
     }));
   };
 
-  // Search is happening at component level - filter --> Parent level
+  const onSearch = (searchValue) => {
+            
+    let filterData = JSON.parse(JSON.stringify(filteredBooks)); 
+    filterData = filterData.filter((item) =>
+    JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase()))
+    updateFilteredBooks(filterData)
+  }
+
   return (
     <div className='book-library-container'>
       <LibraryBackground />
       {openFilterMenu && <FilterMenu toggleFilterMenu={toggleFilterMenu} handleFilterCheckbox={handleFilterCheckbox} selectedFilters={selectedFilters} />}
       <div className="container-row container-content-center books-container">
-        <FilterBar selectedFilters={selectedFilters} filterBooks={filterBooks} books={filteredBooks} openFilterMenu={openFilterMenu} toggleFilterMenu={toggleFilterMenu} handleFilterCheckbox= {handleFilterCheckbox} />
+        <FilterBar selectedFilters={selectedFilters} onSearch={onSearch} books={filteredBooks} openFilterMenu={openFilterMenu} toggleFilterMenu={toggleFilterMenu} handleFilterCheckbox= {handleFilterCheckbox} />
 
         {filteredBooks.length > 0 ?
           <ul className="book-list">

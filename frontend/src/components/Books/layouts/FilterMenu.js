@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import FilterBtn from './FilterBtn';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays, faPen } from '@fortawesome/free-solid-svg-icons';
 const genres = ["Action", "Drama", "Sci-Fi"];
-const authors = ["Jk Rowling", "icon", "Def"];
-const publishedYears = [2009, 2006, 2007];
+const authors = ["J. K Rowling", "Rick Riordan", "Charles"];
+const publishedYears = [2011,2010,2009, 2008, 2007, 2006, 2005];
 
 const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) => {
 
@@ -74,21 +75,24 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
                 </li>
                 <li>
                 <div onClick={() => toggleCategory('authors')}>
-                        <span className='filter-heading-icon'>icon</span>
+                        <span className='filter-heading-icon'>
+                        <FontAwesomeIcon icon={faPen} />
+                        </span>
                     <h4 >Authors</h4>
+                    { menuOpen('authors') ? <i className="arrow up"></i> : <i className="arrow down"></i> }
                         </div>
                     {openCategory.includes('authors') && (
                         <ul className='filter-options-sub-list'>
-                            {authors.map(author => (
-                                <li key={author}>
+                            {authors.map(authorVal => (
+                                <li key={authorVal}>
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedFilters.authors.includes(author)}
+                                            checked={selectedFilters.author.includes(authorVal)}
 
-                                            onChange={() => handleCheckboxChange('authors', author)}
+                                            onChange={() => handleCheckboxChange('author', authorVal)}
                                         />
-                                        {author}
+                                        {authorVal}
                                     </label>
                                 </li>
                             ))}
@@ -97,8 +101,11 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
                 </li>
                 <li>
                 <div onClick={() => toggleCategory('publishedYear')}>
-                        <span className='filter-heading-icon'>icon</span>
+                        <span className='filter-heading-icon'>
+                        <FontAwesomeIcon icon={faCalendarDays} />
+                        </span>
                     <h4 >Published Year</h4>
+                    { menuOpen('publishedYear') ? <i className="arrow up"></i> : <i className="arrow down"></i> }
                         </div>
                     {openCategory.includes('publishedYear') && (
                         <ul className='filter-options-sub-list'>
