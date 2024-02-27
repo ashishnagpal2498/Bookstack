@@ -46,7 +46,7 @@ function CommonNavbar() {
                     <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></> }
                 {
                     user ?
-                    <NavDropdown className="ms-auto col-sm-2"
+                    <NavDropdown className="ms-auto"
                         title="Sam" 
                         id="basic-nav-dropdown">
                         <NavDropdown.Item href="#profile">
