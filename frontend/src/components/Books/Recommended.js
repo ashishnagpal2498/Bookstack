@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Button from "react-bootstrap/esm/Button";
+import { Link } from 'react-router-dom';
 
 const booksPerPage = 5;
 
@@ -97,11 +98,13 @@ const Recommended = () => {
                   <tr key={index}>
                     <th scope="row" className="col-md-2 col-2 my-1">{index + 1}</th>
                     <td className="col-md-4 col-4 my-1">
+                    <Link to={'/book/' + (index + 1)}>
                       <img
                         src="https://pngimg.com/d/book_PNG2111.png"
                         width={"100px"}
                         alt="Book cover"
                       />
+                      </Link>
                     </td>
                     <td className="col-md-4 col-4">{book.bookName}</td>
                     <td className="col-md-4 col-4">{book.author}</td>
