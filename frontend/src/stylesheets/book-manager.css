@@ -1,0 +1,55 @@
+.book-manager-div {
+    width: 100vw;
+    height: 100vh; 
+    background-color: #D6B498 !important;
+
+    .container {
+        padding-top: 20px;
+    }
+}
+
+.book-cards {
+    margin: 10px;
+
+    img {
+        margin-right: 10px;
+    }
+}
+
+#search-div {
+    margin-top: 20px;
+}
+
+.modal-header {
+    border: none !important;
+}
+
+.modal-footer {
+    border: none !important;
+}
+
+#delete-confirmation {
+    .modal-title {
+        color: #1447FC;
+    }
+}
+
+.add-book-btn.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.add-book-btn.btn-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.edit-btn.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.edit-btn.btn-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
