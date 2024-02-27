@@ -33,6 +33,7 @@ const ContactUs = () => {
   return (
     <div className="contact-us-div">
       <Container className='contact-us-container'>
+        <h2>Contact Us</h2>
           <Row>
             <Col>
               <img src={contactIllustration} alt="Contact us"/>
@@ -69,7 +70,7 @@ const ContactUs = () => {
                 <Row>
                   <Col>
                     <Form.Group controlId="message">
-                      <Form.Label><h4>Message</h4></Form.Label>
+                      <Form.Label>Message</Form.Label>
                       <Form.Control as="textarea" rows={6} value={message} onChange={(e) => setMessage(e.target.value)} required isInvalid={validated && !message} />
                       <Form.Control.Feedback type="invalid">Please provide a message or description.</Form.Control.Feedback>
                     </Form.Group>
