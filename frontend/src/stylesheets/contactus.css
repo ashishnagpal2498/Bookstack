@@ -11,6 +11,10 @@
   border-radius: 4px;
 }
 
+.contact-us-container > h2 {
+  margin-bottom: 20px;
+}
+
 .submit-btn {
   margin-top: 20px;  
 }

@@ -33,6 +33,7 @@ const ContactUs = () => {
   return (
     <div className="contact-us-div">
       <Container className='contact-us-container'>
+        <h2>Contact Us</h2>
           <Row>
             <Col>
               <img src={contactIllustration} alt="Contact us"/>
