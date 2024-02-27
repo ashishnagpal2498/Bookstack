@@ -112,13 +112,13 @@
 
 
 .card-block {
-  height: 250px;
-  width: 300px;
-  background-position: center;
-  background-size: cover;
-  transition: all 0.2s ease-in-out;
-  border-radius: 24px;
-  position: relative;
+  height: 250px !important;
+  width: 300px !important;
+  background-position: center !important;
+  background-size: cover !important;
+  transition: all 0.2s ease-in-out !important;
+  border-radius: 24px !important;
+  position: relative !important;
 }
 
 .card-block:hover {
