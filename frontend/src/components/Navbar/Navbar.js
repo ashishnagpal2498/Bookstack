@@ -10,7 +10,6 @@ function CommonNavbar() {
   const user = localStorageUtil.getItem('user');
   const navigate = useNavigate();
 
-
   // Comment this code (just for testing)
   const login = () => {
     localStorageUtil.setItem('user', { "name": "xyz", "role": "admin" })

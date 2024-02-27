@@ -17,6 +17,8 @@ import Register from './components/UserAuth/Register';
 import Profile from './components/UserAuth/Profile';
 import { ForgetPasswordEmail } from './components/UserAuth/SendEmailPR.js';
 import { ResetPassword } from './components/UserAuth/ResetPassword';
+import AddBook from './components/BookManagement/AddBook.js';
+import BookManager from './components/BookManagement/BookManager.js';
 
 const App = () => {
 
@@ -39,6 +41,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />}/>
         <Route path="/forgetps" element={<ForgetPasswordEmail />}/>
         <Route path="/resetpassword" element={<ResetPassword />}/>
+        <Route path="/manage-books" element={<BookManager />} />
+        <Route path="/add-book" element={<AddBook />} />
       </Routes>
     </Router>
 
