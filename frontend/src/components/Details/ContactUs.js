@@ -35,10 +35,10 @@ const ContactUs = () => {
       <Container className='contact-us-container'>
         <h2>Contact Us</h2>
           <Row>
-            <Col>
+            <div className='col-lg-6 col-md-12'>
               <img src={contactIllustration} alt="Contact us"/>
-            </Col>
-            <Col>
+            </div>
+            <div className='col-lg-6 col-md-12'>
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row>
                   <Col>
@@ -82,7 +82,7 @@ const ContactUs = () => {
                   </Col>
                 </Row>
               </Form>
-            </Col>
+            </div>
           </Row>
       </Container>
       <Modal

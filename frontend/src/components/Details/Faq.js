@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../stylesheets/faq.css';
-import { Container, Row, Col, Accordion } from 'react-bootstrap';
+import { Container, Row, Accordion } from 'react-bootstrap';
 import faqIllustration from "../../assets/faq.png";
 
 const Faq = () => {
@@ -10,10 +10,10 @@ const Faq = () => {
         <div className="faq-div">
             <Container className='contact-us-container'>
                 <Row>
-                    <Col>
+                    <div className='col-lg-6 col-md-12'>
                     <img src={faqIllustration} alt="Contact us"/>
-                    </Col>
-                    <Col>
+                    </div>
+                    <div className='col-lg-6 col-md-12'>
                         <h3>FAQ</h3>
                         <Accordion defaultActiveKey="0">
                             <Accordion.Item eventKey="0">
@@ -47,7 +47,7 @@ const Faq = () => {
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
-                    </Col>
+                    </div>
                 </Row>
             </Container>
         </div>
