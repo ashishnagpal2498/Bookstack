@@ -3,7 +3,7 @@
     background-color: #FCEAC6;
     color: var(--white-color);
     text-align: center;
-    height: 100vh;
+    padding-bottom: 5em;
   }
   
   .about-container h1 {
@@ -23,7 +23,7 @@
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .about-container {
+    .about-container p {
       padding: 15px;
     }
   }
