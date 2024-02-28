@@ -50,7 +50,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-
         </div>
       </section>
       <section id="services" class="services section-bg">
@@ -59,7 +58,6 @@ const Home = () => {
             <h2>Services</h2>
             <p>Discover the key features that make Book Stack your ultimate destination for book rentals.</p>
           </div>
-
           <div class="row">
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in">
               <div class="icon-box icon-box-pink">
@@ -68,7 +66,6 @@ const Home = () => {
                 <p class="description">Access comprehensive details and information about each book in our extensive collection.</p>
               </div>
             </div>
-
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box icon-box-cyan">
                 <div class="icon"><img src={favIcon} alt="" /></div>
@@ -76,7 +73,6 @@ const Home = () => {
                 <p class="description">Easily mark and manage your favorite books for quick access and personalized recommendations.</p>
               </div>
             </div>
-
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
               <div class="icon-box icon-box-green">
                 <div class="icon"><img src={openBookIcon} alt="" /></div>
@@ -84,7 +80,6 @@ const Home = () => {
                 <p class="description">Explore our vast library of books spanning various genres and topics to find your next read.</p>
               </div>
             </div>
-
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
               <div class="icon-box icon-box-blue">
                 <div class="icon"><img src={feedbackIcon} alt="" /></div>
@@ -92,13 +87,36 @@ const Home = () => {
                 <p class="description">Share your thoughts and feedback on the books you've read to help other users make informed choices.</p>
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
-
-      
+      <div className="page-footer font-small blue pt-4">
+          <div className="container-fluid text-center text-md-left">
+              <div className="row">
+                  <div className="col-md-6 mt-md-0 mt-3">
+                      <h5>Book Stack</h5>
+                      <p>
+                      Goldberg Computer Science Building<br/>
+                      6050 University Ave,<br/>
+                      Halifax, Nova Scotia<br/>
+                      NS B3H 1W5
+                      </p>
+                  </div>
+                  <hr className="clearfix w-100 d-md-none pb-0"/>
+                  <div className="col-md-6 mb-md-0 mb-3">
+                      <h5>Useful Links</h5>
+                      <ul className="list-unstyled">
+                          <li><a href="/">Home</a></li>
+                          <li><a href="/about">About Us</a></li>
+                          <li><a href="/contactus">Contact us</a></li>
+                          <li><a href="/faq">FAQ</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div className="footer-copyright text-center py-3">© 2024 Copyright: Book Stack Inc.
+          </div>
+      </div>
     </>
   );
 };
