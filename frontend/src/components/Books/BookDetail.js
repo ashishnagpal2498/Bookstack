@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -10,6 +11,7 @@ import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 import { toast } from "react-toastify";
 
 function BookSingle() {
+  // eslint-disable-next-line no-unused-vars
   const { bookId } = useParams();
   const location = useLocation();
   useEffect(() => {
@@ -18,7 +20,7 @@ function BookSingle() {
 
   const [show, setShow] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-
+// eslint-disable-next-line no-unused-vars
   const [recommendedbookArray, setRecommendedBookArray] = useState([
     { bookName: "Book1", author: "Author1" },
     { bookName: "Book2", author: "Author2" },
@@ -28,6 +30,7 @@ function BookSingle() {
   ]);
 
   const [rating, setRating] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [mostRelevent, setMostRelevent] = useState([
     { ratingValue: 3, review: "ABC Book" },
     { ratingValue: 4, review: "XYZ Book" },
@@ -41,6 +44,7 @@ function BookSingle() {
     { ratingValue: 1, review: "Terrible Book" },
     { ratingValue: 3, review: "Meh Book" },
   ]);
+  // eslint-disable-next-line no-unused-vars
   const [mostRecent, setMostRecent] = useState([
     { ratingValue: 3, review: "Hello" },
     { ratingValue: 4, review: "Hello Data Book" },
@@ -66,16 +70,20 @@ function BookSingle() {
     console.log("handleopen", rating);
   };
   // Optinal callback functions
+  // eslint-disable-next-line no-unused-vars
   const handleRating = (value, index) => {
     setRating(value);
     console.log("aXZcXZcZdsf", value, index);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const onPointerEnter = (value, index) => console.log("adsf", value, index);
+  // eslint-disable-next-line no-unused-vars
   const onPointerLeave = () => {
     console.log("Leave");
     // setRating(0);
   };
+  // eslint-disable-next-line no-unused-vars
   const onPointerMove = (value, index) => {
     console.log("abc", value, index);
   };
@@ -85,8 +93,6 @@ function BookSingle() {
   const handlerevelant = () => {
     setIsReleventOrRecent("relevent");
   };
-
-  const recent = [];
 
   return (
     <>
@@ -99,7 +105,7 @@ function BookSingle() {
                   <div className="col-lg-3 col-md-5 col-sm-6 col-8 d-flex mx-auto">
                     <img
                       src="https://pngimg.com/d/book_PNG2111.png"
-                      className="w-100"
+                      className="w-100" alt=""
                     ></img>
                   </div>
                   <div className="col-lg-9 col-md-12 col-12">

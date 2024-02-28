@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const booksPerPage = 5;
 
 const Recommended = () => {
+  // eslint-disable-next-line no-unused-vars
   const [books, setBooks] = useState([
     { bookName: "Book1", author: "Author1" },
     { bookName: "Book2", author: "Author2" },
