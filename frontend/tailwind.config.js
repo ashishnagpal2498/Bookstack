@@ -18,6 +18,5 @@ module.exports = {
         highlight: 'rgb(56, 110, 128)'
       },
     },
-  },
-  plugins: [],
+  }
 }
