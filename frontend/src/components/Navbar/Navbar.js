@@ -22,7 +22,7 @@ function CommonNavbar() {
 
   return (
     <Navbar expand="lg" className="top-nav" data-bs-theme="light">
-        <Container>
+        <Container className='min-w-full px-4'>
             <Navbar.Brand href="/">
                 <img
                 alt=""
