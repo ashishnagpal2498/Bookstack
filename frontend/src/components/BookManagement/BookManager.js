@@ -42,10 +42,10 @@ function BookCard({ book, onDelete }) {
                 </Modal.Header>
                 <Modal.Body>Are you sure you want to delete this book?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-primary" onClick={handleClose}>
+                    <Button variant="outline-primary cancel-btn" onClick={handleClose}>
                         No, Cancel
                     </Button>
-                    <Button variant="primary" onClick={confirmDelete}>
+                    <Button variant="primary delete-btn" onClick={confirmDelete}>
                         Yes, Delete
                     </Button>
                 </Modal.Footer>

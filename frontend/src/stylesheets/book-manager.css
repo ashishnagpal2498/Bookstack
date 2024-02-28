@@ -51,3 +51,23 @@
     background: var(--secondary-color);
     border-color: var(--secondary-color);
 }
+
+.cancel-btn.btn-outline-primary {
+    border-color: var(--primary-color-dark);
+    color: var(--primary-color-dark);
+}
+
+.cancel-btn.btn-outline-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.delete-btn.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.delete-btn.btn-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
