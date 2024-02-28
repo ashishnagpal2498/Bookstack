@@ -130,26 +130,26 @@
 
 .dropdown {
     width: 240px;
+}
 
-    .dropdown-toggle {
-        text-align: end;
+.dropdown .dropdown-toggle {
+    text-align: end;
+}
 
-        .pull-left {
-            display: contents;
-        }
-    }
+.dropdown .dropdown-toggle  .pull-left {
+    display: contents;
+}
 
-    .dropdown-menu {
-        width: 100%;
-    }
+.dropdown .dropdown-menu {
+    width: 100%;
 }
 
 .authentication-buttons {
     text-align: end;
+}
 
-    .signup {
-        color: white;
-    }
+.authentication-buttons .signup {
+    color: white;
 }
 
 .btn {

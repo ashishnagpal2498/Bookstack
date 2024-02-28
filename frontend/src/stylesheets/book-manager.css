@@ -2,18 +2,18 @@
     width: 100vw;
     height: 100vh; 
     background-color: #D6B498 !important;
+}
 
-    .container {
-        padding-top: 20px;
-    }
+.book-manager-div .container {
+    padding-top: 20px;
 }
 
 .book-cards {
     margin: 10px;
+}
 
-    img {
-        margin-right: 10px;
-    }
+.book-cards img {
+    margin-right: 10px;
 }
 
 #search-div {
@@ -28,10 +28,8 @@
     border: none !important;
 }
 
-#delete-confirmation {
-    .modal-title {
-        color: #1447FC;
-    }
+#delete-confirmation .modal-title {
+    color: var(--primary-color);
 }
 
 .add-book-btn.btn-primary {
