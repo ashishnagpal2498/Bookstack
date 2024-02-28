@@ -62,7 +62,7 @@ const ContactUs = () => {
                   <Col>
                     <Form.Group controlId="phone-number">
                       <Form.Label>Phone Number</Form.Label>
-                      <Form.Control type="text" value={phone} onChange={(e) => setPhone(e.target.value)} required isInvalid={validated && !phone} />
+                      <Form.Control type="tel" pattern="[0-9]{10}" value={phone} onChange={(e) => setPhone(e.target.value)} required isInvalid={validated && !phone} />
                       <Form.Control.Feedback type="invalid">Please enter a valid phone number.</Form.Control.Feedback>
                     </Form.Group>
                   </Col>
