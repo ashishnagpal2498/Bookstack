@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../stylesheets/faq.css';
-import { Container, Row, Col, Button, Accordion } from 'react-bootstrap';
+import { Container, Row, Col, Accordion } from 'react-bootstrap';
 import faqIllustration from "../../assets/faq.png";
 
 const Faq = () => {

@@ -1,7 +1,4 @@
 import React from 'react';
-import Banner from './Banner';
-import BookCard from './BookCard';
-import Footer from './Footer';
 import '../../stylesheets/home.css';
 import { Container } from 'react-bootstrap';
 import homebg from "../../assets/home-bg.jpg";
