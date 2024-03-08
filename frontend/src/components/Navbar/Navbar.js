@@ -42,7 +42,7 @@ function CommonNavbar() {
                 <Nav.Link href="/about">About Us</Nav.Link>
                 <Nav.Link href="/contactus">Contact Us</Nav.Link>
                 <Nav.Link href="/faq">FAQ</Nav.Link>
-                { user ? <Nav.Link href="/adminLateFeeSystemSearch">Late Fee System</Nav.Link> : <></> }
+                { user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></> }
                 { user ? 
                     <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></> }
                 {

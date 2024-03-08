@@ -13,12 +13,6 @@ function LateFeeSystemSearch() {
         { id: 6, user: { name: 'Jenna No', picture: 'https://source.unsplash.com/random/100x100/?person' }, book: { name: 'Book 6', reservedDate: "25-01-2024", dueDate: "02-02-2024" }, fee: "$1000" },
     ];
 
-    // if (clearUserDetails!==0){
-    //     // delete item from original search results where item.id == clearuserdetails
-    //     originalSearchResults.splice(originalSearchResults.findIndex(item => item.id === clearUserDetails), 1);
-    //     // originalSearchResults.filter(item => item.id === clearUserDetails);
-    // };
-
     const [searchResults, setSearchResults] = useState(originalSearchResults);
     const [searchQuery, setSearchQuery] = useState('');
     
@@ -39,9 +33,7 @@ function LateFeeSystemSearch() {
     };
 
     const handleClick = (data) => {
-        // setUserDetails(data);
-        // isAuthorized();
-        navigate('/adminLateFeeSystemUserDetails', {state: {data}});
+        navigate('/latefee/details', {state: {'data':data}});
     };
 
     return (
@@ -62,7 +54,7 @@ function LateFeeSystemSearch() {
             </div>
             <div className="mt-8 flex flex-col">
                 {searchResults.map((result) => (
-                    <div key={result.id} onClick={() => handleClick(result)} className="flex flex-row border border-gray-200 rounded p-4 m-2 cursor-pointer">
+                    <div key={result.id} onClick={() => handleClick(result.id)} className="flex flex-row border border-gray-200 rounded p-4 m-2 cursor-pointer">
                         <div className='flex flex-row items-start w-0.66    '>
                             <img src={result.user.picture} alt="User" className="rounded-full mx-auto" />
                         </div>

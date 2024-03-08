@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function LateFeeSystemUserDetails() {
+function LateFeeDetails() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const {data} = location.state;
+    const [userDetails] = useState({ id: 2, user: { name: 'Jane Smith', picture: 'https://source.unsplash.com/random/100x100/?person' }, book: { name: 'Book 2', reservedDate: "25-01-2024", dueDate: "02-02-2024" }, fee: "$150" });
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState('');
-
-
 
     const handleRemindUser = () => {
         // Logic to remind user
@@ -21,15 +18,16 @@ function LateFeeSystemUserDetails() {
         // Logic to clear fee
         setModalContent('Successfully cleared!');
         setShowModal(true);
+        // setClearUserDetails(userDetails.id);
     };
 
     const closeModal = () => {
         setShowModal(false);
-        navigate('/latefee/search');
+        navigate('/adminLateFeeSystemSearch');
     };
 
     return (
-        <div className="container mx-auto px-4 py-8 text-black">
+        <div className="container mx-auto px-4 py-8 text-white">
             <div className="flex items-center justify-center">
                 <div className="flex flex-col items-center">
                     <img src={userDetails.user.picture} alt="Person" className="rounded-full h-24 w-24 mb-2" />
@@ -87,6 +85,6 @@ function LateFeeSystemUserDetails() {
             )}
         </div>
     );
-
 }
-export default LateFeeSystemUserDetails;
+
+export default LateFeeDetails;

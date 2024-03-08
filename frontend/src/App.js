@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
-import { isAuthenticated } from './util';
-import Navbar from './components/Navbar/Navbar.js';
+import { isAuthenticated, isAdmin } from './util';
+import Navbar from './components/Navbar';
 import { LateFeeSystemSearch, LateFeeSystemUserDetails } from './components/LateFeeSystem/AdminSide';
 import Home from './components/home/Home';
 import About from './components/Details/About';
@@ -36,8 +36,8 @@ const App = () => {
         <Route path="/contactus" element={<Contact />} />
         <Route path='/book/:bookId' element={<BookDetail />} />
         <Route path="/Recommended" exact element={<Recommended />} />
-        <Route path="/adminLateFeeSystemSearch" element={isAuthenticated() ? <LateFeeSystemSearch /> : <Navigate to="/login" /*replace="true"*/ />} />
-        <Route path="/adminLateFeeSystemUserDetails" element={isAuthenticated() ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
+        <Route path="/latefee" element={isAuthenticated() ? (isAdmin() ? <LateFeeSystemSearch /> : <LateFeeSystemSearch />) : <Navigate to="/login" /*replace="true"*/ />} />
+        <Route path="/latefee/details" element={(isAuthenticated() && isAdmin()) ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
         <Route path="/faq" element={<Faq />}/>
         <Route path="/favorites" element={<Favorites />}/>
         <Route path="/login" element={<Login />}/>
