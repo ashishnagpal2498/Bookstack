@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
 
   return (
-    <div className="App flex flex-column min-h-screen">
+    <div className="App flex flex-column h-screen">
       <Navbar />
       <div className='flex-1'>
       <Router>
