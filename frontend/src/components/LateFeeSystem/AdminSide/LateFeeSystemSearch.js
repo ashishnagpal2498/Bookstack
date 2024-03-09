@@ -37,36 +37,38 @@ function LateFeeSystemSearch() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <div className="flex">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="border border-gray-300 w-full rounded py-2 px-4 mr-2"
-                    value={searchQuery}
-                    onChange={handleSearch}
-                />
-                <button
-                    className="bg-blue-500 hover:bg-blue-600 font-bold py-2 px-4 rounded"
-                >
-                    Search
-                </button>
-            </div>
-            <div className="mt-8 flex flex-col">
-                {searchResults.map((result) => (
-                    <div key={result.id} onClick={() => handleClick(result.id)} className="flex flex-row border border-gray-200 rounded p-4 m-2 cursor-pointer">
-                        <div className='flex flex-row items-start w-0.66    '>
-                            <img src={result.user.picture} alt="User" className="rounded-full mx-auto" />
+        <div className='bg-aboutUsBrown h-full py-8'>
+            <div className="container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
+                <div className="flex">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className="border border-gray-300 w-full rounded py-2 px-4 mr-2"
+                        value={searchQuery}
+                        onChange={handleSearch}
+                    />
+                    <button
+                        className="py-2 px-4 rounded bg-navbarBrown hover:bg-hoverNavbarBrown text-white"
+                    >
+                        Search
+                    </button>
+                </div>
+                <div className="mt-8 flex flex-col">
+                    {searchResults.map((result) => (
+                        <div key={result.id} onClick={() => handleClick(result.id)} className="flex flex-row border border-gray-200 rounded p-4 m-2 cursor-pointer">
+                            <div className='flex flex-row items-start w-0.66    '>
+                                <img src={result.user.picture} alt="User" className="rounded-full mx-auto" />
+                            </div>
+                            <div className='flex flex-col justify-center ml-4 w-1/2'>
+                                <p className="text-lg font-bold">{result.user.name}</p>
+                                <p className="">{result.book.name}</p>
+                            </div>
+                            <div className='flex flex-col justify-center items-end text-lg font-bold text-hoverNavbarBrown mr-4 w-1/2'>
+                                <p className="">{result.fee}</p>
+                            </div>
                         </div>
-                        <div className='flex flex-col justify-center ml-4 w-1/2'>
-                            <p className="text-lg font-bold">{result.user.name}</p>
-                            <p className="">{result.book.name}</p>
-                        </div>
-                        <div className='flex flex-col justify-center items-end text-lg font-bold text-red-500 mr-4 w-1/2'>
-                            <p className="">{result.fee}</p>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

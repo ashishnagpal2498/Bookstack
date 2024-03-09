@@ -22,7 +22,7 @@ const Home = () => {
             </div>
           </div>
           <div className="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
-            <img src={homebg} className="img-fluid" alt="" />
+            <img loading="lazy" src={homebg} className="img-fluid" alt="" />
           </div>
         </div>
         </Container>
@@ -31,7 +31,7 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6" data-aos="zoom-in">
-              <img src={bookLover} className="img-fluid" alt="" />
+              <img loading="lazy" src={bookLover} className="img-fluid" alt="" />
             </div>
             <div className="col-lg-6">
               <div className="pt-4 pt-lg-0">
@@ -61,28 +61,28 @@ const Home = () => {
           <div class="row">
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in">
               <div class="icon-box icon-box-pink">
-                <div class="icon"><img src={bookDetailsIcon} alt="" /></div>
+                <div class="icon"><img loading="lazy" src={bookDetailsIcon} alt="" /></div>
                 <h4 class="title">Book Details</h4>
                 <p class="description">Access comprehensive details and information about each book in our extensive collection.</p>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box icon-box-cyan">
-                <div class="icon"><img src={favIcon} alt="" /></div>
+                <div class="icon"><img loading="lazy" src={favIcon} alt="" /></div>
                 <h4 class="title">Favorites</h4>
                 <p class="description">Easily mark and manage your favorite books for quick access and personalized recommendations.</p>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
               <div class="icon-box icon-box-green">
-                <div class="icon"><img src={openBookIcon} alt="" /></div>
+                <div class="icon"><img loading="lazy" src={openBookIcon} alt="" /></div>
                 <h4 class="title">Book Library</h4>
                 <p class="description">Explore our vast library of books spanning various genres and topics to find your next read.</p>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
               <div class="icon-box icon-box-blue">
-                <div class="icon"><img src={feedbackIcon} alt="" /></div>
+                <div class="icon"><img loading="lazy" src={feedbackIcon} alt="" /></div>
                 <h4 class="title">Book Feedback</h4>
                 <p class="description">Share your thoughts and feedback on the books you've read to help other users make informed choices.</p>
               </div>

@@ -12,7 +12,7 @@ function CommonNavbar() {
 
   // Comment this code (just for testing)
   const login = () => {
-    localStorageUtil.setItem('user', { "name": "xyz", "role": "admin" })
+    localStorageUtil.setItem('user', { "name": "xyz", "role": "user" })
   }
 
   const logout = () => {
