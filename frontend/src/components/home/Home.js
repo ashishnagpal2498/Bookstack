@@ -18,11 +18,11 @@ const Home = () => {
             <div className='home-info-text-div'>
               <h1>Welcome to Book Stack</h1>
               <h2> Your Ultimate Book Rental Destination</h2>
-              <a href="/books" className="btn-get-started scrollto">Explore Books</a>
+              <a href="/coming-soon" className="btn-get-started scrollto">Explore Books</a>
             </div>
           </div>
           <div className="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
-            <img loading="lazy" src={homebg} className="img-fluid" alt="" />
+            <img loading='lazy' src={homebg} className="img-fluid" alt="" />
           </div>
         </div>
         </Container>
@@ -31,7 +31,7 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6" data-aos="zoom-in">
-              <img loading="lazy" src={bookLover} className="img-fluid" alt="" />
+              <img loading='lazy' src={bookLover} className="img-fluid" alt="" />
             </div>
             <div className="col-lg-6">
               <div className="pt-4 pt-lg-0">
@@ -90,33 +90,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <div className="page-footer font-small blue pt-4">
-          <div className="container-fluid text-center text-md-left">
-              <div className="row">
-                  <div className="col-md-6 mt-md-0 mt-3">
-                      <h5>Book Stack</h5>
-                      <p>
-                      Goldberg Computer Science Building<br/>
-                      6050 University Ave,<br/>
-                      Halifax, Nova Scotia<br/>
-                      NS B3H 1W5
-                      </p>
-                  </div>
-                  <hr className="clearfix w-100 d-md-none pb-0"/>
-                  <div className="col-md-6 mb-md-0 mb-3">
-                      <h5>Useful Links</h5>
-                      <ul className="list-unstyled">
-                          <li><a href="/">Home</a></li>
-                          <li><a href="/about">About Us</a></li>
-                          <li><a href="/contactus">Contact us</a></li>
-                          <li><a href="/faq">FAQ</a></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div className="footer-copyright text-center py-3">© 2024 Copyright: Book Stack Inc.
-          </div>
-      </div>
     </>
   );
 };

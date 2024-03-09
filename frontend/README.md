@@ -231,7 +231,7 @@ _Lines 24 - 84_
 
 ### Home.js
 
-_Lines 14-119_
+_Lines 14-92_
 
 ```
       <div className='home-div'>
@@ -241,11 +241,11 @@ _Lines 14-119_
             <div className='home-info-text-div'>
               <h1>Welcome to Book Stack</h1>
               <h2> Your Ultimate Book Rental Destination</h2>
-              <a href="/books" className="btn-get-started scrollto">Explore Books</a>
+              <a href="/coming-soon" className="btn-get-started scrollto">Explore Books</a>
             </div>
           </div>
           <div className="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
-            <img src={homebg} className="img-fluid" alt="" />
+            <img loading='lazy' src={homebg} className="img-fluid" alt="" />
           </div>
         </div>
         </Container>
@@ -254,7 +254,7 @@ _Lines 14-119_
         <div className="container">
           <div className="row">
             <div className="col-lg-6" data-aos="zoom-in">
-              <img src={bookLover} className="img-fluid" alt="" />
+              <img loading='lazy' src={bookLover} className="img-fluid" alt="" />
             </div>
             <div className="col-lg-6">
               <div className="pt-4 pt-lg-0">
@@ -284,28 +284,28 @@ _Lines 14-119_
           <div class="row">
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in">
               <div class="icon-box icon-box-pink">
-                <div class="icon"><img src={bookDetailsIcon} alt="" /></div>
+                <div class="icon"><img loading='lazy' src={bookDetailsIcon} alt="" /></div>
                 <h4 class="title">Book Details</h4>
                 <p class="description">Access comprehensive details and information about each book in our extensive collection.</p>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box icon-box-cyan">
-                <div class="icon"><img src={favIcon} alt="" /></div>
+                <div class="icon"><img loading='lazy' src={favIcon} alt="" /></div>
                 <h4 class="title">Favorites</h4>
                 <p class="description">Easily mark and manage your favorite books for quick access and personalized recommendations.</p>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
               <div class="icon-box icon-box-green">
-                <div class="icon"><img src={openBookIcon} alt="" /></div>
+                <div class="icon"><img loading='lazy' src={openBookIcon} alt="" /></div>
                 <h4 class="title">Book Library</h4>
                 <p class="description">Explore our vast library of books spanning various genres and topics to find your next read.</p>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
               <div class="icon-box icon-box-blue">
-                <div class="icon"><img src={feedbackIcon} alt="" /></div>
+                <div class="icon"><img loading='lazy' src={feedbackIcon} alt="" /></div>
                 <h4 class="title">Book Feedback</h4>
                 <p class="description">Share your thoughts and feedback on the books you've read to help other users make informed choices.</p>
               </div>
@@ -313,33 +313,6 @@ _Lines 14-119_
           </div>
         </div>
       </section>
-      <div className="page-footer font-small blue pt-4">
-          <div className="container-fluid text-center text-md-left">
-              <div className="row">
-                  <div className="col-md-6 mt-md-0 mt-3">
-                      <h5>Book Stack</h5>
-                      <p>
-                      Goldberg Computer Science Building<br/>
-                      6050 University Ave,<br/>
-                      Halifax, Nova Scotia<br/>
-                      NS B3H 1W5
-                      </p>
-                  </div>
-                  <hr className="clearfix w-100 d-md-none pb-0"/>
-                  <div className="col-md-6 mb-md-0 mb-3">
-                      <h5>Useful Links</h5>
-                      <ul className="list-unstyled">
-                          <li><a href="/">Home</a></li>
-                          <li><a href="/about">About Us</a></li>
-                          <li><a href="/contactus">Contact us</a></li>
-                          <li><a href="/faq">FAQ</a></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div className="footer-copyright text-center py-3">© 2024 Copyright: Book Stack Inc.
-          </div>
-      </div>
 ```
 - The code above was created by adapting the code in [Scaffold Template Home Page](https://bootstrapmade.com/demo/Scaffold/).
 
@@ -1296,63 +1269,66 @@ _Lines 14-119_
 - We changed the syntax from plain HTML to a syntax that is supported by React.
 - We added custom images and icons that are different from what original code had, to further tailor it to our application.
 - We changed the color scheme of the original code to match the scheme that we had established for the application.
+- We separated footer div to a different component called Footer.js.
+
 
 ### ContactUs.js
 
-_Lines 35-106_
+_Lines 80-153_
 ```
+ <div className="contact-us-div">
       <Container className='contact-us-container'>
         <h2>Contact Us</h2>
-          <Row>
-            <div className='col-lg-6 col-md-12'>
-              <img src={contactIllustration} alt="Contact us"/>
-            </div>
-            <div className='col-lg-6 col-md-12'>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <Row>
-                  <Col>
-                    <Form.Group controlId="full-name">
-                      <Form.Label>Full Name</Form.Label>
-                      <Form.Control type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required isInvalid={validated && !fullName} />
-                      <Form.Control.Feedback type="invalid">Please enter your full name.</Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Form.Group controlId="email">
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required isInvalid={validated && !email} />
-                      <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Form.Group controlId="phone-number">
-                      <Form.Label>Phone Number</Form.Label>
-                      <Form.Control type="text" value={phone} onChange={(e) => setPhone(e.target.value)} required isInvalid={validated && !phone} />
-                      <Form.Control.Feedback type="invalid">Please enter a valid phone number.</Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Form.Group controlId="message">
-                      <Form.Label>Message</Form.Label>
-                      <Form.Control as="textarea" rows={6} value={message} onChange={(e) => setMessage(e.target.value)} required isInvalid={validated && !message} />
-                      <Form.Control.Feedback type="invalid">Please provide a message or description.</Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Button type="submit" className="submit-btn">Submit</Button>
-                  </Col>
-                </Row>
-              </Form>
-            </div>
-          </Row>
+        <Row>
+          <div className='col-lg-6 col-md-12'>
+            <img src={contactIllustration} alt="Contact us" />
+          </div>
+          <div className='col-lg-6 col-md-12'>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="full-name">
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required isInvalid={checkName()} />
+                    <Form.Control.Feedback type="invalid">Please enter your full name. (Name cannot contain numbers or special characters)</Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type='text' value={email} onChange={(e) => setEmail(e.target.value)} required isInvalid={checkEmail()} />
+                    <Form.Control.Feedback type="invalid">Please enter a valid email address. (name@domain.subdomain)</Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="phone-number">
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required isInvalid={checkPhone()} />
+                    <Form.Control.Feedback type="invalid">Please enter a valid phone number.</Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="message">
+                    <Form.Label>Message</Form.Label>
+                    <Form.Control as="textarea" rows={6} value={message} onChange={(e) => setMessage(e.target.value)} required isInvalid={validated && !message} />
+                    <Form.Control.Feedback type="invalid">Please provide a message or description.</Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button type="submit" className="submit-btn">Submit</Button>
+                </Col>
+              </Row>
+            </Form>
+          </div>
+        </Row>
       </Container>
       <Modal
         show={showConfirmation}
@@ -1373,6 +1349,7 @@ _Lines 35-106_
           <Button className='col-sm-4 form-close-btn' onClick={() => handleModalClose()}>OK</Button>
         </Modal.Footer>
       </Modal>
+    </div>
 ```
 - The code above was created by adapting the code in [Forms | React Bootstrap](https://react-bootstrap.netlify.app/docs/forms/overview) and [Modals | React Bootstrap](https://react-bootstrap.netlify.app/docs/components/modal).
 

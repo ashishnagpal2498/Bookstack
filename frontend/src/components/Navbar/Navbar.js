@@ -1,5 +1,5 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import {React, useState} from 'react'
+// import { useNavigate } from 'react-router-dom';
 import '../../stylesheets/header-nav.css'
 import { localStorageUtil } from '../../util';
 import { NavDropdown, Row, Col, Container, Button, Navbar, Nav } from 'react-bootstrap';
@@ -7,17 +7,20 @@ import profileIcon from '../../assets/profile.png';
 import logo from '../../assets/logo.png';
 
 function CommonNavbar() {
-  const user = localStorageUtil.getItem('user');
-  const navigate = useNavigate();
+  const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
+//   const navigate = useNavigate();
 
   // Comment this code (just for testing)
   const login = () => {
-    localStorageUtil.setItem('user', { "name": "xyz", "role": "user" })
+    const newUser = { name: 'xyz', role: 'admin' };
+    setUser(newUser);
+    localStorageUtil.setItem('user', newUser)
   }
 
   const logout = () => {
+    setUser(null);
     localStorageUtil.removeItem('user');
-    navigate("/login")
+    // navigate("/login")
   }
 
   return (
@@ -38,19 +41,19 @@ function CommonNavbar() {
             <Nav className="container-fluid">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/books">Books</Nav.Link>
-                <Nav.Link href="/favorites">Favorites</Nav.Link>
+                <Nav.Link href="/coming-soon">Favorites</Nav.Link>
                 <Nav.Link href="/about">About Us</Nav.Link>
                 <Nav.Link href="/contactus">Contact Us</Nav.Link>
                 <Nav.Link href="/faq">FAQ</Nav.Link>
                 { user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></> }
                 { user ? 
-                    <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></> }
+                    <Nav.Link href="/coming-soon">Book Management</Nav.Link> : <></> }
                 {
                     user ?
                     <NavDropdown className="ms-auto"
                         title="Sam" 
                         id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#profile">
+                        <NavDropdown.Item href="#coming-soon">
                             <Row>
                                 <Col xs={3}>
                                     <img src={profileIcon} alt=""/>
@@ -63,7 +66,7 @@ function CommonNavbar() {
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
-                        <NavDropdown.Item href="/manage-books">
+                        <NavDropdown.Item href="/coming-soon">
                             Book Management
                         </NavDropdown.Item>
                         <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>

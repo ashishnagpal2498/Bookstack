@@ -3,6 +3,8 @@ import './App.css';
 import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
 import { isAuthenticated, isAdmin } from './util';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer/Footer.js';
+import ComingSoon from './components/ComingSoon';
 import { LateFeeSystemSearch, LateFeeSystemUserDetails, LateFeeDetails } from './components/LateFeeSystem';
 import Home from './components/home/Home';
 import About from './components/Details/About';
@@ -25,31 +27,36 @@ import BookManager from './components/BookManagement/BookManager.js';
 const App = () => {
 
   return (
-    <>
-      <ToastContainer />
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/books" element={<BookLibrary />} />
-          <Route path="/contactus" element={<Contact />} />
-          <Route path='/book/:bookId' element={<BookDetail />} />
-          <Route path="/Recommended" exact element={<Recommended />} />
-          <Route path="/latefee" element={isAuthenticated() ? (isAdmin() ? <LateFeeSystemSearch /> : <LateFeeDetails />) : <Navigate to="/login" /*replace="true"*/ />} />
-          <Route path="/latefee/details" element={(isAuthenticated() && isAdmin()) ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/forgetps" element={<ForgetPasswordEmail />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/manage-books" element={<BookManager />} />
-          <Route path="/add-book" element={<AddBook />} />
-        </Routes>
-      </Router>
-    </>
+    <div className="App flex flex-column h-screen">
+      <Navbar />
+      <div className='flex-1'>
+        <ToastContainer />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/books" element={<BookLibrary />} />
+            <Route path="/contactus" element={<Contact />} />
+            <Route path='/book/:bookId' element={<BookDetail />} />
+            <Route path="/Recommended" exact element={<Recommended />} />
+            <Route path="/latefee" element={isAuthenticated() ? (isAdmin() ? <LateFeeSystemSearch /> : <LateFeeDetails />) : <Navigate to="/login" /*replace="true"*/ />} />
+            <Route path="/latefee/details" element={(isAuthenticated() && isAdmin()) ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/forgetps" element={<ForgetPasswordEmail />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/manage-books" element={<BookManager />} />
+            <Route path="/add-book" element={<AddBook />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
+          </Routes>
+        </Router>
+      </div>
+      <Footer />
+    </div>
+
   );
 }
 
