@@ -5,11 +5,12 @@ const lateFeeSchema = new mongoose.Schema({
     books: [{
         amount: String,
         book_id: String,
-        reserved_date: Date,
-        paid: Boolean
+        reserved_date: String,
+        paid: Boolean,
+        paid_date: String
     }],
 });
 
-const lateFee = mongoose.model('users', lateFeeSchema);
+const lateFee = mongoose.model('latefee', lateFeeSchema, 'latefee');
 
 module.exports = lateFee;
