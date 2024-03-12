@@ -8,7 +8,7 @@ const cors = require('cors');
 const Favorite = require('./models/favorite');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors());
