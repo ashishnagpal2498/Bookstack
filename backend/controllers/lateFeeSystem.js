@@ -123,11 +123,11 @@ exports.checkActiveLateFee = async (req, res) => {
                 })
             }
             // No unpaid late fees means there are no active late fees for the user - return false
-            else{
+            else {
                 return res.status(200).json({
                     message: "No active late fee!",
                     status: false
-                })  
+                })
             }
         }
         // No document means no active late fee
@@ -148,11 +148,192 @@ exports.checkActiveLateFee = async (req, res) => {
 }
 
 // API to fetch a list of all users who have active late fees - to display on admin late fee system search page (return user picture, user name, book name, and active late fee amount)
+exports.getActiveLateFeesUsers = async (req, res) => {
+    try {
+        // fetch all documents who have paid as false ([{books: [{paid:  false}, {paid: true}, {paid: true}]}, {books: [{paid: true}, {paid: true}]}, {books: [{paid:  false}]}])
+        const lateFeeDocuments = await lateFeeSchema.find({ "books.paid": false });
+        const users = [];
+        for (let i = 0; i < lateFeeDocuments.length; i++) {
+            let lateFeeDocument = lateFeeDocuments[i];
+            // console.log(lateFeeDocument)
+            const user = await usersSchema.findOne({ _id: new ObjectID(lateFeeDocument.user_id) });
+            const book = lateFeeDocument.books.filter(book => book.paid === false)[0];
+            if (!user || !book) {
+                continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or
+            }
+            const user_name = user.first_name;
+            const user_picture = user.picture;
+            const book_document = await booksSchema.findOne({ _id: new ObjectID(book.book_id) });
+            const book_name = book_document?.name;
+            const user_dict = {
+                _id: lateFeeDocument._id,
+                user_name,
+                user_picture,
+                book_name,
+                amount: book.amount,
+                book__id: book._id,
+            }
+            users.push(user_dict);
+        }
+        return res.status(200).json({
+            message: "List of active late fee users!",
+            users: users
+        })
+    }
+    // internal server error
+    catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Uh oh! Looks like something broke on our end...",
+            users: []
+        })
+    }
+}
 
 // API to fetch user details - to display on admin late fee details page (return user picture, name, email, phone)
+exports.getUserDetails = async (req, res) => {
+    try {
+        const { _id } = req.params;
+        const lateFeeDocument = await lateFeeSchema.findOne({ _id: new ObjectID(_id) });
+        const user = await usersSchema.findOne({ _id: new ObjectID(lateFeeDocument.user_id) }).select(['-password', '-role']);
+        // if no user is found
+        if (!lateFeeDocument || !user) {
+            return res.status(404).json({
+                message: "Details not found!",
+                user: {}
+            });
+        }
+        // Delete unwanted items in dictionary
+        return res.status(200).json({
+            message: "User Details Found!",
+            user
+        })
+    }
+    // internal server error
+    catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Uh oh! Looks like something broke on our end...",
+            user: {}
+        })
+    }
+}
 
 // API to fetch active late fee details - to display on admin, user late fee details page (return book picture, book name, reserved date, due date, amount due)
+exports.getActiveLateFeeDetails = async (req, res) => {
+    try {
+        const { _id, book__id } = req.params;
+        const lateFeeDocument = await lateFeeSchema.findOne({ _id: new ObjectID(_id) });
+        const book = lateFeeDocument.books.filter(book => book._id.toString() === book__id)[0];
+        const book_document = await booksSchema.findOne({ _id: new ObjectID(book.book_id) });
+        if (!lateFeeDocument || !book_document) {
+            return res.status(404).json({
+                message: "Active Late Fee details not found!",
+                active_late_fee: {}
+            });
+        }
+        // Check if fee is already paid
+        if (book.paid === true) {
+            return res.status(200).json({
+                message: "No Active Late Fees!",
+                active_late_fee: {}
+            })
+        }
+        active_late_fee = {}
+        active_late_fee.book_picture = book_document.image_url
+        active_late_fee.book_name = book_document.book_name
+        active_late_fee.reserved_date = new Date(book.reserved_date).toUTCString().split(' ').slice(0, 4).join(' ')
+        // Due date is 14 days from reserved date
+        active_late_fee.due_date = new Date(new Date(active_late_fee.reserved_date).getTime() + 14 * 24 * 60 * 60 * 1000).toUTCString().split(' ').slice(0, 4).join(' ');
+        active_late_fee.amount_due = book.amount
+
+        return res.status(200).json({
+            message: "Active Late Fee details found!",
+            active_late_fee
+        })
+
+    }
+    // internal server error
+    catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Uh oh! Looks like something broke on our end...",
+            active_late_fee: {}
+        })
+    }
+}
 
 // API to fetch past late fees - to display on admin, user late fee details page (return book picture, book name, paid date, amount paid)
+exports.getPastLateFees = async (req, res) => {
+    try {
+        const { _id } = req.params;
+        const lateFeeDocument = await lateFeeSchema.findOne({ _id: new ObjectID(_id) });
+        let past_late_fees = lateFeeDocument.books.filter(book => book.paid === true);
+        // console.log(typeof(past_late_fees))
+        // fetch book details of each paid late fee
+        for (let i = 0; i < past_late_fees.length; i++) {
+            let past_late_fee = past_late_fees[i].toObject();
+            const book_document = await booksSchema.findOne({ _id: new ObjectID(past_late_fees[i].book_id) });
+            // if no book is found
+            if (!book_document) {
+                continue;
+            }
+            past_late_fee.reserved_date = new Date(past_late_fee.reserved_date).toUTCString().split(' ').slice(0, 4).join(' ');
+            past_late_fee.paid_date = new Date(past_late_fee.paid_date).toUTCString().split(' ').slice(0, 4).join(' ');
+            // add due_date, book_name, and image_url to past_late_fee
+            past_late_fee.due_date = new Date(new Date(past_late_fee.reserved_date).getTime() + 14 * 24 * 60 * 60 * 1000).toUTCString().split(' ').slice(0, 4).join(' ');
+            past_late_fee.book_name = book_document.book_name;
+            past_late_fee.image_url = book_document.image_url;
+            // console.log(book_document.image_url + " " + book_document.book_name)
+            past_late_fees[i] = past_late_fee;
+        }
+        // sort past late fees by paid date in descending order
+        past_late_fees.sort((a, b) => new Date(b.paid_date) - new Date(a.paid_date));
+
+        return res.status(200).json({
+            message: "Past Late Fees found!",
+            past_late_fees
+        })
+
+
+    }
+    // internal server error
+    catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Uh oh! Looks like something broke on our end...",
+            past_late_fees: {}
+        })
+    }
+}
+
 
 // API to clear active late fees - for the button in admin late fee details page (return true or false)
+exports.clearActiveLateFee = async (req, res) => {
+    try {
+        const { _id, book__id } = req.params;
+        const lateFeeDocument = await lateFeeSchema.findOne({ _id: new ObjectID(_id) });
+        const book = lateFeeDocument.books.filter(book => book._id.toString() === book__id)[0];
+        if (!lateFeeDocument || !book) {
+            return res.status(404).json({
+                message: "Late fee not found!",
+                status: false
+            })
+        }
+        // Clear the active late fee by setting paid to true and add paid_date
+        book.paid = true;
+        book.paid_date = new Date();
+        await lateFeeDocument.save();
+        return res.status(200).json({
+            message: "Active late fee cleared!",
+            status: true
+        })
+    }
+    catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Uh oh! Looks like something broke on our end...",
+            status: false
+        })
+    }
+}

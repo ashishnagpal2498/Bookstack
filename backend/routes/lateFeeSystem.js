@@ -10,19 +10,19 @@ router.post('/create', lateFeeController.createLateFee);
 router.post('/check-restriction/:user_id', lateFeeController.checkActiveLateFee);
 
 // API to fetch a list of all users who have active late fees - to display on admin late fee system search page (return user picture, user name, book name, and active late fee amount)
-// router.get('/active-users', lateFeeController.getActiveLateFeesUsers);
+router.get('/active-users', lateFeeController.getActiveLateFeesUsers);
 
 // API to fetch user details - to display on admin late fee details page (return user picture, name, email, phone)
-// router.get('/user-details/:userId', userController.getUserDetails);
+router.get('/user-details/:_id', lateFeeController.getUserDetails);
 
 // API to fetch active late fee details - to display on admin, user late fee details page (return book picture, book name, reserved date, due date, amount due)
-// router.get('/active-details/:userId', lateFeeController.getActiveLateFeeDetails);
+router.get('/active-fee-details/:_id/:book__id', lateFeeController.getActiveLateFeeDetails);
 
 // API to fetch past late fees - to display on admin, user late fee details page (return book picture, book name, paid date, amount paid)
-// router.get('/past/:userId', lateFeeController.getPastLateFees);
+router.get('/past-fee-details/:_id', lateFeeController.getPastLateFees);
 
 // API to clear active late fees - for the button in admin late fee details page (return true or false)
-// router.post('/clear/:userId', lateFeeController.clearActiveLateFee);
+router.post('/clear-fee/:_id/:book__id', lateFeeController.clearActiveLateFee);
 
 // Export the router to be used in the main app
 module.exports = router;
