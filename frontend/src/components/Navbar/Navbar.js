@@ -12,7 +12,7 @@ function CommonNavbar() {
 
   // Comment this code (just for testing)
   const login = () => {
-    const newUser = { name: 'xyz', role: 'admin' };
+    const newUser = { name: 'xyz', role: 'admin', user_id:'65f0d24ef3a9f5b258d5487f' };
     setUser(newUser);
     localStorageUtil.setItem('user', newUser)
   }

@@ -9,6 +9,6 @@ const booksSchema = new mongoose.Schema({
     price: Number
 });
 
-const books = mongoose.model('books', booksSchema);
+const books = mongoose.model('books-dummy', booksSchema, 'books-dummy');
 
 module.exports = books;

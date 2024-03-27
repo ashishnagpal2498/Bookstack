@@ -1,26 +1,84 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { getUserDetails, getActiveLateFeeDetails, getPastLateFees, clearActiveLateFee } from '../../../services/LateFeeSystem'
+import { remindUserLateFee } from '../../../services/Notifications'
 
 function LateFeeSystemUserDetails() {
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const {data} = location.state;
+    const location = useLocation();
+    const { user_id } = location.state;
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState('');
+    const [userDetails, setUserDetails] = useState({})
+    const [userDetailsResponseMessage, setUserDetailsResponseMessage] = useState('')
+    const [activeLateFeeDetails, setActiveLateFeeDetails] = useState({})
+    const [activeLateFeeResponseMessage, setActiveLateFeeResponseMessage] = useState('')
+    const [pastLateFeeDetails, setPastLateFeeDetails] = useState([])
+    const [pastLateFeeResponseMessage, setPastLateFeeResponseMessage] = useState('')
 
-    const userDetails = { id: 2, user: { name: 'Jane Smith', email: 'ab@ab.ab', phone: '+17828224556', picture: 'https://source.unsplash.com/random/100x100/?person' }, book: { name: 'Book 2', reservedDate: "25-01-2024", dueDate: "02-02-2024" }, fee: "$150" }
+    useEffect(() => {
+        const fetchData = async () => {
+            // User Details
+            const userData = await getUserDetails(user_id);
+            // console.log(userData);
+            setUserDetails(userData.user);
+            setUserDetailsResponseMessage(userData.message);
+        };
+        fetchData();
+    },
+        [user_id])
 
-    const handleRemindUser = () => {
+    useEffect(() => {
+        const fetchData = async () => {
+            // Active Late Fee Details
+            const activeLateFeeData = await getActiveLateFeeDetails(user_id);
+            // console.log(activeLateFeeData);
+            setActiveLateFeeDetails(activeLateFeeData.active_late_fee);
+            setActiveLateFeeResponseMessage(activeLateFeeData.message);
+        };
+        fetchData();
+    },
+        [user_id])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // Past Late Fee Details
+            const pastLateFeeData = await getPastLateFees(user_id);
+            // console.log(pastLateFeeData);
+            setPastLateFeeDetails(pastLateFeeData.past_late_fees);
+            setPastLateFeeResponseMessage(pastLateFeeData.message);
+        };
+        fetchData();
+    },
+        [user_id])
+
+
+    // const userDetails = { id: 2, user: { name: 'Jane Smith', email: 'ab@ab.ab', phone: '+17828224556', picture: 'https://source.unsplash.com/random/100x100/?person' }, book: { name: 'Book 2', reservedDate: "25-01-2024", dueDate: "02-02-2024" }, fee: "$150" }
+
+    const handleRemindUser = async () => {
         // Logic to remind user
+        const response = await remindUserLateFee(user_id);
+        console.log(response);
+        if (!response?.status) {
+            setModalContent(response?.message);
+            setShowModal(true);
+        }
         setModalContent('User successfully notified!');
         setShowModal(true);
 
     };
 
-    const handleClearFee = () => {
+    const handleClearFee = async () => {
         // Logic to clear fee
+        const response = await clearActiveLateFee(user_id);
+        if (!response?.status) {
+            setModalContent(response?.message);
+            setShowModal(true);
+            return;
+        }
         setModalContent('Successfully cleared!');
         setShowModal(true);
+
     };
 
     const closeModal = () => {
@@ -29,64 +87,77 @@ function LateFeeSystemUserDetails() {
     };
 
     return (
-        <div className='bg-aboutUsBrown h-screen py-8'>
+        <div className='bg-aboutUsBrown py-8'>
             <div className="container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
                 <div className="flex flex-col justify-between">
                     <div className='mb-4'>
                         <p className="text-3xl">User Details</p>
                     </div>
-                    <div className='flex flex-row'>
-                        <div className='flex justify-center items-center'><img src={userDetails.user.picture} alt="Person" className="rounded-full h-24 w-24 mb-2" /></div>
+                {
+                    Object.keys(userDetails).length > 0 ? (
+                        <div className='flex flex-row'>
+                        <div className='flex justify-center items-center'><img src={userDetails.picture} alt="Person" className="rounded-full h-24 w-24 mb-2" /></div>
                         <div className='ml-4 flex flex-col justify-start items-start'>
                             <div className="mb-2">
                                 <span className="text-gray-600">User Name: </span>
-                                <span className="text-lg font-bold">{userDetails.user.name}</span>
+                                <span className="text-lg font-bold">{userDetails.first_name + ' ' + userDetails.last_name}</span>
                             </div>
                             <div className="mb-2">
                                 <span className="text-gray-600">Email: </span>
-                                <span className="text-lg font-bold">{userDetails.user.email}</span>
+                                <span className="text-lg font-bold">{userDetails.email}</span>
                             </div>
                             <div className="mb-2">
                                 <span className="text-gray-600">Phone: </span>
-                                <span className="text-lg font-bold">{userDetails.user.phone}</span>
+                                <span className="text-lg font-bold">{userDetails.phone}</span>
                             </div>
                         </div>
                     </div>
+                    ) : (
+                        <p className='text-center text-muted'>{userDetailsResponseMessage}</p>
+                    )
+                }
                 </div>
-                <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+                <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
                 <div className="flex flex-col justify-between">
                     <div className='mb-4'>
                         <p className="text-3xl">Active Late Fee Details</p>
-                    </div>
-                    <div className='flex flex-row'>
-                        <img className="w-40 h-40 mb-4" src={"https://source.unsplash.com/random/2000x2000/?book,title,page"} alt="Book" />
-                        <div className='ml-4 flex flex-col justify-start items-start'>
-                            <div className="mb-3">
-                                <span className="text-gray-600">Book Name: </span>
-                                <span className="text-lg font-bold">{userDetails.book.name}</span>
+                    </div>{
+                        Object.keys(activeLateFeeDetails).length > 0 ? (
+                            <div>
+                                <div className='flex flex-row'>
+                                    <img className="w-40 h-40 mb-4" src={activeLateFeeDetails.book_picture} alt="Book" />
+                                    <div className='ml-4 flex flex-col justify-start items-start'>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Book Name: </span>
+                                            <span className="text-lg font-bold">{activeLateFeeDetails.book_name}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Reserved Date: </span>
+                                            <span className="text-lg font-bold">{activeLateFeeDetails.reserved_date}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Due Date: </span>
+                                            <span className="text-lg font-bold">{activeLateFeeDetails.due_date}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Amount Due: </span>
+                                            <span className="text-lg font-bold">${activeLateFeeDetails.amount_due}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex justify-center">
+                                    <button onClick={handleRemindUser} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mr-4">
+                                        Remind User
+                                    </button>
+                                    <button onClick={handleClearFee} className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                                        Clear Fee
+                                    </button>
+                                </div>
                             </div>
-                            <div className="mb-3">
-                                <span className="text-gray-600">Reserved Date: </span>
-                                <span className="text-lg font-bold">{userDetails.book.reservedDate}</span>
-                            </div>
-                            <div className="mb-3">
-                                <span className="text-gray-600">Due Date: </span>
-                                <span className="text-lg font-bold">{userDetails.book.dueDate}</span>
-                            </div>
-                            <div className="mb-3">
-                                <span className="text-gray-600">Amount Due: </span>
-                                <span className="text-lg font-bold">{userDetails.fee}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex justify-center">
-                        <button onClick={handleRemindUser} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mr-4">
-                            Remind User
-                        </button>
-                        <button onClick={handleClearFee} className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                            Clear Fee
-                        </button>
-                    </div>
+                        ) : (<p className='text-center text-muted'>
+                            {activeLateFeeResponseMessage}
+                        </p>)
+                    }
                 </div>
                 {showModal && (
                     <div className="fixed z-100 inset-0 overflow-y-auto">
@@ -112,10 +183,57 @@ function LateFeeSystemUserDetails() {
                         </div>
                     </div>
                 )}
-                <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+                <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
                 <div>
                     <p className="text-3xl">Past Late Fee Details</p>
-                    <p className="text-center text-gray-600">No past late fees found!</p>
+                    {Object.keys(pastLateFeeDetails).length > 0 ? (<table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Image
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Name
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Reserved Date
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Due Date
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Paid Date
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {pastLateFeeDetails.map((item, i) => (
+                                <tr key={i}>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        <img src={item.image_url} alt="Book" className="h-10 w-10 rounded-full" />
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {item.book_name}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {item.reserved_date}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {item.due_date}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {item.paid_date}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        ${item.amount}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>) : (<p className="text-center text-muted">{pastLateFeeResponseMessage}</p>)}
                 </div>
             </div>
         </div >
