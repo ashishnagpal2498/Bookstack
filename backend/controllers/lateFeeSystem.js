@@ -173,6 +173,13 @@ exports.getActiveLateFeesUsers = async (req, res) => {
             }
             users.push(user_dict);
         }
+        // check if users array is empty
+        if (users.length === 0) {
+            return res.status(404).json({
+                message: "No active late fee users found!",
+                users: []
+            })
+        }
         return res.status(200).json({
             message: "List of active late fee users!",
             users: users

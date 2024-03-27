@@ -74,7 +74,7 @@ function LateFeeSystemSearch() {
                             </div>
                         ))
                     ) : (
-                        <p className='text-center'>{apiMessage}</p>
+                        <p className='text-center text-muted'>{apiMessage}</p>
                     )}
                 </div>
             </div>

@@ -87,7 +87,7 @@ function LateFeeSystemUserDetails() {
     };
 
     return (
-        <div className='bg-aboutUsBrown py-8'>
+        <div className='bg-aboutUsBrown h-full py-8'>
             <div className="container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
                 <div className="flex flex-col justify-between">
                     <div className='mb-4'>
