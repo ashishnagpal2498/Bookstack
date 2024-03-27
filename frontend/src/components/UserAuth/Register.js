@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
+// eslint-disable-next-line
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
