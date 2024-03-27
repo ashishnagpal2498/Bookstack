@@ -1,3 +1,5 @@
+const backend_url = process.env.REACT_APP_BACKEND_URL
+
 export const remindUserLateFee = async(user_id) => {
     try{
         const postOptions = {
@@ -6,8 +8,8 @@ export const remindUserLateFee = async(user_id) => {
                 'Content-Type': 'application/json',
             },
          }
-        // const response = await fetch(`https://book-stack-q5ux.onrender.com/notify/late-fee-reminder-user/${user_id}`); 
-        const response = await fetch(`http://localhost:8080/notify/late-fee-reminder-user/${user_id}`, postOptions); 
+        const response = await fetch(`${backend_url}/notify/late-fee-reminder-user/${user_id}`, postOptions); 
+        // const response = await fetch(`http://localhost:8080/notify/late-fee-reminder-user/${user_id}`, postOptions); 
         const data = await response.json();
         return data;
     }
@@ -19,8 +21,8 @@ export const remindUserLateFee = async(user_id) => {
 
 export const disputeLateFeeCharge = async(user_id) => {
     try{
-        // const response = await fetch(`https://book-stack-q5ux.onrender.com/notify/late-fee-dispute-charge/${user_id}`);
-        const response = await fetch(`http://localhost:8080/notify/late-fee-dispute-charge/${user_id}`);
+        const response = await fetch(`${backend_url}/notify/late-fee-dispute-charge/${user_id}`);
+        // const response = await fetch(`http://localhost:8080/notify/late-fee-dispute-charge/${user_id}`);
         const data = await response.json();
         return data;
     }
