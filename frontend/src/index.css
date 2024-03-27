@@ -1,6 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components{
+  .main{
+    @apply bg-cover bg-black w-screen h-screen bg-fixed bg-no-repeat ml-48;
+  }
+  .Card-reg{
+    @apply w-72 h-80 mt-44 rounded-lg justify-center items-center flex flex-col shadow duration-500 float-left [margin-left:200px] scale-125;
+  }
+  .Card-msg{
+    @apply w-72 h-80 mt-44 rounded-lg justify-center items-center flex flex-col shadow duration-500 float-left [margin-left:195px] scale-125 font-bold text-2xl;
+  }
+  .textbox{
+    @apply mt-4 rounded-lg [padding:3px]
+  }
+}
 
 html, :root{
   min-height: 100vh;
