@@ -7,7 +7,7 @@ function LateFeeDetails() {
     // const navigate = useNavigate();
     // const [userDetails] = useState({ id: 2, user: { name: 'Jane Smith', picture: 'https://source.unsplash.com/random/100x100/?person' }, book: { name: 'Book 2', reservedDate: "25-01-2024", dueDate: "02-02-2024" }, fee: "$150" });
     // Load Active Late Fee Details
-    const [user_id, setUserid] = useState(localStorageUtil.getItem('user').user_id);
+    const [user_id] = useState(localStorageUtil.getItem('user').user_id);
     const [activeLateFeeDetails, setActiveLateFeeDetails] = useState({})
     const [activeLateFeeResponseMessage, setActiveLateFeeResponseMessage] = useState('')
     const [pastLateFeeDetails, setPastLateFeeDetails] = useState([])
