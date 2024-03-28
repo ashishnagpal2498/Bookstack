@@ -21,9 +21,16 @@ export const remindUserLateFee = async(user_id) => {
 
 export const disputeLateFeeCharge = async(user_id) => {
     try{
-        const response = await fetch(`${backend_url}/notify/late-fee-dispute-charge/${user_id}`);
+        const postOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+         }
+        const response = await fetch(`${backend_url}/notify/late-fee-dispute-charge/${user_id}`, postOptions);
         // const response = await fetch(`http://localhost:8080/notify/late-fee-dispute-charge/${user_id}`);
         const data = await response.json();
+        console.log(data);
         return data;
     }
     catch(err){

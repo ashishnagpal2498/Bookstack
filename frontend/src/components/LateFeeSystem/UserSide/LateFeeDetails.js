@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { localStorageUtil } from '../../../util/index'
 // import { useNavigate } from 'react-router-dom';
 import { getActiveLateFeeDetails, getPastLateFees } from '../../../services/LateFeeSystem'
+import {disputeLateFeeCharge} from '../../../services/Notifications'
 
 function LateFeeDetails() {
     // const navigate = useNavigate();
@@ -18,7 +19,7 @@ function LateFeeDetails() {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getActiveLateFeeDetails(user_id);
-            console.log(response);
+            // console.log(response);
             setActiveLateFeeDetails(response.active_late_fee);
             setActiveLateFeeResponseMessage(response.message);
         }
@@ -38,8 +39,15 @@ function LateFeeDetails() {
     },
         [user_id])
 
-    const handleDisputeCharge = () => {
+    const handleDisputeCharge = async() => {
         // Logic to clear fee
+        const response = await disputeLateFeeCharge(user_id);
+        console.log(response);
+        if (!response.status) {
+            setModalContent(response.message);
+            setShowModal(true);
+            return;
+        }
         setModalContent('Successfully notified the admin!');
         setShowModal(true);
     };
@@ -120,49 +128,49 @@ function LateFeeDetails() {
                 <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
                 <div>
                     <p className="text-3xl">Past Late Fee Details</p>
-                    {Object.keys(pastLateFeeDetails).length > 0 ? (<div class="overflow-x-auto">
-                        <table class="w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                    {Object.keys(pastLateFeeDetails).length > 0 ? (<div className="overflow-x-auto">
+                        <table className="w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
                                         Image
                                     </th>
-                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
                                         Name
                                     </th>
-                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
                                         Reserved Date
                                     </th>
-                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
                                         Due Date
                                     </th>
-                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
                                         Paid Date
                                     </th>
-                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
                                         Amount
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                            <tbody className="bg-white divide-y divide-gray-200">
                                 {pastLateFeeDetails.map((item, i) => (
                                     <tr key={i}>
-                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
-                                            <img src={item.image_url} alt="Book" class="h-10 w-10 rounded-full" />
+                                        <td className="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            <img src={item.image_url} alt="Book" className="h-10 w-10 rounded-full" />
                                         </td>
-                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                        <td className="px-3 md:px-6 py-3 md:whitespace-nowrap">
                                             {item.book_name}
                                         </td>
-                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                        <td className="px-3 md:px-6 py-3 md:whitespace-nowrap">
                                             {item.reserved_date}
                                         </td>
-                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                        <td className="px-3 md:px-6 py-3 md:whitespace-nowrap">
                                             {item.due_date}
                                         </td>
-                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                        <td className="px-3 md:px-6 py-3 md:whitespace-nowrap">
                                             {item.paid_date}
                                         </td>
-                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                        <td className="px-3 md:px-6 py-3 md:whitespace-nowrap">
                                             ${item.amount}
                                         </td>
                                     </tr>

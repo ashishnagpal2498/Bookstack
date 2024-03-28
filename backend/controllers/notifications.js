@@ -57,8 +57,8 @@ exports.disputeLateFeeCharge = async (req, res) => {
         // fetch admin from users schema
         const admin = await usersSchema.findOne({ role: 'admin' });
         const user = await usersSchema.findOne({ _id: new ObjectID(user_id) });
-        console.log("user", user);
-        console.log("admin", admin);
+        // console.log("user", user);
+        // console.log("admin", admin);
         if (!user || !admin) {
             return res.status(404).json({
                 message: "Details not found!",
@@ -78,6 +78,7 @@ exports.disputeLateFeeCharge = async (req, res) => {
                     status: false
                 });
             }
+            // console.log('Email sent:');
             return res.status(200).json({
                 message: "Reminder sent!",
                 status: true
