@@ -3,23 +3,41 @@ const Author = require('./author.js');
 const Genre = require('./genre.js');
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema({
-    book_name: String,
-    description: String,
-    content_link: String,
-    publisherDate: String,
+const BookSchema = new mongoose.Schema({
+    description: {
+        type: String,
+        required: true
+    },
+    content_link: {
+        type: String,
+        required: true
+    },
+    publisherDate: {
+        type: Date,
+        required: true
+    },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
         ref: 'Author'
     },
     genresId: [{
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
         ref: 'Genre'
     }],
-    image_url: String,
-    price: Number
+    book_name: {
+        type: String,
+        required: true
+    },
+    image_url: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    }
 });
 
-const Book = mongoose.model('Book', bookSchema, 'books');
-
-module.exports = Book;
+module.exports = mongoose.model('books', BookSchema, 'books');

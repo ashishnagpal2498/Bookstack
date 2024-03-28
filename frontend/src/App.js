@@ -28,7 +28,9 @@ const App = () => {
 
   return (
     <div className="App flex flex-column h-screen">
-      <Navbar />
+      <div>
+        <Navbar />
+      </div>
       <div className='flex-1'>
         <ToastContainer />
         <Router>
@@ -54,7 +56,9 @@ const App = () => {
           </Routes>
         </Router>
       </div>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </div>
 
   );

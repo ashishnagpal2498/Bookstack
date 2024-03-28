@@ -1,4 +1,5 @@
 const usersSchema = require('../models/users');
+const lateFeeSchema = require('../models/lateFeeSystem');
 var sendCustomMail = require('../util/mailService.js');
 const ObjectID = require('mongodb').ObjectId;
 const fs = require('fs');
@@ -14,8 +15,8 @@ const htmlTemplate = fs.readFileSync('./email_templates/html_content.html', 'utf
 // Access admin email from .env, user email from userSchema, send a mail to user.
 exports.remindUserLateFee = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const user = await usersSchema.findOne({ _id: new ObjectID(userId) });
+        const { user_id } = req.params;
+        const user = await usersSchema.findOne({ _id: new ObjectID(user_id) });
         if (!user) {
             return res.status(404).json({
                 message: "User not found!",
@@ -52,12 +53,12 @@ exports.remindUserLateFee = async (req, res) => {
 // API to notify admin of uncleared late fees - for dispute charge button on user late fee details page
 exports.disputeLateFeeCharge = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const { user_id } = req.params;
         // fetch admin from users schema
         const admin = await usersSchema.findOne({ role: 'admin' });
-        const user = await usersSchema.findOne({ _id: new ObjectID(userId) });
-        console.log("user", user);
-        console.log("admin", admin);
+        const user = await usersSchema.findOne({ _id: new ObjectID(user_id) });
+        // console.log("user", user);
+        // console.log("admin", admin);
         if (!user || !admin) {
             return res.status(404).json({
                 message: "Details not found!",
@@ -67,7 +68,7 @@ exports.disputeLateFeeCharge = async (req, res) => {
         // send mail to admin
         const htmlContent = htmlTemplate.replace('[User Name]', admin.first_name + ' ' + admin.last_name)
                             .replace('[Reminder Message]', user.first_name + ' ' + user.last_name + ' has a dispute in their late fee charge. Please look into it!')
-                            .replace('[Learn-more-link]', frontendUrl + 'latefee/details/' + userId);
+                            .replace('[Learn-more-link]', frontendUrl + 'latefee/details/' + user_id);
         
         sendCustomMail(fromEmail = bookStackEmail, toEmail = admin.email, subject = "Late Fee Reminder", html = htmlContent, function (error, info) {
             if (error) {
@@ -77,6 +78,7 @@ exports.disputeLateFeeCharge = async (req, res) => {
                     status: false
                 });
             }
+            // console.log('Email sent:');
             return res.status(200).json({
                 message: "Reminder sent!",
                 status: true
