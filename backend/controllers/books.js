@@ -1,3 +1,4 @@
+const Author = require('../models/author');
 const Book = require('../models/books');
 const Genre = require('../models/genre');
 
@@ -28,6 +29,25 @@ exports.getAllGenres = async (req, res) => {
         return res.status(200).json({
             message: "Genres successfully",
             data: genres,
+            status: true
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            status: false
+        });
+    }
+}
+
+exports.getAllAuthors = async (req, res) => {
+    try {
+        const authors = await Author.find();
+
+        console.log("Authors for Filter", authors);
+        return res.status(200).json({
+            message: "Authors successfully",
+            data: authors,
             status: true
         });
     } catch (error) {
