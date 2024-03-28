@@ -7,7 +7,7 @@ const BookCard = ({ books, loading }) => {
     <>
       {books.map((book, index) => (
         <li  key={index}>
-          <Link className={`book-library-card ${loading? "loading": ''}`} to={`/book/${book._id}`}>
+          <Link alt={book.name} className={`book-library-card ${loading? "loading": ''}`} to={`/book/${book._id}`}>
           {loading ?
               <div className="skeleton-book-bg">
                 <div className='skeleton-book-cover'>
@@ -17,8 +17,8 @@ const BookCard = ({ books, loading }) => {
             <div className='book-cover'>
             <img
               className="book-img"
-              src={book.title.includes("Potter") ? bookUrl2 : bookUrl1}
-              alt={book.title}
+              src={book.book_name.includes("Potter") ? bookUrl2 : bookUrl1}
+              alt={book.book_name}
             />
             </div>
             }

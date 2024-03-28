@@ -285,9 +285,9 @@ function BookSingle() {
         {/* Models */}
 
         <div
-          class="modal fade"
+          className="modal fade"
           id="BookDetails"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="BookDetailsLabel"
           aria-hidden="true"
         >
