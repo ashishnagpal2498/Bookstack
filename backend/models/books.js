@@ -1,15 +1,25 @@
-// book model
+// Import models
+const Author = require('./author.js');
+const Genre = require('./genre.js');
 const mongoose = require('mongoose');
 
-const booksSchema = new mongoose.Schema({
-    id: Number,
-    book_description: String,
+const bookSchema = new mongoose.Schema({
     book_name: String,
+    description: String,
+    content_link: String,
+    publisherDate: String,
+    authorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Author'
+    },
+    genresId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Genre'
+    }],
     image_url: String,
-    poster_url: String,
     price: Number
 });
 
-const books = mongoose.model('books', booksSchema);
+const Book = mongoose.model('Book', bookSchema, 'books');
 
-module.exports = books;
+module.exports = Book;

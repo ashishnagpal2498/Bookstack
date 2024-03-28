@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const lateFeeRoute = require('./routes/lateFeeSystem.js');
 const notificationsRoute = require('./routes/notifications.js');
+const booksRoute = require('./routes/books.js')
 
 // Initialize express app and middleware
 const app = express();
@@ -19,6 +20,7 @@ const frontend_url = process.env.FRONTEND_URI;
 // Load routes
 app.use('/late-fees', lateFeeRoute);
 app.use('/notify', notificationsRoute);
+app.use('/books', booksRoute); 
 
 // Connect to mongoDB
 async function connect() {
