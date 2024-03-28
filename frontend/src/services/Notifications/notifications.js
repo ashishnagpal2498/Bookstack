@@ -1,4 +1,4 @@
-const backend_url = process.env.REACT_APP_BACKEND_URL
+import {backend_url} from '../../config.js';
 
 export const remindUserLateFee = async(user_id) => {
     try{

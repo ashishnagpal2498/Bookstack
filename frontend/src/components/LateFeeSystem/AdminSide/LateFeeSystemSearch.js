@@ -43,33 +43,33 @@ function LateFeeSystemSearch() {
     return (
         <div className='bg-aboutUsBrown h-full py-8'>
             <div className="container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
-                <div className="flex">
+                <div className="flex flex-col">
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="border border-gray-300 w-full rounded py-2 px-4 mr-2"
+                        className="border border-gray-300 rounded py-2 px-4 mb-2"
                         value={searchQuery}
                         onChange={handleSearch}
                     />
                     <button
-                        className="py-2 px-4 rounded bg-navbarBrown hover:bg-hoverNavbarBrown text-white"
+                        className="py-2 px-4 rounded bg-navbarBrown hover:bg-hoverNavbarBrown text-white mb-4"
                     >
                         Search
                     </button>
                 </div>
-                <div className="mt-8 flex flex-col">
+                <div className="mt-8">
                     {filteredResults.length > 0 ? (
                         filteredResults.map((result) => (
-                            <div key={result._id} onClick={() => handleClick(result.user_id)} className="flex flex-row border border-gray-200 rounded p-4 m-2 cursor-pointer">
+                            <div key={result._id} onClick={() => handleClick(result.user_id)} className="flex flex-row justify-between border border-gray-200 rounded p-4 mb-4 cursor-pointer">
                                 <div className='flex flex-row items-start w-0.66    '>
-                                    <img src={result.user_picture} alt="User" className="rounded-full mx-auto" />
+                                    <img src={result.user_picture} alt="User" className="rounded-full" />
+                                    <div className='ml-4'>
+                                        <p className="text-lg font-bold">{result.user_name}</p>
+                                        <p className="">{result.book_name}</p>
+                                    </div>
                                 </div>
-                                <div className='flex flex-col justify-center ml-4 w-1/2'>
-                                    <p className="text-lg font-bold">{result.user_name}</p>
-                                    <p className="">{result.book_name}</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-end text-lg font-bold text-hoverNavbarBrown mr-4 w-1/2'>
-                                    <p className="">${result.amount}</p>
+                                <div className='flex flex-col justify-center'>
+                                    <p className="text-lg font-bold text-hoverNavbarBrown">${result.amount}</p>
                                 </div>
                             </div>
                         ))
@@ -79,6 +79,7 @@ function LateFeeSystemSearch() {
                 </div>
             </div>
         </div>
+
     );
 }
 

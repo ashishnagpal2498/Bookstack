@@ -50,43 +50,46 @@ function LateFeeDetails() {
 
     return (
         <div className='bg-aboutUsBrown h-full py-8'>
-            <div className="container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
+            <div className="container-sm md:container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
                 <div className="flex flex-col justify-between">
                     <div className='mb-4'>
                         <p className="text-3xl">Active Late Fee Details</p>
-                    </div>{
+                    </div>
+                    {
                         Object.keys(activeLateFeeDetails).length > 0 ? (
-                        <div>
-                            <div className='flex flex-row'>
-                                <img className="w-40 h-40 mb-4" src={activeLateFeeDetails.book_picture} alt="Book" />
-                                <div className='ml-4 flex flex-col justify-start items-start'>
-                                    <div className="mb-3">
-                                        <span className="text-gray-600">Book Name: </span>
-                                        <span className="text-lg font-bold">{activeLateFeeDetails.book_name}</span>
-                                    </div>
-                                    <div className="mb-3">
-                                        <span className="text-gray-600">Reserved Date: </span>
-                                        <span className="text-lg font-bold">{activeLateFeeDetails.reserved_date}</span>
-                                    </div>
-                                    <div className="mb-3">
-                                        <span className="text-gray-600">Due Date: </span>
-                                        <span className="text-lg font-bold">{activeLateFeeDetails.due_date}</span>
-                                    </div>
-                                    <div className="mb-3">
-                                        <span className="text-gray-600">Amount Due: </span>
-                                        <span className="text-lg font-bold">${activeLateFeeDetails.amount_due}</span>
+                            <div>
+                                <div className='flex flex-col md:flex-row'>
+                                    <img className="w-full h-auto mb-4 md:w-40 md:h-40 md:mb-0" src={activeLateFeeDetails.book_picture} alt="Book" />
+                                    <div className='mt-4 md:ml-4 flex flex-col justify-start items-start'>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Book Name: </span>
+                                            <span className="text-lg font-bold">{activeLateFeeDetails.book_name}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Reserved Date: </span>
+                                            <span className="text-lg font-bold">{activeLateFeeDetails.reserved_date}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Due Date: </span>
+                                            <span className="text-lg font-bold">{activeLateFeeDetails.due_date}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <span className="text-gray-600">Amount Due: </span>
+                                            <span className="text-lg font-bold">${activeLateFeeDetails.amount_due}</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="flex justify-center mt-4">
+                                    <button onClick={handleDisputeCharge} className="bg-navbarBrown hover:bg-hoverNavbarBrown text-white font-bold py-2 px-4 rounded">
+                                        Dispute Charge
+                                    </button>
+                                </div>
                             </div>
-                            <div className="flex justify-center">
-                                <button onClick={handleDisputeCharge} className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                                    Dispute Charge
-                                </button>
-                            </div>
-                        </div>
-                        ) : (<p className='text-center text-muted'>
-                            {activeLateFeeResponseMessage}
-                        </p>)
+                        ) : (
+                            <p className='text-center text-muted'>
+                                {activeLateFeeResponseMessage}
+                            </p>
+                        )
                     }
                 </div>
 
@@ -114,60 +117,63 @@ function LateFeeDetails() {
                         </div>
                     </div>
                 )}
-                <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+                <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
                 <div>
                     <p className="text-3xl">Past Late Fee Details</p>
-                    {Object.keys(pastLateFeeDetails).length > 0 ? (<table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Image
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Name
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Reserved Date
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Due Date
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Paid Date
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Amount
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                            {pastLateFeeDetails.map((item, i) => (
-                                <tr key={i}>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <img src={item.image_url} alt="Book" className="h-10 w-10 rounded-full" />
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {item.book_name}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {item.reserved_date}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {item.due_date}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {item.paid_date}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        ${item.amount}
-                                    </td>
+                    {Object.keys(pastLateFeeDetails).length > 0 ? (<div class="overflow-x-auto">
+                        <table class="w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                        Image
+                                    </th>
+                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                        Name
+                                    </th>
+                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                        Reserved Date
+                                    </th>
+                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                        Due Date
+                                    </th>
+                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                        Paid Date
+                                    </th>
+                                    <th scope="col" class="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                        Amount
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>):(<p className="text-center text-gray-600">{pastLateFeeResponseMessage}</p>)}
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                {pastLateFeeDetails.map((item, i) => (
+                                    <tr key={i}>
+                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            <img src={item.image_url} alt="Book" class="h-10 w-10 rounded-full" />
+                                        </td>
+                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            {item.book_name}
+                                        </td>
+                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            {item.reserved_date}
+                                        </td>
+                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            {item.due_date}
+                                        </td>
+                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            {item.paid_date}
+                                        </td>
+                                        <td class="px-3 md:px-6 py-3 md:whitespace-nowrap">
+                                            ${item.amount}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>) : (<p className="text-center text-gray-600">{pastLateFeeResponseMessage}</p>)}
                 </div>
             </div>
         </div>
+
     );
 }
 

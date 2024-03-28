@@ -149,29 +149,37 @@ exports.getActiveLateFeesUsers = async (req, res) => {
         const lateFeeDocuments = await lateFeeSchema.find({ "books.paid": false });
         const users = [];
         for (let i = 0; i < lateFeeDocuments.length; i++) {
-            let lateFeeDocument = lateFeeDocuments[i];
-            // console.log(lateFeeDocument)
-            const user = await usersSchema.findOne({ _id: new ObjectID(lateFeeDocument.user_id) });
-            const book = lateFeeDocument.books.filter(book => book.paid === false)[0];
-            // console.log(book)
-            if (!user || !book) {
+            try {
+                let lateFeeDocument = lateFeeDocuments[i];
+                // console.log(lateFeeDocument)
+                const user = await usersSchema.findOne({ _id: new ObjectID(lateFeeDocument.user_id) });
+                const book = lateFeeDocument.books.filter(book => book.paid === false)[0];
+                // console.log(new ObjectID(book.book_id));
+                // console.log(book)
+                if (!user || !book) {
+                    continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or
+                }
+                const user_name = user.first_name + " " + user.last_name;
+                const user_picture = user.picture;
+                const book_document = await booksSchema.findOne({ _id: new ObjectID(book.book_id) });
+                // console.log(book_document);
+                const book_name = book_document.book_name;
+                // console.log(book_name)
+                const user_dict = {
+                    _id: lateFeeDocument._id,
+                    user_id: user._id,
+                    user_name,
+                    user_picture,
+                    book_name,
+                    amount: book.amount,
+                    book_id: book_document._id,
+                }
+                users.push(user_dict);
+            }
+            catch (error) {
+                console.log(error);
                 continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or
             }
-            const user_name = user.first_name + " " + user.last_name;
-            const user_picture = user.picture;
-            const book_document = await booksSchema.findOne({ _id: new ObjectID(book.book_id) });
-            const book_name = book_document.book_name;
-            // console.log(book_name)
-            const user_dict = {
-                _id: lateFeeDocument._id,
-                user_id: user._id,
-                user_name,
-                user_picture,
-                book_name,
-                amount: book.amount,
-                book_id: book_document._id,
-            }
-            users.push(user_dict);
         }
         // check if users array is empty
         if (users.length === 0) {
@@ -297,6 +305,7 @@ exports.getPastLateFees = async (req, res) => {
             if (!book_document) {
                 continue;
             }
+            // console.log(book_document);
             past_late_fee.reserved_date = new Date(past_late_fee.reserved_date).toUTCString().split(' ').slice(0, 4).join(' ');
             past_late_fee.paid_date = new Date(past_late_fee.paid_date).toUTCString().split(' ').slice(0, 4).join(' ');
             // add due_date, book_name, and image_url to past_late_fee
