@@ -1,24 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterBtn from './FilterBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faPen } from '@fortawesome/free-solid-svg-icons';
-const genres = ["Action", "Drama", "Sci-Fi"];
-const authors = ["J. K Rowling", "Rick Riordan", "Charles"];
-const publishedYears = [2011,2010,2009, 2008, 2007, 2006, 2005];
+import axios from 'axios';  // Import axios to make API requests
+import { backend_url } from '../../../config';
 
-const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) => {
+const FilterMenu = ({ toggleFilterMenu, handleFilterCheckbox, selectedFilters }) => {
 
     const [openCategory, setOpenCategory] = useState([]);
+    const [genres, setGenres] = useState([]);
+    const [authors, setAuthors] = useState([]);
+    const [publishedYears] = useState([2011, 2010, 2009, 2008, 2007, 2006, 2005]);
 
     const toggleCategory = (category) => {
-        openCategory.includes (category) ?  setOpenCategory(openCategory.filter(cat => cat !== category)): setOpenCategory([...openCategory,category]);
+        openCategory.includes(category) ? setOpenCategory(openCategory.filter(cat => cat !== category)) : setOpenCategory([...openCategory, category]);
     };
 
     const menuOpen = (category) => openCategory.includes(category)
-    
+
     const handleCheckboxChange = (category, value) => {
-        handleFilterCheckbox(category,value)
+        handleFilterCheckbox(category, value)
     };
+
+    useEffect(() => {
+        axios.get(`${backend_url}/books/genres`)
+            .then(response => {
+                if (response.data.status) {
+                    const fetchedGenres = response.data.data.map(genre => genre.name);
+                    setGenres(fetchedGenres);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching genres:", error);
+            });
+
+        axios.get(`${backend_url}/books/authors`)
+            .then(response => {
+                if (response.data.status) {
+                    const fetchedAuthors = response.data.data.map(author => author.name);
+                    setAuthors(fetchedAuthors);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching authors:", error);
+            });
+    }, []);
 
     return (
         <div className='filter-options-container'>
@@ -53,9 +79,9 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
 			c0.119-0.09,0.224-0.165,0.344-0.24c0.195-0.135,0.403-0.27,0.598-0.389c0.21-0.149,0.404-0.284,0.613-0.403
 			c-0.224,0.284-0.419,0.583-0.613,0.883v1.72H257.099z"></path><path fill="none" stroke="#464668" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="10" d="M429.24 9.152v317.396c-50.224-1.062-121.483 34.978-172.081 108.153V119.205c-.015-.03-.045-.06-.06-.09v-1.721c.195-.3.389-.598.613-.883 2.11-3.037 4.249-6.015 6.448-8.917C314.175 40.96 381.291 8.15 429.24 9.152zM223.958 395.889v107.982l-28.004-28.004-28.004 28.004V351.787C186.993 362.844 206.087 377.551 223.958 395.889z"></path></svg>
                         </span>
-                    <h4 >Genres</h4>
-                    { menuOpen('genres') ? <i className="arrow up"></i> : <i className="arrow down"></i> }
-                        </div>
+                        <h4>Genres</h4>
+                        {menuOpen('genres') ? <i className="arrow up"></i> : <i className="arrow down"></i>}
+                    </div>
                     {openCategory.includes('genres') && (
                         <ul className='filter-options-sub-list'>
                             {genres.map(genre => (
@@ -63,8 +89,8 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedFilters.genres.includes(genre)}
-                                            onChange={() => handleCheckboxChange('genres', genre)}
+                                            checked={selectedFilters.genreIds.includes(genre)}
+                                            onChange={() => handleCheckboxChange('genreIds', genre)}
                                         />
                                         {genre}
                                     </label>
@@ -74,13 +100,13 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
                     )}
                 </li>
                 <li>
-                <div onClick={() => toggleCategory('authors')}>
+                    <div onClick={() => toggleCategory('authors')}>
                         <span className='filter-heading-icon'>
-                        <FontAwesomeIcon icon={faPen} />
+                            <FontAwesomeIcon icon={faPen} />
                         </span>
-                    <h4 >Authors</h4>
-                    { menuOpen('authors') ? <i className="arrow up"></i> : <i className="arrow down"></i> }
-                        </div>
+                        <h4>Authors</h4>
+                        {menuOpen('authors') ? <i className="arrow up"></i> : <i className="arrow down"></i>}
+                    </div>
                     {openCategory.includes('authors') && (
                         <ul className='filter-options-sub-list'>
                             {authors.map(authorVal => (
@@ -88,9 +114,8 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedFilters.author.includes(authorVal)}
-
-                                            onChange={() => handleCheckboxChange('author', authorVal)}
+                                            checked={selectedFilters.authorIds.includes(authorVal)}
+                                            onChange={() => handleCheckboxChange('authorIds', authorVal)}
                                         />
                                         {authorVal}
                                     </label>
@@ -100,13 +125,13 @@ const FilterMenu = ({toggleFilterMenu, handleFilterCheckbox, selectedFilters}) =
                     )}
                 </li>
                 <li>
-                <div onClick={() => toggleCategory('publishedYear')}>
+                    <div onClick={() => toggleCategory('publishedYear')}>
                         <span className='filter-heading-icon'>
-                        <FontAwesomeIcon icon={faCalendarDays} />
+                            <FontAwesomeIcon icon={faCalendarDays} />
                         </span>
-                    <h4 >Published Year</h4>
-                    { menuOpen('publishedYear') ? <i className="arrow up"></i> : <i className="arrow down"></i> }
-                        </div>
+                        <h4>Published Year</h4>
+                        {menuOpen('publishedYear') ? <i className="arrow up"></i> : <i className="arrow down"></i>}
+                    </div>
                     {openCategory.includes('publishedYear') && (
                         <ul className='filter-options-sub-list'>
                             {publishedYears.map(year => (

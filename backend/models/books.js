@@ -1,3 +1,6 @@
+// Import models
+const Author = require('./author.js');
+const Genre = require('./genre.js');
 const mongoose = require('mongoose');
 
 const BookSchema = new mongoose.Schema({
@@ -13,13 +16,15 @@ const BookSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    authorId: {
+    authorIds: [{
         type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-    genresId: [{
+        required: true,
+        ref: 'Author'
+    }],
+    genreIds: [{
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'Genre'
     }],
     book_name: {
         type: String,
