@@ -8,56 +8,6 @@ import '../../stylesheets/filters.css'
 import { LibraryBackground } from './layouts/LibraryBackground';
 import axios from 'axios';
 import { backend_url } from '../../config';
-// const books = [
-//   {
-//     book_name: "Percy Jackson 1",
-//     author: "Rick Riordan",
-//     genres: "Sci-fi",
-//     publishedYear: "2009",
-//     _id: "1",
-//     price: 29
-//   }, {
-//     book_name: "Percy Jackson 2",
-//     author: "Rick Riordan",
-//     genres: "Sci-fi",
-//     publishedYear: "2011",
-//     _id: "2",
-//     price: 45
-//   },
-//   {
-//     book_name: "Percy Jackson 3",
-//     author: "Rick Riordan",
-//     genres: "Action",
-//     publishedYear: "2013",
-//     _id: "3",
-//     price: 32
-//   },
-//   {
-//     book_name: "Harry Potter 1",
-//     author: "J. K Rowling",
-//     genres: "Fiction",
-//     publishedYear: "2005",
-//     _id: "4",
-//     price: 27
-//   },
-//   {
-//     book_name: "Harry Potter 2",
-//     author: "J. K Rowling",
-//     genres: "Drama",
-//     publishedYear: "2008",
-//     _id: "5",
-//     price: 91
-//   },
-//   {
-//     book_name: "Harry Potter 3",
-//     author: "J. K Rowling", 
-//     genres: "Drama",
-//     publishedYear: "2011",
-//     _id: "6",
-//     price: 69
-//   }
-
-// ];
 
 const BookLibrary = () => {
   const [books,setBooks] = useState([]);
@@ -65,8 +15,8 @@ const BookLibrary = () => {
   const [loading, setLoading] = useState(true);
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-    genres: [],
-    author: [],
+    genreIds: [],
+    authorIds: [],
     publishedYear: []
   });
   const [searchValue,setSearchValue] = useState("");
@@ -80,10 +30,8 @@ const BookLibrary = () => {
     axios.get(`${backend_url}/books/all`)
     .then(response => {
         if (response.data.status) {
-            console.log("Response", response);
             setBooks(response.data.data)
         }
-        setTimeout(() => setLoading(false), 5000)
         updateFilteredBooks(response.data.data)
     })
     .catch(error => {
@@ -100,9 +48,16 @@ const BookLibrary = () => {
     // Selected Filters
     Object.entries(selectedFilters).forEach(([filterKey, filterValues]) => {
       if (filterValues.length > 0) {
-        updateBooks = updateBooks.filter(book =>
-          filterValues.every(value => book[filterKey].includes(value))
-        );
+        console.log("FilterKey -->", filterKey);
+        updateBooks = updateBooks.filter(book => {
+          return filterValues.every(value => {
+            if (filterKey === 'genreIds' || filterKey === 'authorIds') {
+              return book[filterKey].some(item => item.name.toLowerCase().includes(value.toLowerCase()));
+            } else if(filterKey === 'publishedYear'){
+              return book['publisherDate'].includes(value);
+            }
+          });
+        });
       }
     });
 
@@ -120,7 +75,7 @@ const BookLibrary = () => {
   
     console.log("Updated Books ", updateBooks)
     updateFilteredBooks(updateBooks);
-    setLoading(false)
+    setTimeout(()=> setLoading(false),1000)
   }, [selectedFilters, searchValue, sortValue]); 
 
   const handleFilterCheckbox = (category, value, remove=false) => {
@@ -151,7 +106,7 @@ const BookLibrary = () => {
       <div className="container-row container-content-center books-container">
         <FilterBar selectedFilters={selectedFilters} onSearch={onSearch} openFilterMenu={openFilterMenu} toggleFilterMenu={toggleFilterMenu} handleFilterCheckbox= {handleFilterCheckbox} setSortValue={setSortValue} />
 
-        {filteredBooks.length > 0 ?
+        {loading || filteredBooks.length > 0 ?
           <ul className="book-list">
             <BookCard books={filteredBooks} loading={loading} />
           </ul>

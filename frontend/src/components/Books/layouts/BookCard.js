@@ -3,6 +3,24 @@ import bookUrl1 from "../../../book-cover-1.png"
 import bookUrl2 from "../../../book-cover-2.jpg"
 import { Link } from 'react-router-dom'
 const BookCard = ({ books, loading }) => {
+
+  if(loading){
+    let skeletionLoading = [];
+    for(let i=0;i<8;i++){
+      skeletionLoading.push(
+
+        <li  key={i}>
+        <Link  className={`book-library-card ${loading? "loading": ''}`} to={`/book/}`}>
+            <div className="skeleton-book-bg">
+              <div className='skeleton-book-cover'>
+              </div>
+            </div>
+            </Link>
+            </li>
+      )
+    }
+    return skeletionLoading;
+  }
   return (
     <>
       {books.map((book, index) => (

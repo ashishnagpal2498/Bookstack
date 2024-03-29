@@ -52,7 +52,7 @@ const FilterMenu = ({ toggleFilterMenu, handleFilterCheckbox, selectedFilters })
             <ul className='filter-options-list'>
                 <li>
                     <div onClick={() => toggleCategory('genres')}>
-                    <span className='filter-heading-icon'>
+                        <span className='filter-heading-icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" viewBox="0 0 512 512" id="book"><path fill="none" stroke="#464668" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="10" d="M52.655 360.043c37.609 3.443 76.534 13.048 115.294 28.813V429.4L9 401.127V64.931l43.655 7.758V360.043zM255.904 436.516v8.526l-31.946-5.684v-23.275c10.714 6.078 21.345 12.643 31.883 19.686v.83C255.862 436.568 255.883 436.547 255.904 436.516z"></path><path fill="none" stroke="#464668" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="10" d="M257.099 117.709v318.893l-.598-.105-.344-.06-.179-.03-.075-.015-.06-.015V119.205c.015-.03.045-.06.06-.09v-1.616l.09.015.165.03.344.06.404.075L257.099 117.709zM83.761 326.553c24.644-.529 54.349 7.883 84.189 25.235v37.069c-38.76-15.765-77.686-25.37-115.294-28.813V41.159c10.279.933 20.661 2.344 31.105 4.211C83.761 45.37 83.761 326.553 83.761 326.553zM255.841 434.701v1.068c-10.538-7.043-21.169-13.608-31.883-19.686v-20.194C235.17 407.391 245.905 420.335 255.841 434.701z"></path><path fill="none" stroke="#464668" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="10" d="
 			M257.099,117.709v318.893c-0.09-0.06-0.165-0.119-0.254-0.165c-0.119-0.09-0.224-0.165-0.344-0.24
 			c-0.09-0.06-0.179-0.119-0.27-0.165c-0.105-0.09-0.224-0.165-0.329-0.224c-0.015-0.015-0.045-0.03-0.06-0.045V119.205
@@ -89,8 +89,8 @@ const FilterMenu = ({ toggleFilterMenu, handleFilterCheckbox, selectedFilters })
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedFilters.genres.includes(genre)}
-                                            onChange={() => handleCheckboxChange('genres', genre)}
+                                            checked={selectedFilters.genreIds.includes(genre)}
+                                            onChange={() => handleCheckboxChange('genreIds', genre)}
                                         />
                                         {genre}
                                     </label>
@@ -114,8 +114,8 @@ const FilterMenu = ({ toggleFilterMenu, handleFilterCheckbox, selectedFilters })
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedFilters.author.includes(authorVal)}
-                                            onChange={() => handleCheckboxChange('author', authorVal)}
+                                            checked={selectedFilters.authorIds.includes(authorVal)}
+                                            onChange={() => handleCheckboxChange('authorIds', authorVal)}
                                         />
                                         {authorVal}
                                     </label>

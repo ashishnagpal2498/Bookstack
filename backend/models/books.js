@@ -16,12 +16,12 @@ const BookSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    authorId: {
+    authorIds: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
-    },
-    genresId: [{
+    }],
+    genreIds: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Genre'

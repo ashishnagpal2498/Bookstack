@@ -4,7 +4,7 @@ const Genre = require('../models/genre');
 
 exports.getAllBooks = async (req, res) => {
     try {
-        const books = await Book.find().populate('authorId').populate({ path: 'genresId', model: 'Genre' });;
+        const books = await Book.find().populate('authorIds').populate({ path: 'genreIds', model: 'Genre' });;
 
         console.log("Bookksss return", books);
         return res.status(200).json({
