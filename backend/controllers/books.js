@@ -1,6 +1,7 @@
 const Author = require('../models/author');
 const Book = require('../models/books');
 const Genre = require('../models/genre');
+const mongoose = require('mongoose');
 
 exports.getAllBooks = async (req, res) => {
     try {
@@ -56,5 +57,46 @@ exports.getAllAuthors = async (req, res) => {
             message: "Internal Server Error",
             status: false
         });
+    }
+}
+
+exports.addBook = async (req, res) => {
+    try {
+        const { description, content_link, authorIds, genreIds, book_name, image_url, price, availability } = req.body;
+
+        const newBook = new Book({
+            description,
+            content_link,
+            publisherDate: new Date(),
+            authorIds: [authorIds],
+            genreIds: [genreIds],
+            book_name,
+            image_url,
+            price,
+            availability
+        });
+
+        const savedBook = await newBook.save();
+        res.status(200).json(savedBook);
+    } catch (error) {
+        console.error('Error adding book:', error);
+        res.status(500).json({ error: 'Failed to add book ' + error });
+    }
+}
+
+exports.deleteBook = async (req, res) => {
+    try {
+        const bookId = req.query.id;
+        if (!bookId) {
+            return res.status(400).json({ error: 'Book ID is required' });
+        }
+        const deletedBook = await Book.findByIdAndDelete(bookId);
+        if (!deletedBook) {
+            return res.status(404).json({ error: 'Book not found' });
+        }
+        res.status(200).json({ message: 'Book deleted successfully', deletedBook });
+    } catch (error) {
+        console.error('Error deleting book:', error);
+        res.status(500).json({ error: 'Failed to delete book ' + error });
     }
 }

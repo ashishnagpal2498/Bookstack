@@ -47,7 +47,7 @@ function CommonNavbar() {
                 <Nav.Link href="/faq">FAQ</Nav.Link>
                 { user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></> }
                 { user ? 
-                    <Nav.Link href="/coming-soon">Book Management</Nav.Link> : <></> }
+                    <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></> }
                 {
                     user ?
                     <NavDropdown className="ms-auto"
@@ -66,7 +66,7 @@ function CommonNavbar() {
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
-                        <NavDropdown.Item href="/coming-soon">
+                        <NavDropdown.Item href="/manage-books">
                             Book Management
                         </NavDropdown.Item>
                         <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
