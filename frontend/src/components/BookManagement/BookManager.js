@@ -1,6 +1,5 @@
 import "../../stylesheets/book-manager.css";
 import { Modal, Card, Button, Row, Col, Container, Form } from 'react-bootstrap';
-import bookIcon from '../../assets/book-cover-1.png';
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { backend_url } from '../../config';
@@ -25,7 +24,7 @@ function BookCard({ book, author, onDelete }) {
             <Card id={"book-"+book._id} className="book-cards">
                 <Card.Body className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
-                        <img src={bookIcon} alt={book.book_name} className="mr-3" style={{ maxWidth: '60px' }} />
+                    <img src={book.image_url} alt={book.book_name} className="mr-3" style={{ maxWidth: '60px' }} />
                         <div>
                             <Card.Title>{book.book_name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>
