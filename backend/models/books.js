@@ -41,6 +41,10 @@ const BookSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+    availability : {
+        type: Boolean,
+        required: true
     }
 });
 

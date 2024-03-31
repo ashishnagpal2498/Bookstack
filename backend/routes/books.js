@@ -11,4 +11,8 @@ router.get('/genres', bookController.getAllGenres);
 
 router.get('/authors', bookController.getAllAuthors);
 
+router.post('/add', bookController.addBook);
+
+router.delete('/delete', bookController.deleteBook);
+
 module.exports = router;

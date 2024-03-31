@@ -1,10 +1,11 @@
 import "../../stylesheets/book-manager.css";
 import { Modal, Card, Button, Row, Col, Container, Form } from 'react-bootstrap';
 import bookIcon from '../../assets/book-cover-1.png';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import { backend_url } from '../../config';
 
-function BookCard({ book, onDelete }) {
-    const { id, name, author } = book;
+function BookCard({ book, author, onDelete }) {
 
     const [showModal, setShowModal] = useState(false);
 
@@ -13,7 +14,7 @@ function BookCard({ book, onDelete }) {
     };
 
     const confirmDelete = () => {
-        onDelete(id);
+        onDelete(book._id);
         setShowModal(false);
     };
 
@@ -21,12 +22,12 @@ function BookCard({ book, onDelete }) {
 
     return (
         <>
-            <Card id={"book-"+id} className="book-cards">
+            <Card id={"book-"+book._id} className="book-cards">
                 <Card.Body className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
-                        <img src={bookIcon} alt={name} className="mr-3" style={{ maxWidth: '60px' }} />
+                        <img src={bookIcon} alt={book.book_name} className="mr-3" style={{ maxWidth: '60px' }} />
                         <div>
-                            <Card.Title>{name}</Card.Title>
+                            <Card.Title>{book.book_name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>
                         </div>
                     </div>
@@ -56,30 +57,52 @@ function BookCard({ book, onDelete }) {
 
 function BookManager() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [books, setBooks] = useState([
-        {
-            id: "1",
-            name: "Percy Jackson - The Lightning Thief",
-            author: "Rick Riordan",
-        },
-        {
-            id: "2",
-            name: "Percy Jackson - The Sea of Monsters",
-            author: "Rick Riordan",
-        }
-    ]);
+    const [books, setBooks] = useState([]);
+    const [authors, setAuthors] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${backend_url}/books/all`)
+        .then(response => {
+            if (response.data.status) {
+                setBooks(response.data.data)
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching genres:", error);
+        });
+
+        axios.get(`${backend_url}/books/authors`)
+          .then(response => {
+              if (response.data.status) {
+                  const fetchedAuthors = response.data.data;
+                  setAuthors(fetchedAuthors);
+              }
+          })
+          .catch(error => {
+              console.error("Error fetching authors:", error);
+          });
+      }, [])
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    const handleDelete = (id) => {
-        setBooks(books.filter(book => book.id !== id));
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete(`${backend_url}/books/delete?id=${id}`);
+            if (response.status === 200) {
+                console.log('Book deleted successfully:', response.data);
+            } else {
+                console.error('Failed to delete book:', response.data);
+            }
+        } catch (error) {
+            console.error('Error deleting book:', error.message);
+        }
+        setBooks(books.filter(book => book._id !== id));
     };
 
     const filteredBooks = books.filter(book =>
-        book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.author.toLowerCase().includes(searchTerm.toLowerCase())
+        book.book_name.toLowerCase().includes(searchTerm.toLowerCase()) 
     );
 
   return (
@@ -95,7 +118,7 @@ function BookManager() {
             </Row>
             <Row>
                 {filteredBooks.map((book, index) => (
-                    <BookCard key={book.id} book={book} onDelete={handleDelete}/>
+                    <BookCard key={book.id} book={book} author={authors.filter(author => author._id === book.authorIds[0]._id)[0].name} onDelete={handleDelete}/>
                 ))}
             </Row>
         </Container>

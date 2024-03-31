@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../stylesheets/heartbutton.css';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 const HeartButton = ({ username, bookName }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -44,7 +45,7 @@ const HeartButton = ({ username, bookName }) => {
 
   return (
     <button className={`heart-button ${isFavorite ? 'favorite' : ''}`} onClick={toggleFavorite}>
-      {isFavorite ? '❤' : '♡'}
+      {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
     </button>
   );
 };
