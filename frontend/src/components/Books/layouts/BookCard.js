@@ -1,6 +1,4 @@
 import React from 'react'
-import bookUrl1 from "../../../book-cover-1.png"
-import bookUrl2 from "../../../book-cover-2.jpg"
 import { Link } from 'react-router-dom'
 const BookCard = ({ books, loading }) => {
 
@@ -35,7 +33,7 @@ const BookCard = ({ books, loading }) => {
             <div className='book-cover'>
             <img
               className="book-img"
-              src={book.book_name.includes("Potter") ? bookUrl2 : bookUrl1}
+              src={book.image_url}
               alt={book.book_name}
             />
             </div>
