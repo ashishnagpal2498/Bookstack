@@ -1,4 +1,6 @@
-// Import models
+// Multiple Authors - 
+// Abhinav Acharya Tirumala Vinjamuri
+// Ashish Nagpal
 const Author = require('./author.js');
 const Genre = require('./genre.js');
 const mongoose = require('mongoose');
@@ -16,11 +18,13 @@ const BookSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    // Mapping with Author Collection
     authorIds: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
     }],
+    // Mapping with Genre Collection
     genreIds: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,

@@ -15,7 +15,7 @@
 
 # Getting Started
 
-To start with the project for this assignment, I cloned the [project repository](https://git.cs.dal.ca/anagpal/csci-5709-grp-13) which had 1 feature created by each group member. Next, I checked out into my branch - ``ashish-nagpal``, took the latest pull from main branch and started making changes to complete the ``Book Library Feature``.
+To start with the project development for this assignment, I cloned the [project repository](https://git.cs.dal.ca/anagpal/csci-5709-grp-13) which had 1 task of the feature created by each group member. Next, I checked out into my branch - ``ashish-nagpal``, took the latest pull from main branch and started making changes to complete the ``Book Library Feature``.
 
 # Prerequisites
 
@@ -264,9 +264,59 @@ const productSchema = new mongoose.Schema({
 module.exports = mongoose.model('Product', productSchema);
 ```
 
-- The code was used to revisit the use of mongoose with mongoDB database and nodeJs server using ExpressJs.
+- The code was used to revisit the concepts of using **mongoose** with **mongoDB** database and **nodeJs** server using ExpressJs.
 - I used the code because I wanted to create schema using mongoose and map it to mongoDB collection.
 - I used the reference to create books schema with different fields type along with referencing other collection using `ObjectId`.
+
+# Workflow
+
+## Frontend
+When user visits the books library page, `BookLibrary` component is rendered. The component shows loader in form of skeleton books, whereas an API call is triggered to `/books/all` path for fetching books. The books are store in state with name `books`. When the user performs any type of filtering i.e filter selection, search or sort, a `useEffect` method is triggered to perform the action and update the state - `filteredBooks` accordingly.
+```js
+  // Use Effect upon change of any type of Filters/ search/ sort
+  useEffect(() => {
+    setLoading(true);
+
+    let updateBooks = JSON.parse(JSON.stringify(books));
+
+    // Selected Filters
+    Object.entries(selectedFilters).forEach(([filterKey, filterValues]) => {
+      if (filterValues.length > 0) {
+        console.log("FilterKey -->", filterKey);
+        updateBooks = updateBooks.filter(book => {
+              // eslint-disable-next-line 
+          return filterValues.some(value => {
+            if (filterKey === 'genreIds' || filterKey === 'authorIds') {
+              return book[filterKey].some(item => item.name.toLowerCase().includes(value.toLowerCase()));
+            } else if(filterKey === 'publishedYear'){
+              return book['publisherDate'].includes(value);
+            }
+          });
+        });
+      }
+    });
+
+    // Searching Functionality
+    updateBooks = updateBooks.filter((item) =>
+    JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase()))
+
+    // Sort Functionality
+    console.log(sortValue)
+    if (sortValue === "price") {
+      updateBooks.sort((a, b) => a.price - b.price);
+    } else if (sortValue === "name") {
+      updateBooks.sort((a, b) => a.book_name.localeCompare(b.book_name));
+    }
+  
+    console.log("Updated Books ", updateBooks)
+    updateFilteredBooks(updateBooks);
+    setTimeout(()=> setLoading(false),1000)
+  }, [selectedFilters, searchValue, sortValue]); 
+  ```
+
+
+## Backend
+As described in the application architecture of assignment 2, the backend server takes the **HTTP request** and forwards it to its respective **router**. In my feature, the request enters the `index.js` file and forwards it to the book router. The books router checks the API URL and calls the books controller for further execution. The controller file, where the business logic exists, interacts with the MongoDB database and returns the response of the request.
 
 # Image Credits
 1. *Books on Wooden Shelves Inside Library* by Stanislav Kondratiev, visit https://www.pexels.com/photo/books-on-wooden-shelves-inside-library-2908984/

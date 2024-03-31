@@ -1,3 +1,4 @@
+// Ashish Nagpal
 import React, { useEffect, useState } from 'react'
 import BookCard from './layouts/BookCard'
 import Pagination from './layouts/Pagination'
@@ -27,6 +28,8 @@ const BookLibrary = () => {
   const toggleFilterMenu = () => {
     setOpenFilterMenu(!openFilterMenu);
   };
+
+  // Fetch all the books from backend
   useEffect(() => {
     axios.get(`${backend_url}/books/all`)
     .then(response => {
