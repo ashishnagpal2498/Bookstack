@@ -7,7 +7,7 @@ import FilterBtn from './FilterBtn';
 export const FilterBar = ({onSearch, openFilterMenu, toggleFilterMenu, selectedFilters, handleFilterCheckbox, setSortValue}) => {
 
     const [isActive, setIsActive] = useState(false);
-    const [selected, setIsSelected] = useState("price");
+    const [selected, setIsSelected] = useState("Price");
 
     const sortOptions = ["price", "name"]
 
