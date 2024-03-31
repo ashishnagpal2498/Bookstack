@@ -1,8 +1,8 @@
 
-# Assignment 1
+# Assignment 3
 
 * *Date Created*: 29 March 2024
-* *Last Modification Date*: 29 March 2024
+* *Last Modification Date*: 30 March 2024
 * *Project URL*: https://git.cs.dal.ca/anagpal/csci-5709-grp-13
 * *Github URL*: https://github.com/ashishnagpal2498/bookStack
 * *Frontend - Deployment Link*: https://bookstack-csci-group-13.netlify.app/
@@ -37,8 +37,10 @@ To start with the project development for this assignment, I cloned the [project
 
 # Deployment
 
-The deployment for Frontend is made through Netlify. 
+Deployment for Frontend is made through **Netlify**. 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c9aa70e1-579d-4e9f-9e3a-f00b2c17b318/deploy-status)](https://app.netlify.com/sites/bookstack-csci-group-13/deploys)
+
+Deployment for backend server is done on **Render**. ![](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
 
 # Testing
@@ -207,7 +209,9 @@ The code above was created by adapting the code in [blog.logrocket](https://blog
 ### 1. models/books.js
 
 ```js
-// Import models
+// Multiple Authors - 
+// Abhinav Acharya Tirumala Vinjamuri
+// Ashish Nagpal
 const Author = require('./author.js');
 const Genre = require('./genre.js');
 const mongoose = require('mongoose');
@@ -217,15 +221,21 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    content_link: {
+        type: String,
+        required: true
+    },
     publisherDate: {
         type: Date,
         required: true
     },
+    // Mapping with Author Collection
     authorIds: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
     }],
+    // Mapping with Genre Collection
     genreIds: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -318,6 +328,62 @@ When user visits the books library page, `BookLibrary` component is rendered. Th
 ## Backend
 As described in the application architecture of assignment 2, the backend server takes the **HTTP request** and forwards it to its respective **router**. In my feature, the request enters the `index.js` file and forwards it to the book router. The books router checks the API URL and calls the books controller for further execution. The controller file, where the business logic exists, interacts with the MongoDB database and returns the response of the request.
 
+```js
+// index.js Snippet
+// Load routes
+app.use('/late-fees', lateFeeRoute);
+app.use('/notify', notificationsRoute);
+app.use('/books', booksRoute); 
+// .....
+```
+
+```js
+// routes/books.js
+// Ashish Nagpal
+const express = require('express');
+const bookController = require('../controllers/books');
+
+const router = express.Router();
+
+// API to fetch all books
+router.get('/all', bookController.getAllBooks);
+
+router.get('/genres', bookController.getAllGenres);
+
+router.get('/authors', bookController.getAllAuthors);
+
+module.exports = router;
+```
+
+```js
+// controllers/books.js Snippet
+// Ashish Nagpal
+const Author = require('../models/author');
+const Book = require('../models/books');
+const Genre = require('../models/genre');
+
+exports.getAllBooks = async (req, res) => {
+    try {
+        const books = await Book.find().populate('authorIds').populate({ path: 'genreIds', model: 'Genre' });;
+
+        console.log("Bookksss return", books);
+        return res.status(200).json({
+            message: "Books fetched successfully",
+            data: books,
+            status: true
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            status: false
+        });
+    }
+};
+
+// ....
+```
+
 # Image Credits
 1. *Books on Wooden Shelves Inside Library* by Stanislav Kondratiev, visit https://www.pexels.com/photo/books-on-wooden-shelves-inside-library-2908984/
 
@@ -327,6 +393,6 @@ As described in the application architecture of assignment 2, the backend server
 
 
 # Acknowledgments
-* I am grateful to the coding community for all of their hardwork in providing videos, articles and blogs related to frontend development. The materials provided served as a foundation for understanding and learning it's functionality and logic. 
+* I am grateful to the coding community for all of their hardwork in providing videos, articles and blogs related to web development. The materials provided served as a foundation for understanding and learning it's functionality and logic. 
 
 * The valuable insights helped me in brushing up the skills and contributing efficiently towards the assignment. Their contribution is highly appreciated.
