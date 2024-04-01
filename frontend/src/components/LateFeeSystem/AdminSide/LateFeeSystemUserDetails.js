@@ -58,7 +58,7 @@ function LateFeeSystemUserDetails() {
     const handleRemindUser = async () => {
         // Logic to remind user
         const response = await remindUserLateFee(user_id);
-        console.log(response);
+        // console.log(response);
         if (!response?.status) {
             setModalContent(response?.message);
             setShowModal(true);
@@ -128,8 +128,8 @@ function LateFeeSystemUserDetails() {
                         Object.keys(activeLateFeeDetails).length > 0 ? (
                             <div>
                                 <div className='flex flex-col md:flex-row'>
-                                    <img className="w-full h-auto mb-4 md:w-40 md:h-40 md:mb-0" src={activeLateFeeDetails.book_picture} alt="Book" />
-                                    <div className='mt-4 md:ml-4 flex flex-col justify-start items-start'>
+                                    <img className="h-24 w-24 mb-4 md:w-40 md:h-40 md:mb-0" src={activeLateFeeDetails.book_picture} alt="Book" />
+                                    <div className=' md:ml-4 flex flex-col justify-start items-start'>
                                         <div className="mb-3">
                                             <span className="text-gray-600">Book Name: </span>
                                             <span className="text-lg font-bold">{activeLateFeeDetails.book_name}</span>

@@ -35,7 +35,7 @@ export const checkActiveLateFee = async (user_id) => {
 
 export const getActiveLateFeesUsers = async () => {
     try {
-        console.log("backend url", backend_url);
+        // console.log("backend url", backend_url);
         const response = await fetch(`${backend_url}/late-fees/active-users`);
         // const response = await fetch(`http://localhost:8080/late-fees/active-users`);
         const data = await response.json();
