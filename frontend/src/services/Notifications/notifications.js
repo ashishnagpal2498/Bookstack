@@ -1,4 +1,5 @@
-import {backend_url} from '../../config.js';
+// Author - Abhinav Acharya Tirumala Vinjamuri
+import {backend_url} from '../../util/config';
 
 export const remindUserLateFee = async(user_id) => {
     try{
@@ -30,7 +31,7 @@ export const disputeLateFeeCharge = async(user_id) => {
         const response = await fetch(`${backend_url}/notify/late-fee-dispute-charge/${user_id}`, postOptions);
         // const response = await fetch(`http://localhost:8080/notify/late-fee-dispute-charge/${user_id}`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         return data;
     }
     catch(err){

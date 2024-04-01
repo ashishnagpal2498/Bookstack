@@ -1,4 +1,5 @@
-import {backend_url} from '../../config.js';
+// Author - Abhinav Acharya Tirumala Vinjamuri
+import {backend_url} from '../../util/config';
 
 export const createLateFee = async (user_id, book_id, reserved_date) => {
     try {
@@ -35,7 +36,7 @@ export const checkActiveLateFee = async (user_id) => {
 
 export const getActiveLateFeesUsers = async () => {
     try {
-        console.log("backend url", backend_url);
+        // console.log("backend url", backend_url);
         const response = await fetch(`${backend_url}/late-fees/active-users`);
         // const response = await fetch(`http://localhost:8080/late-fees/active-users`);
         const data = await response.json();

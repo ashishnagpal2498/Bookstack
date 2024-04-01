@@ -1,3 +1,4 @@
+// Authors - [Abhinav Acharya Tirumala Vinjamuri]
 const mongoose = require('mongoose');
 
 const favoriteSchema = new mongoose.Schema({
