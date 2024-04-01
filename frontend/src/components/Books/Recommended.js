@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { backend_url } from "../../config";
+import { backend_url } from "../../util/config";
 
 const booksPerPage = 5;
 

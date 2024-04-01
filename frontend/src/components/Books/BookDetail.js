@@ -10,7 +10,7 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
-import { backend_url } from "../../config";
+import { backend_url } from "../../util/config";
 import axios from "axios";
 
 function BookSingle() {
