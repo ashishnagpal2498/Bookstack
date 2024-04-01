@@ -4,7 +4,7 @@ import "../../stylesheets/add-book.css";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
-import { backend_url } from '../../config';
+import { backend_url } from '../../util/config';
 import { imageToBase64, compressImageData } from '../../util/imageConverter'
 
 function AddBook() {

@@ -7,7 +7,7 @@ import '../../stylesheets/book-library.css'
 import '../../stylesheets/filters.css'
 import { LibraryBackground } from './layouts/LibraryBackground';
 import axios from 'axios';
-import { backend_url } from '../../config';
+import { backend_url } from '../../util/config';
 
 const BookLibrary = () => {
   const [books,setBooks] = useState([]);

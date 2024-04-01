@@ -1,3 +1,4 @@
+// Author - Abhinav Acharya Tirumala Vinjamuri
 function ComingSoon() {
     return (
         <div class="relative h-100 w-full flex items-center justify-center bg-cover bg-center text-center px-5">

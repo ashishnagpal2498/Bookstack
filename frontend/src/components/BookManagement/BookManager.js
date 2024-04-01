@@ -3,7 +3,7 @@ import { Modal, Card, Button, Row, Col, Container, Form } from 'react-bootstrap'
 import bookIcon from '../../assets/book-cover-1.png';
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { backend_url } from '../../config';
+import { backend_url } from '../../util/config';
 
 function BookCard({ book, author, onDelete }) {
 

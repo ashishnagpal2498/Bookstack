@@ -1,4 +1,5 @@
-import {backend_url} from '../../config.js';
+// Author - Abhinav Acharya Tirumala Vinjamuri
+import {backend_url} from '../../util/config';
 
 export const createLateFee = async (user_id, book_id, reserved_date) => {
     try {

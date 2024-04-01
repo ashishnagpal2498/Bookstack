@@ -1,3 +1,4 @@
+// Authors - [Arihant Dugar, Abhinav Acharya Tirumala Vinjamuri]
 const mongoose = require('mongoose');
 const reservationStatus = require('../util/reservationStatus')
 

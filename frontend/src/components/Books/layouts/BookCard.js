@@ -1,6 +1,6 @@
 import React from 'react'
-import bookUrl1 from "../../../book-cover-1.png"
-import bookUrl2 from "../../../book-cover-2.jpg"
+import bookUrl1 from "../../../assets/book-cover-1.png"
+import bookUrl2 from "../../../assets/book-cover-2.jpg"
 import { Link } from 'react-router-dom'
 const BookCard = ({ books, loading }) => {
 
