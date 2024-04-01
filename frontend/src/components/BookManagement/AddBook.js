@@ -4,8 +4,9 @@ import "../../stylesheets/add-book.css";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
-import { backend_url } from '../../util/config';
-import { imageToBase64, compressImageData } from '../../util/imageConverter'
+import { backend_url } from '../../util/config.js';
+import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import storage from "../../firebaseConfig.js"
 
 function AddBook() {
   const [validated, setValidated] = useState(false);
@@ -17,7 +18,6 @@ function AddBook() {
   const [bookPrice, setBookPrice] = useState('');
   const [bookDescription, setBookDescription] = useState('');
   const [bookCoverImg, setBookCoverImg] = useState('');
-  const [bookImageFileName, setBookImageFileName] = useState('');
 
 
   const [genres, setGenres] = useState([]);
@@ -51,40 +51,83 @@ function AddBook() {
 
   const handleFiles = (files) => {
     const file = files[0];
-    imageToBase64(file)
-        .then(async base64Image => {
-            var data = await compressImageData(base64Image);
-            setBookCoverImg(compressImageData(data));
-            setBookImageFileName(file.name);
-        })
-        .catch(error => {
-            console.error('Error converting image to base64:', error);
-        });
+    setBookCoverImg(file);
+    setBookCoverImg(file);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      const bookData = {
-        description : bookDescription, 
-        content_link : contentLink, 
-        authorIds : bookAuthor, 
-        genreIds : bookGenre, 
-        book_name : bookTitle, 
-        image_url : bookCoverImg, 
-        price : bookPrice, 
-        availability : bookAvailability
+
+      if(bookCoverImg) {
+        const storageRef = ref(storage,`/files/${bookCoverImg.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, bookCoverImg);
+     
+        await uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+            },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    const bookData = {
+                      description : bookDescription, 
+                      content_link : contentLink, 
+                      authorIds : bookAuthor, 
+                      genreIds : bookGenre, 
+                      book_name : bookTitle, 
+                      image_url : url, 
+                      price : bookPrice, 
+                      availability : bookAvailability
+                    }
+                    axios.post(`${backend_url}/books/add`, bookData).then((response) => {
+                      navigate('/manage-books');
+                    }).catch((error) => {
+                      if (error.response && error.response.status === 401) {
+                        console.log("Error : " + error)
+                      }
+                    });
+                });
+            }
+        );
       }
-      axios.post(`${backend_url}/books/add`, bookData).then((response) => {
-        navigate('/manage-books');
-      }).catch((error) => {
-        if (error.response && error.response.status === 401) {
-          console.log("Error : " + error)
-        }
-      });
+
+      if(bookCoverImg) {
+        const storageRef = ref(storage,`/files/${bookCoverImg.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, bookCoverImg);
+     
+        await uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+            },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    const bookData = {
+                      description : bookDescription, 
+                      content_link : contentLink, 
+                      authorIds : bookAuthor, 
+                      genreIds : bookGenre, 
+                      book_name : bookTitle, 
+                      image_url : url, 
+                      price : bookPrice, 
+                      availability : bookAvailability
+                    }
+                    axios.post(`${backend_url}/books/add`, bookData).then((response) => {
+                      navigate('/manage-books');
+                    }).catch((error) => {
+                      if (error.response && error.response.status === 401) {
+                        console.log("Error : " + error)
+                      }
+                    });
+                });
+            }
+        );
+      }
     }
     setValidated(true);
   };
@@ -178,7 +221,8 @@ function AddBook() {
                       <img src={uploadIcon} width="60" height="58" alt="Upload Icon" /><br />
                       <Form.Label htmlFor="book-cover-img">Drag & Drop book image or <span className="highlighted-text">Browse</span></Form.Label>
                       <br />Supported formats: JPEG, PNG
-                      <br /><br /><div id="selectedFileName">{bookImageFileName}</div>
+                      <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
+                      <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
                   </div>
                 </Form.Group>
               </Col>
