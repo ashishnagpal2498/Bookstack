@@ -14,7 +14,7 @@ dotenv.config();
 
 // Load params from .env file
 const PORT = process.env.PORT || 8080;
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || "mongodb+srv://aiwinmanuel652:webgrp13@group13.gs7y5qc.mongodb.net/test?retryWrites=true&w=majority&appName=group13";
 const frontend_url = process.env.FRONTEND_URI;
 
 // Load routes

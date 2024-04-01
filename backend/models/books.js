@@ -1,47 +1,64 @@
 // Import models
-const Author = require('./author.js');
-const Genre = require('./genre.js');
-const mongoose = require('mongoose');
+const Author = require("./author.js");
+const Genre = require("./genre.js");
+const mongoose = require("mongoose");
 
 const BookSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: true
+  description: {
+    type: String,
+    required: true,
+  },
+  content_link: {
+    type: String,
+    required: true,
+  },
+  publisherDate: {
+    type: Date,
+    required: true,
+  },
+  authorIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Author",
     },
-    content_link: {
-        type: String,
-        required: true
+  ],
+  genreIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Genre",
     },
-    publisherDate: {
+  ],
+  book_name: {
+    type: String,
+    required: true,
+  },
+  image_url: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  availability: {
+    type: Boolean,
+    required: true,
+  },
+  rating: [
+    {
+      noOfStars: Number,
+      description: String,
+      time: {
         type: Date,
-        required: true
+        default: Date.now(),
+      },
     },
-    authorIds: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Author'
-    }],
-    genreIds: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Genre'
-    }],
-    book_name: {
-        type: String,
-        required: true
-    },
-    image_url: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    availability : {
-        type: Boolean,
-        required: true
-    }
+  ],
+  book_contributors: String,
+  book_targetAudience: String,
+  book_classification: String,
 });
 
-module.exports = mongoose.model('books', BookSchema, 'books');
+module.exports = mongoose.model("books", BookSchema, "books");
