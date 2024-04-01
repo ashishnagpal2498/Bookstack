@@ -24,6 +24,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddBook from './components/BookManagement/AddBook.js';
 import BookManager from './components/BookManagement/BookManager.js';
+import UpdateBook from './components/BookManagement/UpdateBook.js';
+import ManageBookReservations from './components/BookManagement/ManageBookReservations.js';
 
 const App = () => {
 
@@ -53,6 +55,8 @@ const App = () => {
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/manage-books" element={<BookManager />} />
             <Route path="/add-book" element={<AddBook />} />
+            <Route path="/update-book/:bookId" element={<UpdateBook />} />
+            <Route path="/manage-reservations" element={<ManageBookReservations />} />
             <Route path="/coming-soon" element={<ComingSoon />} />
           </Routes>
         </Router>
