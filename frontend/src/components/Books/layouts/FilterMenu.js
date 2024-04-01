@@ -4,7 +4,7 @@ import FilterBtn from './FilterBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';  // Import axios to make API requests
-import { backend_url } from '../../../config';
+import { backend_url } from '../../../util/config';
 
 const FilterMenu = ({ toggleFilterMenu, handleFilterCheckbox, selectedFilters }) => {
 

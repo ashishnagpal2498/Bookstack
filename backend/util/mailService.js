@@ -1,3 +1,4 @@
+// Author - Abhinav Acharya Tirumala Vinjamuri
 var transporter = require('./transporter');
 
 function sendCustomMail(fromEmail, toEmail, subject, html, callback) {

@@ -1,3 +1,4 @@
+// Author - Abhinav Acharya Tirumala Vinjamuri
 import { localStorageUtil } from "./localStorage";
 
 export const isAuthenticated = () => {

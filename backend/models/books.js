@@ -1,6 +1,5 @@
-// Multiple Authors - 
-// Abhinav Acharya Tirumala Vinjamuri
-// Ashish Nagpal
+// Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal]
+// Import models
 const Author = require('./author.js');
 const Genre = require('./genre.js');
 const mongoose = require('mongoose');
