@@ -1,6 +1,6 @@
 // Author - Abhinav Acharya Tirumala Vinjamuri
 import React from 'react';
-import './stylesheets/app.css';
+import './stylesheets/App.css';
 import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
 import { isAuthenticated, isAdmin } from './util';
 import Navbar from './components/Navbar';
