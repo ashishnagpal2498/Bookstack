@@ -32,7 +32,7 @@ function BookSingle() {
         })
         .catch((error) => {
           console.log(error);
-          setIsUserLogedIn(false);
+          setIsUserLogedIn(true);
         });
     }
 
@@ -46,7 +46,7 @@ function BookSingle() {
   const [bookDetail, setBookDetail] = useState();
   const [show, setShow] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [isUserLogedIn, setIsUserLogedIn] = useState(false);
+  const [isUserLogedIn, setIsUserLogedIn] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [ratingRatio, setRatingRatio] = useState(0);
   const [recommendedbookArray, setRecommendedBookArray] = useState([]);
@@ -167,7 +167,7 @@ function BookSingle() {
                       </div>
 
                       <div className="col-12 text-center mt-2">
-                        {isUserLogedIn && (
+                        {!isUserLogedIn && (
                           <Button
                             onClick={() => callReservation()}
                             className="resever-btn"
