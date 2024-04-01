@@ -1,3 +1,4 @@
+// Ashish Nagpal
 import React, { useEffect, useState } from 'react'
 import BookCard from './layouts/BookCard'
 import Pagination from './layouts/Pagination'
@@ -21,12 +22,15 @@ const BookLibrary = () => {
   });
   const [searchValue,setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("price");
+  const [currentPage, setCurrentPage] = useState(1);
+  const booksPerPage = 8; 
 
   const toggleFilterMenu = () => {
     setOpenFilterMenu(!openFilterMenu);
   };
+
+  // Fetch all the books from backend
   useEffect(() => {
-    console.log("USE effect")
     axios.get(`${backend_url}/books/all`)
     .then(response => {
         if (response.data.status) {
@@ -37,6 +41,7 @@ const BookLibrary = () => {
     .catch(error => {
         console.error("Error fetching genres:", error);
     });
+    // eslint-disable-next-line 
   }, [])
 
   // Use Effect upon change of any type of Filters/ search/ sort
@@ -50,7 +55,8 @@ const BookLibrary = () => {
       if (filterValues.length > 0) {
         console.log("FilterKey -->", filterKey);
         updateBooks = updateBooks.filter(book => {
-          return filterValues.every(value => {
+              // eslint-disable-next-line 
+          return filterValues.some(value => {
             if (filterKey === 'genreIds' || filterKey === 'authorIds') {
               return book[filterKey].some(item => item.name.toLowerCase().includes(value.toLowerCase()));
             } else if(filterKey === 'publishedYear'){
@@ -78,6 +84,7 @@ const BookLibrary = () => {
     setTimeout(()=> setLoading(false),1000)
   }, [selectedFilters, searchValue, sortValue]); 
 
+  // Checkbox --> Function as Prop
   const handleFilterCheckbox = (category, value, remove=false) => {
     console.log("Handle FIlter Parent called - " + category + " - " + value + "  " + remove)
     if(remove){
@@ -95,9 +102,14 @@ const BookLibrary = () => {
     }));
   };
 
+  // Search Function sent as prop
   const onSearch = (searchValue) => {
       setSearchValue(searchValue)
   }
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className='book-library-container'>
@@ -107,13 +119,15 @@ const BookLibrary = () => {
         <FilterBar selectedFilters={selectedFilters} onSearch={onSearch} openFilterMenu={openFilterMenu} toggleFilterMenu={toggleFilterMenu} handleFilterCheckbox= {handleFilterCheckbox} setSortValue={setSortValue} />
 
         {loading || filteredBooks.length > 0 ?
-          <ul className="book-list">
-            <BookCard books={filteredBooks} loading={loading} />
-          </ul>
+          <>
+            <ul className="book-list">
+              <BookCard books={filteredBooks} loading={loading} />
+            </ul>
+            <Pagination totalBooks={filteredBooks.length} booksPerPage={booksPerPage} paginate={paginate} currentPage={currentPage} />
+          </>
           :
           <div style={{ width: "100%", margin: "20px", textAlign: "center", padding: "40px", fontSize: "24px" }}>No books found.</div>
         }
-        <Pagination />
       </div>
     </div>
 
