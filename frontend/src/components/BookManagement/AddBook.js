@@ -54,8 +54,6 @@ function AddBook() {
     setBookCoverImg(file);
     setBookCoverImg(file);
   }
-
-  const handleSubmit = async (event) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
