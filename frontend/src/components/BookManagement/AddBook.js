@@ -2,10 +2,10 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import uploadIcon from "../../assets/upload-icon.png";
 import "../../stylesheets/add-book.css";
 import { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { backend_url } from '../../util/config.js';
-import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebaseConfig.js"
 
 function AddBook() {
@@ -24,27 +24,27 @@ function AddBook() {
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
-      axios.get(`${backend_url}/books/genres`)
-          .then(response => {
-              if (response.data.status) {
-                  const fetchedGenres = response.data.data;
-                  setGenres(fetchedGenres);
-              }
-          })
-          .catch(error => {
-              console.error("Error fetching genres:", error);
-          });
+    axios.get(`${backend_url}/books/genres`)
+      .then(response => {
+        if (response.data.status) {
+          const fetchedGenres = response.data.data;
+          setGenres(fetchedGenres);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching genres:", error);
+      });
 
-      axios.get(`${backend_url}/books/authors`)
-          .then(response => {
-              if (response.data.status) {
-                  const fetchedAuthors = response.data.data;
-                  setAuthors(fetchedAuthors);
-              }
-          })
-          .catch(error => {
-              console.error("Error fetching authors:", error);
-          });
+    axios.get(`${backend_url}/books/authors`)
+      .then(response => {
+        if (response.data.status) {
+          const fetchedAuthors = response.data.data;
+          setAuthors(fetchedAuthors);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching authors:", error);
+      });
   }, []);
 
   let navigate = useNavigate();
@@ -56,84 +56,84 @@ function AddBook() {
   }
 
   const handleSubmit = async (event) => {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+        event.stopPropagation();
+      } else {
 
-      if(bookCoverImg) {
-        const storageRef = ref(storage,`/files/${bookCoverImg.name}`)
-        const uploadTask = uploadBytesResumable(storageRef, bookCoverImg);
-     
-        await uploadTask.on(
+        if (bookCoverImg) {
+          const storageRef = ref(storage, `/files/${bookCoverImg.name}`)
+          const uploadTask = uploadBytesResumable(storageRef, bookCoverImg);
+
+          await uploadTask.on(
             "state_changed",
             (snapshot) => {
             },
             (err) => console.log(err),
             () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    const bookData = {
-                      description : bookDescription, 
-                      content_link : contentLink, 
-                      authorIds : bookAuthor, 
-                      genreIds : bookGenre, 
-                      book_name : bookTitle, 
-                      image_url : url, 
-                      price : bookPrice, 
-                      availability : bookAvailability
-                    }
-                    axios.post(`${backend_url}/books/add`, bookData).then((response) => {
-                      navigate('/manage-books');
-                    }).catch((error) => {
-                      if (error.response && error.response.status === 401) {
-                        console.log("Error : " + error)
-                      }
-                    });
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                const bookData = {
+                  description: bookDescription,
+                  content_link: contentLink,
+                  authorIds: bookAuthor,
+                  genreIds: bookGenre,
+                  book_name: bookTitle,
+                  image_url: url,
+                  price: bookPrice,
+                  availability: bookAvailability
+                }
+                axios.post(`${backend_url}/books/add`, bookData).then((response) => {
+                  navigate('/manage-books');
+                }).catch((error) => {
+                  if (error.response && error.response.status === 401) {
+                    console.log("Error : " + error)
+                  }
                 });
+              });
             }
-        );
-      }
+          );
+        }
 
-      if(bookCoverImg) {
-        const storageRef = ref(storage,`/files/${bookCoverImg.name}`)
-        const uploadTask = uploadBytesResumable(storageRef, bookCoverImg);
-     
-        await uploadTask.on(
+        if (bookCoverImg) {
+          const storageRef = ref(storage, `/files/${bookCoverImg.name}`)
+          const uploadTask = uploadBytesResumable(storageRef, bookCoverImg);
+
+          await uploadTask.on(
             "state_changed",
             (snapshot) => {
             },
             (err) => console.log(err),
             () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    const bookData = {
-                      description : bookDescription, 
-                      content_link : contentLink, 
-                      authorIds : bookAuthor, 
-                      genreIds : bookGenre, 
-                      book_name : bookTitle, 
-                      image_url : url, 
-                      price : bookPrice, 
-                      availability : bookAvailability
-                    }
-                    axios.post(`${backend_url}/books/add`, bookData).then((response) => {
-                      navigate('/manage-books');
-                    }).catch((error) => {
-                      if (error.response && error.response.status === 401) {
-                        console.log("Error : " + error)
-                      }
-                    });
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                const bookData = {
+                  description: bookDescription,
+                  content_link: contentLink,
+                  authorIds: bookAuthor,
+                  genreIds: bookGenre,
+                  book_name: bookTitle,
+                  image_url: url,
+                  price: bookPrice,
+                  availability: bookAvailability
+                }
+                axios.post(`${backend_url}/books/add`, bookData).then((response) => {
+                  navigate('/manage-books');
+                }).catch((error) => {
+                  if (error.response && error.response.status === 401) {
+                    console.log("Error : " + error)
+                  }
                 });
+              });
             }
-        );
+          );
+        }
       }
-    }
-    setValidated(true);
-  };
+      setValidated(true);
+    };
 
-  return (
-    <div className="add-book-div">
+    return (
+      <div className="add-book-div">
         <Container className="add-form-container">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <h1>Add Book</h1>
@@ -151,7 +151,7 @@ function AddBook() {
                   <Form.Select value={bookGenre} onChange={(e) => setBookGenre(e.target.value)} required isInvalid={validated && !bookGenre}>
                     <option value="">Select Genre</option>
                     {genres.map(genre => (
-                        <option key={genre._id} value={genre._id}>{genre.name}</option>
+                      <option key={genre._id} value={genre._id}>{genre.name}</option>
                     ))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">Please select a genre.</Form.Control.Feedback>
@@ -165,7 +165,7 @@ function AddBook() {
                   <Form.Select value={bookAuthor} onChange={(e) => setBookAuthor(e.target.value)} required isInvalid={validated && !bookAuthor}>
                     <option value="">Select Author</option>
                     {authors.map(author => (
-                        <option key={author._id} value={author._id}>{author.name}</option>
+                      <option key={author._id} value={author._id}>{author.name}</option>
                     ))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">Please select author.</Form.Control.Feedback>
@@ -211,18 +211,18 @@ function AddBook() {
                 <Form.Group className="image-div" controlId="book-cover-img">
                   <h4>Cover Image</h4>
                   <div className="upload-div">
-                      <Form.Control 
-                          className="file-input"
-                          type="file" 
-                          id="book-cover-img" 
-                          accept=".png, .jpg, .jpeg" 
-                          onChange={(e) => handleFiles(e.target.files)} 
-                      />
-                      <img src={uploadIcon} width="60" height="58" alt="Upload Icon" /><br />
-                      <Form.Label htmlFor="book-cover-img">Drag & Drop book image or <span className="highlighted-text">Browse</span></Form.Label>
-                      <br />Supported formats: JPEG, PNG
-                      <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
-                      <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
+                    <Form.Control
+                      className="file-input"
+                      type="file"
+                      id="book-cover-img"
+                      accept=".png, .jpg, .jpeg"
+                      onChange={(e) => handleFiles(e.target.files)}
+                    />
+                    <img src={uploadIcon} width="60" height="58" alt="Upload Icon" /><br />
+                    <Form.Label htmlFor="book-cover-img">Drag & Drop book image or <span className="highlighted-text">Browse</span></Form.Label>
+                    <br />Supported formats: JPEG, PNG
+                    <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
+                    <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
                   </div>
                 </Form.Group>
               </Col>
@@ -234,8 +234,9 @@ function AddBook() {
             </Row>
           </Form>
         </Container>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default AddBook;
