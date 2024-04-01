@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const lateFeeRoute = require('./routes/lateFeeSystem.js');
 const notificationsRoute = require('./routes/notifications.js');
 const booksRoute = require('./routes/books.js')
+const reservationsRoute = require('./routes/reservations.js')
 
 // Initialize express app and middleware
 const app = express();
@@ -22,6 +23,7 @@ const frontend_url = process.env.FRONTEND_URI;
 app.use('/late-fees', lateFeeRoute);
 app.use('/notify', notificationsRoute);
 app.use('/books', booksRoute); 
+app.use('/reservations', reservationsRoute); 
 
 // Connect to mongoDB
 async function connect() {
