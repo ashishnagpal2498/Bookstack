@@ -2,13 +2,16 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Rating from 'react-rating'
+import Rating from "react-rating";
 import { Link, useLocation } from "react-router-dom";
-import { useParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
+import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import { backend_url } from "../../util/config";
+import axios from "axios";
 
 function BookSingle() {
   // eslint-disable-next-line no-unused-vars
@@ -16,50 +19,47 @@ function BookSingle() {
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location])
+    let logedInUserDetails = JSON.parse(localStorage.getItem("user"));
 
+    if (logedInUserDetails) {
+      axios({
+        url: `${backend_url}/late-fees/check-restriction/${logedInUserDetails?.user_id}`,
+        method: "GET",
+      })
+        .then((result) => {
+          console.log(result.data?.status);
+          setIsUserLogedIn(result.data?.status);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsUserLogedIn(true);
+        });
+    }
+
+    getBookDetail();
+  }, [location]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   getBookDetail();
+  // }, [location]);
+
+  const [bookDetail, setBookDetail] = useState();
   const [show, setShow] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-// eslint-disable-next-line no-unused-vars
-  const [recommendedbookArray, setRecommendedBookArray] = useState([
-    { bookName: "Book1", author: "Author1" },
-    { bookName: "Book2", author: "Author2" },
-    { bookName: "Book3", author: "Author3" },
-    { bookName: "Book4", author: "Author4" },
-    { bookName: "Book5", author: "Author5" },
-  ]);
+  const [isUserLogedIn, setIsUserLogedIn] = useState(true);
+  // eslint-disable-next-line no-unused-vars
+  const [ratingRatio, setRatingRatio] = useState(0);
+  const [recommendedbookArray, setRecommendedBookArray] = useState([]);
 
   const [rating, setRating] = useState(0);
+  const [ratingArray, setRatingArray] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  const [mostRelevent, setMostRelevent] = useState([
-    { ratingValue: 3, review: "ABC Book" },
-    { ratingValue: 4, review: "XYZ Book" },
-    { ratingValue: 5, review: "Great Book" },
-    { ratingValue: 2, review: "Okay Book" },
-    { ratingValue: 4, review: "Interesting Book" },
-    { ratingValue: 3, review: "Nice Book" },
-    { ratingValue: 4, review: "Fantastic Book" },
-    { ratingValue: 2, review: "Disappointing Book" },
-    { ratingValue: 5, review: "Must Read Book" },
-    { ratingValue: 1, review: "Terrible Book" },
-    { ratingValue: 3, review: "Meh Book" },
-  ]);
+  const [mostRelevant, setmostRelevant] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  const [mostRecent, setMostRecent] = useState([
-    { ratingValue: 3, review: "Hello" },
-    { ratingValue: 4, review: "Hello Data Book" },
-    { ratingValue: 5, review: "The Great Book Of IT" },
-    { ratingValue: 2, review: "Okay Book It Now" },
-    { ratingValue: 4, review: "Interesting Book of Jungle" },
-    { ratingValue: 3, review: "Nice Book for Children" },
-    { ratingValue: 4, review: "Fantastic Book for Kdrama Lovers" },
-    { ratingValue: 2, review: "Disappointing Book for Developers" },
-    { ratingValue: 5, review: "Must Read Book for Thrill Lover" },
-    { ratingValue: 1, review: "Terrible Book for Me" },
-    { ratingValue: 3, review: "Meh Book No Bro No" },
-  ]);
+  const [mostRecent, setMostRecent] = useState([]);
 
   const [isReleventOrRecent, setIsReleventOrRecent] = useState("recent");
+  const [description, setDescription] = useState("");
   // setRating(rate);
   const handleClose = () => {
     setShow(false);
@@ -89,34 +89,119 @@ function BookSingle() {
   };
   const handleRecent = () => {
     setIsReleventOrRecent("recent");
+    setMostRecent(ratingArray);
+    setmostRelevant([]);
   };
-  const handlerevelant = () => {
+  const handleRelevant = () => {
     setIsReleventOrRecent("relevent");
+    setMostRecent([]);
+    setmostRelevant(ratingArray.reverse());
+  };
+
+  const getBookDetail = async () => {
+    try {
+      const api = await axios.get(`${backend_url}/books/${bookId}`);
+      if (api.data) {
+        setBookDetail(api.data.book);
+        setRatingArray(api.data.book.rating);
+        setMostRecent(api.data.book?.rating);
+        // setRatingRatio(api.data.rating);
+
+        if (api.data.book?.rating.length > 0) {
+          const bookRatingRatio =
+            api.data.book?.rating.reduce((acc, val) => {
+              var objreating = acc + parseFloat(val.noOfStars.toFixed(1));
+              return objreating;
+            }, 0) / api.data.book?.rating.length;
+          setRatingRatio(bookRatingRatio.toFixed(1));
+        }
+
+        // setmostRelevant(api.data.book?.rating);
+        setRecommendedBookArray(api.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addRating = async () => {
+    try {
+      const data = {
+        id: bookDetail?._id,
+        noOfStars: rating,
+        description: description,
+      };
+      const api = await axios.post(backend_url + "/books/rating", data);
+      if (api.status === 200) {
+        toast.success("Review added successfully.");
+        setRating(0);
+        setDescription("");
+        getBookDetail();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const callReservation = async () => {
+    try {
+    } catch (error) {}
   };
 
   return (
     <>
-      <section className="review">
+      <section className="description">
         <div className="container-fluid mt-5">
           <div className="container">
             <div className="row">
               <div className="col-lg-9 col-10">
                 <div className="row">
-                  <div className="col-lg-3 col-md-5 col-sm-6 col-8 d-flex mx-auto">
-                    <img
-                      src="https://pngimg.com/d/book_PNG2111.png"
-                      className="w-100" alt=""
-                    ></img>
+                  <div className="col-lg-4 col-md-5 col-sm-6 col-8 d-flex mx-auto">
+                    <div className="row">
+                      <div className="col-12">
+                        <img
+                          src={bookDetail?.image_url}
+                          className="w-100 aspect-ratio"
+                          alt=""
+                        ></img>
+                      </div>
+
+                      <div className="col-12 text-center mt-2">
+                        {!isUserLogedIn && (
+                          <Button
+                            onClick={() => callReservation()}
+                            className="resever-btn"
+                          >
+                            Reserve
+                          </Button>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-lg-9 col-md-12 col-12">
-                    <h2>Book Name</h2>
+                  <div className="col-lg-8 col-md-12 col-12">
+                    <div>
+                      <h2>{bookDetail?.book_name}</h2>
+                    </div>
                     <div className="d-flex align-items-center">
                       <div className="d-flex align-items-center gap-2 my-3">
                         <Rating
                           stop={5}
-                          initialRating={3}
-                          emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
-                          fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
+                          initialRating={ratingRatio}
+                          emptySymbol={
+                            <FontAwesomeIcon
+                              icon={regularStar}
+                              size="1x"
+                              className="medium"
+                            />
+                          }
+                          fullSymbol={
+                            <FontAwesomeIcon
+                              icon={solidStar}
+                              size="1x"
+                              className="medium"
+                              style={{ color: "#f5c842" }}
+                            />
+                          }
                           readonly
                         />
                       </div>
@@ -124,12 +209,12 @@ function BookSingle() {
                         View Rating and Review
                       </a>
                     </div>
-                    <p>
-                      Hey there, Jungle Book Fans! Welcome to Mowgli's World!
-                    </p>
-                    <p>
-                      Get ready to swing from vine to vine and roam the untamed wilderness alongside Mowgli, the fearless hero of Rudyard Kipling's legendary tale, "The Jungle Book."
-                    </p>
+                    <p>{bookDetail?.description}</p>
+                    {/* <p>
+                      Get ready to swing from vine to vine and roam the untamed
+                      wilderness alongside Mowgli, the fearless hero of Rudyard
+                      Kipling's legendary tale, "The Jungle Book."
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -145,8 +230,24 @@ function BookSingle() {
                     <i class="fa-regular fa-star"></i> */}
                       <Rating
                         stop={5}
-                        emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
-                        fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
+                        // fractions={rating}
+                        initialRating={rating}
+                        emptySymbol={
+                          <FontAwesomeIcon
+                            icon={regularStar}
+                            size="1x"
+                            className="medium"
+                          />
+                        }
+                        fullSymbol={
+                          <FontAwesomeIcon
+                            icon={solidStar}
+                            size="1x"
+                            className="medium"
+                            style={{ color: "#f5c842" }}
+                          />
+                        }
+                        onChange={handleRating}
                       />
                     </div>
                     <div class="my-3">
@@ -154,12 +255,22 @@ function BookSingle() {
                         class="form-control"
                         id="exampleFormControlTextarea1"
                         rows="4"
+                        value={description}
+                        onChange={(event) => {
+                          console.log(event.target.value);
+                          setDescription(event.target.value);
+                        }}
                       ></textarea>
                     </div>
                     <div className="my-3">
-                      <Button onClick={()=>{
-                        toast.success("Review added successfully.")
-                      }}>Submit</Button>
+                      <Button
+                        onClick={() => {
+                          addRating();
+                        }}
+                        className="resever-btn"
+                      >
+                        Submit
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -178,8 +289,11 @@ function BookSingle() {
                 {/* </div>
             <div className="row"> */}
                 <div className="col-md-9 col-sm-8 col-12">
-                  <h5>Name: Book Name</h5>
-                  <h6>Author: Abcd name</h6>
+                  <h5>Name: {bookDetail?.book_name}</h5>
+                  {bookDetail?.authorIds.map((author) => (
+                    <h6>Author: {author?.name}</h6>
+                  ))}
+
                   <a
                     className="text-primery"
                     data-bs-toggle="modal"
@@ -203,8 +317,13 @@ function BookSingle() {
                 {/* </div>
             <div className="row"> */}
                 <div className="col-md-9 col-sm-8 col-12">
-                  <h5>Publisher Name: Book Name</h5>
-                  <h6>Publisher Date: Abcd Date</h6>
+                  <h5>Publisher Name:</h5>
+                  <h6>
+                    Publisher Date:{" "}
+                    {`${new Date(bookDetail?.publisherDate).getDate()}-${
+                      new Date(bookDetail?.publisherDate).getMonth() - 1
+                    }-${new Date(bookDetail?.publisherDate).getFullYear()}`}
+                  </h6>
                 </div>
               </div>
             </div>
@@ -229,23 +348,27 @@ function BookSingle() {
                   <div className="col-lg-10 col-12">
                     <div className="row pt-3">
                       <div className="col-lg-12 col-12 d-flex align-items-center book-recom ">
-                        {
-                          recommendedbookArray.length > 0 &&
-                          recommendedbookArray.map((recommendedBookDetail, index) => {
-                            return (
-                              <div key={index} className="col-lg-2 col-md-3 col-sm-5 col-6">
-                                <Link to={'/book/' + (index+1)}>
-
-                                  <img
-                                    src="https://pngimg.com/d/book_PNG2111.png"
-                                    className="w-100"
-                                    alt="..."
-                                  />
-                                </Link>
-                              </div>
-                            )
-                          })
-                        }
+                        {recommendedbookArray.length > 0 &&
+                          recommendedbookArray.map(
+                            (recommendedBookDetail, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="col-lg-2 col-md-3 col-sm-5 col-6"
+                                >
+                                  <Link
+                                    to={"/book/" + recommendedBookDetail._id}
+                                  >
+                                    <img
+                                      src={recommendedBookDetail.image_url}
+                                      className="w-100"
+                                      alt="..."
+                                    />
+                                  </Link>
+                                </div>
+                              );
+                            }
+                          )}
                         <div className=" col-md-4 col-sm-5 col-6 text-end">
                           <h5>
                             <Link to={"/Recommended"}>
@@ -263,12 +386,17 @@ function BookSingle() {
                           <div className="col-12">
                             <ul>
                               {recommendedbookArray.length > 0 &&
-                                recommendedbookArray.map((recommendedBookDetail, index) => {
-                                  return (
-                                    <li key={index}>{recommendedBookDetail.author}</li>
-                                  )
-                                })
-                              }
+                                recommendedbookArray.map(
+                                  (recommendedBookDetail, index) => {
+                                    return (
+                                      <li key={index}>
+                                        {recommendedBookDetail.authorIds.map(
+                                          (i) => i.name
+                                        )}
+                                      </li>
+                                    );
+                                  }
+                                )}
                             </ul>
                           </div>
                         </div>
@@ -285,9 +413,9 @@ function BookSingle() {
         {/* Models */}
 
         <div
-          className="modal fade"
+          class="modal fade"
           id="BookDetails"
-          tabIndex="-1"
+          tabindex="-1"
           aria-labelledby="BookDetailsLabel"
           aria-hidden="true"
         >
@@ -309,11 +437,9 @@ function BookSingle() {
                   <div className="col-sm-3 text-center fw-bolder">
                     <i className="fa fa-book"></i>
                   </div>
-                  <div className="col-sm-9">
-                    <h5 className="book-title">Book Title</h5>
-                    <p>
-                      Welcome to Mowgli's World
-                    </p>
+                  <div className="col-sm-6">
+                    <h5 className="book-title">{bookDetail?.book_name}</h5>
+                    {/* <p>Welcome to Mowgli's World</p> */}
                   </div>
                 </div>
 
@@ -321,12 +447,7 @@ function BookSingle() {
                 <div className="row">
                   <div className="col-sm-3 text-center fw-bolder">Details</div>
                   <div className="col-sm-9">
-                    <p>
-                      Hey there, Jungle Book Fans! Welcome to Mowgli's World!
-
-                      Get ready to swing from vine to vine and roam the untamed wilderness alongside Mowgli, the fearless hero of Rudyard Kipling's legendary tale, "The Jungle Book." In this awesome collection of stories, we're diving deep into the heart of the jungle where excitement, friendship, and discovery are waiting for you around every corner.
-
-                    </p>
+                    <p>{bookDetail?.description}</p>
                   </div>
                 </div>
 
@@ -336,12 +457,7 @@ function BookSingle() {
                     Contributors
                   </div>
                   <div className="col-sm-9">
-                    <p>
-                      Hey there, Jungle Book Fans! Welcome to Mowgli's World!
-
-                      Get ready to swing from vine to vine and roam the untamed wilderness alongside Mowgli, the fearless hero of Rudyard Kipling's legendary tale, "The Jungle Book." In this awesome collection of stories, we're diving deep into the heart of the jungle where excitement, friendship, and discovery are waiting for you around every corner.
-
-                    </p>
+                    <p>{bookDetail?.book_contributors}</p>
                   </div>
                 </div>
 
@@ -349,12 +465,9 @@ function BookSingle() {
                 <div className="row">
                   <div className="col-sm-3 text-center fw-bolder">Genre</div>
                   <div className="col-sm-9">
-                    <p>
-                      Hey there, Jungle Book Fans! Welcome to Mowgli's World!
-
-                      Get ready to swing from vine to vine and roam the untamed wilderness alongside Mowgli, the fearless hero of Rudyard Kipling's legendary tale, "The Jungle Book." In this awesome collection of stories, we're diving deep into the heart of the jungle where excitement, friendship, and discovery are waiting for you around every corner.
-
-                    </p>
+                    <p>{` ${bookDetail?.genreIds.map(
+                      (genre) => genre.name
+                    )} `}</p>
                   </div>
                 </div>
 
@@ -364,11 +477,7 @@ function BookSingle() {
                     Target Audience
                   </div>
                   <div className="col-sm-9">
-                    <p>
-                      Hey there, Jungle Book Fans! Welcome to Mowgli's World!
-
-                      Get ready to swing from vine to vine and roam the untamed wilderness alongside Mowgli, the fearless hero of Rudyard Kipling's legendary tale, "The Jungle Book." In this awesome collection of stories, we're diving deep into the heart of the jungle where excitement, friendship, and discovery are waiting for you around every corner.
-                    </p>
+                    <p>{bookDetail?.book_targetAudience}</p>
                   </div>
                 </div>
 
@@ -378,11 +487,7 @@ function BookSingle() {
                     Classification
                   </div>
                   <div className="col-sm-9">
-                    <p>
-                      Hey there, Jungle Book Fans! Welcome to Mowgli's World!
-
-                      Get ready to swing from vine to vine and roam the untamed wilderness alongside Mowgli, the fearless hero of Rudyard Kipling's legendary tale, "The Jungle Book." In this awesome collection of stories, we're diving deep into the heart of the jungle where excitement, friendship, and discovery are waiting for you around every corner.
-                    </p>
+                    <p>{bookDetail?.book_classification}</p>
                   </div>
                 </div>
               </div>
@@ -392,18 +497,18 @@ function BookSingle() {
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
             {/* <Modal.Title>Book 1</Modal.Title> */}
-            <Modal.Title>Customer reviews</Modal.Title>
+            <Modal.Title>Customer Ratings & Reviews</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalReviewBody">
             <div className="d-flex align-items-center gap-2">
               <h2 className="">
-                {mostRecent.length > 0 &&
+                {ratingArray.length > 0 &&
                   (
-                    mostRecent.reduce((acc, val) => {
+                    ratingArray.reduce((acc, val) => {
                       var objreating =
-                        acc + parseFloat(val.ratingValue.toFixed(1));
+                        acc + parseFloat(val.noOfStars.toFixed(1));
                       return objreating;
-                    }, 0) / mostRecent.length
+                    }, 0) / ratingArray.length
                   ).toFixed(1)}
               </h2>
 
@@ -411,43 +516,72 @@ function BookSingle() {
                 <Rating
                   stop={5}
                   readonly
-                  initialRating={3.5}
-                  emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
-                  fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
+                  initialRating={ratingRatio}
+                  emptySymbol={
+                    <FontAwesomeIcon
+                      icon={regularStar}
+                      size="1x"
+                      className="medium"
+                    />
+                  }
+                  fullSymbol={
+                    <FontAwesomeIcon
+                      icon={solidStar}
+                      size="1x"
+                      className="medium"
+                      style={{ color: "#f5c842" }}
+                    />
+                  }
                 />
               </div>
-              <div className="mx-1">( {mostRecent.length} review)
-              <button className="mx-2 btn btn-primary" onClick={()=>{setShowFilter(prev=>!prev)}}>{!showFilter ? "Show Filters": "Hide Filters"}</button>
+              <div className="mx-1">
+                {/* ( {mostRecent.length} description) */}
+                <button
+                  className="mx-2 btn btn-primary"
+                  onClick={() => {
+                    setShowFilter(!showFilter);
+                  }}
+                >
+                  {!showFilter ? "Show Filters" : "Hide Filters"}
+                </button>
               </div>
             </div>
 
-
-            <div className={`${showFilter ? "d-flex" : "d-none"} flex-wrap mt-3 justify-content-center`}>
+            <div
+              className={`${
+                showFilter ? "d-flex" : "d-none"
+              } flex-wrap mt-3 justify-content-center`}
+            >
               <div>
-                <i class="fa-solid fa-filter fs-3 mx-sm-2 mx-1"></i>
+                <FontAwesomeIcon
+                  icon={faFilter}
+                  className="fs-3 mx-sm-2 mx-1"
+                />
               </div>
               <div>
-                <a
-                  className={`cursor-pointer mx-sm-2 mx-1 ${isReleventOrRecent !== "relevent" ? "flActive" : ""
-                    }`}
+                <button
+                  className={`cursor-pointer mx-sm-2 mx-1 ${
+                    isReleventOrRecent !== "relevent" ? "flActive" : ""
+                  }`}
                   onClick={handleRecent}
                 >
                   Most Recent
-                </a>
+                </button>
               </div>
               <div>
-                <a
-                  className={`cursor-pointer mx-sm-2 mx-1 ${isReleventOrRecent === "relevent" ? "flActive" : ""
-                    }`}
-                  onClick={handlerevelant}
+                <button
+                  className={`cursor-pointer mx-sm-2 mx-1 ${
+                    isReleventOrRecent === "relevent" ? "flActive" : ""
+                  }`}
+                  onClick={handleRelevant}
                 >
                   Most Relevant
-                </a>
+                </button>
               </div>
             </div>
             {isReleventOrRecent === "recent" ? (
               <>
-                {mostRecent?.map((mostRecentData, index) => (
+                {mostRecent.map((mostRecentData, index) => (
                   <div
                     key={index}
                     className="my-2 d-flex align-items-center npmreating1"
@@ -460,19 +594,32 @@ function BookSingle() {
                         <Rating
                           stop={5}
                           readonly
-                          initialRating={mostRecentData.ratingValue}
-                          emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
-                          fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
+                          initialRating={mostRecentData.noOfStars}
+                          emptySymbol={
+                            <FontAwesomeIcon
+                              icon={regularStar}
+                              size="1x"
+                              className="medium"
+                            />
+                          }
+                          fullSymbol={
+                            <FontAwesomeIcon
+                              icon={solidStar}
+                              size="1x"
+                              className="medium"
+                              style={{ color: "#f5c842" }}
+                            />
+                          }
                         />
                       </div>
-                      <h6 className="mt-1">{mostRecentData.review}</h6>
+                      <h6 className="mt-1">{mostRecentData.description}</h6>
                     </div>
                   </div>
                 ))}
               </>
             ) : (
               <>
-                {mostRelevent?.map((mostReleventData, index) => (
+                {mostRelevant?.map((mostRelevantData, index) => (
                   <div
                     key={index}
                     className="my-2 d-flex align-items-center npmreating1"
@@ -485,12 +632,25 @@ function BookSingle() {
                         <Rating
                           stop={5}
                           readonly
-                          initialRating={mostReleventData.ratingValue}
-                          emptySymbol={<FontAwesomeIcon icon={regularStar} size="1x" className="medium" />}
-                          fullSymbol={<FontAwesomeIcon icon={solidStar} size="1x" className="medium" style={{ color: '#f5c842' }} />}
+                          initialRating={mostRelevantData.noOfStars}
+                          emptySymbol={
+                            <FontAwesomeIcon
+                              icon={regularStar}
+                              size="1x"
+                              className="medium"
+                            />
+                          }
+                          fullSymbol={
+                            <FontAwesomeIcon
+                              icon={solidStar}
+                              size="1x"
+                              className="medium"
+                              style={{ color: "#f5c842" }}
+                            />
+                          }
                         />
                       </div>
-                      <h6 className="mt-1">{mostReleventData.review}</h6>
+                      <h6 className="mt-1">{mostRelevantData.description}</h6>
                     </div>
                   </div>
                 ))}

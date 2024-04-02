@@ -5,8 +5,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const lateFeeRoute = require('./routes/lateFeeSystem.js');
 const notificationsRoute = require('./routes/notifications.js');
-const booksRoute = require('./routes/books.js')
-const reservationsRoute = require('./routes/reservations.js')
+const booksRoute = require('./routes/books.js');
+const favoritesRoute = require('./routes/favorite');
 
 // Initialize express app and middleware
 const app = express();
@@ -16,14 +16,15 @@ dotenv.config();
 
 // Load params from .env file
 const PORT = process.env.PORT || 8080;
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || "mongodb+srv://aiwinmanuel652:webgrp13@group13.gs7y5qc.mongodb.net/test?retryWrites=true&w=majority&appName=group13";
 const frontend_url = process.env.FRONTEND_URI;
 
 // Load routes
 app.use('/late-fees', lateFeeRoute);
 app.use('/notify', notificationsRoute);
-app.use('/books', booksRoute); 
-app.use('/reservations', reservationsRoute); 
+app.use('/books', booksRoute);
+app.use('/api/favorites', favoritesRoute);
+
 
 // Connect to mongoDB
 async function connect() {

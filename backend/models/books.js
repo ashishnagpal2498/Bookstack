@@ -1,8 +1,8 @@
 // Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal]
 // Import models
-const Author = require('./author.js');
-const Genre = require('./genre.js');
-const mongoose = require('mongoose');
+const Author = require("./author.js");
+const Genre = require("./genre.js");
+const mongoose = require("mongoose");
 
 const BookSchema = new mongoose.Schema({
     description: {
@@ -44,7 +44,20 @@ const BookSchema = new mongoose.Schema({
     availability : {
         type: Boolean,
         required: true
-    }
+    },
+    rating: [
+      {
+        noOfStars: Number,
+        description: String,
+        time: {
+          type: Date,
+          default: Date.now(),
+        },
+      },
+    ],
+    book_contributors: String,
+    book_targetAudience: String,
+    book_classification: String,
 });
 
-module.exports = mongoose.model('books', BookSchema, 'books');
+module.exports = mongoose.model("books", BookSchema, "books");

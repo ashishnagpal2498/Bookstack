@@ -114,6 +114,14 @@ body {
   height: 40vh;
   overflow-y: scroll;
 }
+
+.resever-btn{
+  background-color: var(--secondary-color) !important; 
+  border: 1px solid var(--secondary-color) !important;
+}
+.aspect-ratio{
+  aspect-ratio: 8/8;
+}
 @media (max-width: 375px) {
   .modalReviewBody {
     height: 30vh;
