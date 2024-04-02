@@ -38,6 +38,8 @@ function CommonNavbar({ user, setUser }) {
                         {user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></>}
                         {user ?
                             <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></>}
+                        {user ?
+                            <Nav.Link href="/manage-reservations">Manage Reservations</Nav.Link> : <></>}
                         {
                             user ?
                                 <NavDropdown className="ms-auto"
