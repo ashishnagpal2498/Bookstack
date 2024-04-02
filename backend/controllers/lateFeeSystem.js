@@ -158,7 +158,7 @@ exports.getActiveLateFeesUsers = async (req, res) => {
                 // console.log(new ObjectID(book.book_id));
                 // console.log(book)
                 if (!user || !book) {
-                    continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or
+                    continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined
                 }
                 const user_name = user.first_name + " " + user.last_name;
                 const user_picture = user.picture;
@@ -179,7 +179,7 @@ exports.getActiveLateFeesUsers = async (req, res) => {
             }
             catch (error) {
                 console.log(error);
-                continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or null or undefined or NaN or Infinity or -Infinity or 0 or false or
+                continue; // skip to next iteration of loop if user name or book is missing or null or empty or undefined
             }
         }
         // check if users array is empty
