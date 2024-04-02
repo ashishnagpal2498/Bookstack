@@ -1,5 +1,4 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-unused-vars */
+// Author - Yogish Honnadevipura Gopalakrishna
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
