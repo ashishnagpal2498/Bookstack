@@ -7,6 +7,7 @@ const lateFeeRoute = require('./routes/lateFeeSystem.js');
 const notificationsRoute = require('./routes/notifications.js');
 const booksRoute = require('./routes/books.js');
 const favoritesRoute = require('./routes/favorite');
+const reservationsRoute = require('./routes/reservations.js');
 
 // Initialize express app and middleware
 const app = express();
@@ -24,6 +25,7 @@ app.use('/late-fees', lateFeeRoute);
 app.use('/notify', notificationsRoute);
 app.use('/books', booksRoute);
 app.use('/api/favorites', favoritesRoute);
+app.use('/reservations', reservationsRoute);
 
 
 // Connect to mongoDB

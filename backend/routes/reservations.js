@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/add', reservationsController.addReservation);
 
 // API to view all reservations
-router.get('/get', reservationsController.getReservations);
+router.get('/all', reservationsController.getAllReservations);
 
 // API to change status of a reservation
 router.put('/update/:reservation_id/:book_id', reservationsController.changeReservationStatus);
