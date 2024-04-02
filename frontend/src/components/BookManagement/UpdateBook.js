@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { backend_url } from '../../util/config.js';
 import { useNavigate, useParams } from "react-router-dom";
+import "../../stylesheets/update-book.css";
 
 function UpdateBook() {
     const { bookId } = useParams();
@@ -45,13 +46,14 @@ function UpdateBook() {
         try {
             const api = await axios.get(`${backend_url}/books/${bookId}`);
             if (api.data) {
-                setBookTitle(api.data.data[0].book_name);
-                setBookGenre(api.data.data[0].genreIds[0]._id);
-                setBookAuthor(api.data.data[0].authorIds[0]._id);
-                setBookAvailability(api.data.data[0].availability === true ? 1 : 2);
-                setContentLink(api.data.data[0].content_link);
-                setBookPrice(api.data.data[0].price);
-                setBookDescription(api.data.data[0].description);
+                const bookDetailsData = api.data.data[0];
+                setBookTitle(bookDetailsData.book_name);
+                setBookGenre(bookDetailsData.genreIds[0]._id);
+                setBookAuthor(bookDetailsData.authorIds[0]._id);
+                setBookAvailability(bookDetailsData.availability === true ? 1 : 2);
+                setContentLink(bookDetailsData.content_link);
+                setBookPrice(bookDetailsData.price);
+                setBookDescription(bookDetailsData.description);
             }
         } catch (error) {
             console.log(error);
@@ -85,10 +87,10 @@ function UpdateBook() {
     };
 
     return (
-        <div className="add-book-div">
-          <Container className="add-form-container">
+        <div className="update-book-div">
+          <Container className="update-form-container">
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <h1>Add Book</h1>
+              <h1>Edit Book</h1>
               <Row>
                 <Col md={6}>
                   <Form.Group controlId="book-title">
@@ -162,7 +164,7 @@ function UpdateBook() {
               </Row>
               <Row>
                 <Col md={12} className="btn-div">
-                  <Button type="submit" className="submit-btn">Update Book</Button>
+                  <Button type="submit" className="submit-btn">Update</Button>
                 </Col>
               </Row>
             </Form>

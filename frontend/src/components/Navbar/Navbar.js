@@ -62,6 +62,9 @@ function CommonNavbar({ user, setUser }) {
                                     <NavDropdown.Item href="/manage-books">
                                         Book Management
                                     </NavDropdown.Item>
+                                    <NavDropdown.Item href="/manage-reservations">
+                                        Manage Reservations
+                                    </NavDropdown.Item>
                                     <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={() => logout()}>

@@ -73,7 +73,7 @@ exports.addReservation = async (req, res) => {
 }
 
 // API to view all reservations
-exports.getReservations = async (req, res) => {
+exports.getAllReservations = async (req, res) => {
 
     try {
         // get all reservations where reservationStatus is NOT_RETURNED
