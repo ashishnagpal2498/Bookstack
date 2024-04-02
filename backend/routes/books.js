@@ -1,4 +1,4 @@
-// Ashish Nagpal
+// Authors - [Ashish Nagpal, Jinal Dave]
 const express = require('express');
 const bookController = require('../controllers/books');
 
