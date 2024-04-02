@@ -1,0 +1,284 @@
+<!-- Author - Abhinav Acharya Tirumala Vinjamuri -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <style>
+      /* html {
+        min-height: 100%;
+      } */
+      body {
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        background-color: #fce8c7;
+      }
+      .body-content {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .top-nav {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background-color: rgba(192, 138, 95, 1);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        gap: 2em;
+        z-index: 5;
+        justify-content: space-between;
+      }
+
+      .nav-options {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(192, 138, 95, 1);
+        /* padding: 20px; */
+        /* transform: translateX(-100%); */
+        transition: transform 0.3s ease-in-out;
+      }
+      .nav-options > ul > li > a {
+        padding-left: 20px;
+      }
+      .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+      }
+      .logo {
+        font-size: 24px;
+      }
+
+      .menu-toggle .bar {
+        width: 30px;
+        height: 4px;
+        background-color: white;
+        border-radius: 2px;
+        margin-bottom: 6px;
+      }
+
+      .menu li a {
+        color: white;
+        text-decoration: none;
+      }
+
+      #content {
+        flex: 1;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .center-text {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .button {
+        display: inline-block;
+        background-color: #c08a5f;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      .button:hover {
+        background-color: #a67248;
+      }
+
+      #footer {
+        text-align: center;
+        color: #666666;
+      }
+
+      .page-footer {
+        background-color: #c08a5f;
+        color: white;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+
+      .col-md-6 {
+        /* flex: 0 0 auto; */
+        width: 50%;
+        max-width: 50%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      h5 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        /* margin-top: 0; */
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+        background-color: transparent;
+      }
+
+      a:hover {
+        color: #f0f0f0;
+        text-decoration: underline;
+      }
+
+      .footer-copyright {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 0.875rem;
+        background-color: rgba(0, 0, 0, 0.03);
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="body-content">
+      <div class="top-nav">
+        <div class="logo">Book Stack</div>
+        <div class="nav-options">
+          <ul class="menu">
+            <li>
+              <a href="https://main--bookstack-csci-group-13.netlify.app/"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="https://main--bookstack-csci-group-13.netlify.app/about"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://main--bookstack-csci-group-13.netlify.app/contactus"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="https://main--bookstack-csci-group-13.netlify.app/faq"
+                >FAQ</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="content">
+        <div class="container">
+          <div class="center-text">
+            <h1>Email Reminder</h1>
+          </div>
+          <div>
+            <p>Dear [User Name],</p>
+            <p>[Reminder Message]</p>
+          </div>
+          <div>
+            <p>
+              If you have any questions, please don't hesitate to contact us.
+            </p>
+            <p class="center-text">
+              <a href="[Learn-more-link]" class="button">Learn More</a>
+            </p>
+          </div>
+          <div id="footer">
+            <p>Thank you for your attention.</p>
+            <p>Sincerely,<br />Team Book Stack</p>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="container-fluid text-center text-md-left">
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <h5>Book Stack</h5>
+              <p>
+                Goldberg Computer Science Building<br />
+                6050 University Ave,<br />
+                Halifax, Nova Scotia<br />
+                NS B3H 1W5
+              </p>
+            </div>
+            <div class="col-md-6 mb-md-0 mb-3">
+              <h5>Useful Links</h5>
+              <ul>
+                <li>
+                  <a href="https://main--bookstack-csci-group-13.netlify.app/"
+                    >Home</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://main--bookstack-csci-group-13.netlify.app/about"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://main--bookstack-csci-group-13.netlify.app/contactus"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://main--bookstack-csci-group-13.netlify.app/faq"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright text-center">
+          © 2024 Copyright: Book Stack Inc.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

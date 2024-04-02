@@ -1,36 +1,47 @@
-.contact-form {
-  padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    max-width: 500px; 
-    margin: 0 auto; 
-  }
-  
-  .contact-form input,
-  .contact-form textarea {
-    padding: 10px;
-    border-radius: 5px; 
-    border: 1px solid #ccc; 
-    outline: none; 
-  }
-  
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    border-color: #007bff; 
-  }
-  
-  .contact-form button {
-    padding: 10px 15px;
-    width: fit-content;
-    border-radius: 25px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    align-self: center;
-  }
-  
-  .contact-form button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
+.contact-us-div {
+  width: 100vw;
+  height: 100vh; 
+  background-color: #D6B498 !important;
+  padding-top: 20px;
+}
+
+.contact-us-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.contact-us-container > h2 {
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  margin-top: 20px;  
+}
+
+
+.modal-footer {
+  justify-content: center !important;
+}
+
+.modal-body {
+  text-align: center !important;
+}
+
+.confirmation-img {
+  height: 50px;
+}
+
+.modal-img-div {
+  text-align: -webkit-center;
+}
+
+.form-close-btn.btn-primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.form-close-btn.btn-primary:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+}

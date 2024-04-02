@@ -1,57 +1,91 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+// Authors - [Arihant Dugar]
+import {React, useState} from 'react'
+// import { useNavigate } from 'react-router-dom';
 import '../../stylesheets/header-nav.css'
 import { localStorageUtil } from '../../util';
+import { NavDropdown, Row, Col, Container, Button, Navbar, Nav } from 'react-bootstrap';
+import profileIcon from '../../assets/profile.png';
+import logo from '../../assets/logo.png';
 
-function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const user = localStorageUtil.getItem('user');
-  const navigate = useNavigate();
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+function CommonNavbar() {
+  const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
+//   const navigate = useNavigate();
 
   // Comment this code (just for testing)
   const login = () => {
-    localStorageUtil.setItem('user', { "name": "xyz", "role": "admin" })
+    const newUser = { name: 'xyz', role: 'admin', user_id:'65f0d24ef3a9f5b258d5487f' };
+    setUser(newUser);
+    localStorageUtil.setItem('user', newUser)
   }
 
   const logout = () => {
+    setUser(null);
     localStorageUtil.removeItem('user');
-    navigate("/login")
+    // navigate("/login")
   }
 
   return (
-    <nav className="top-nav">
-      <div className="logo">Logo</div>
-      <div className={`nav-options ${menuOpen ? 'open' : ''}`}>
-        <ul className="menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/books">Books</a></li>
-          <li><a href="/favorites">Favorites</a></li>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/contactus">Contact Us</a></li>
-          {user ? <li><a href="/adminLateFeeSystemSearch">Late Fee System</a></li> : null}
-        </ul>
-
-        <ul className="menu menu-auth">
-        <li><a href="/faq">FAQ </a></li>
-          {user ? <button onClick={logout}>Logout</button> : <>
-            <button onClick={login}><a href="#">Login</a></button>
-            <li><a href="#">SignUp</a></li>
-          </>}
-          <li className='flex items-center h-full'><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Bell"><g data-name="Layer 2" fill="#ffffff" ><g data-name="bell" fill="#ffffff" ><rect width="24" height="24" opacity="0" fill="#ffffff" ></rect><path d="M20.52 15.21l-1.8-1.81V8.94a6.86 6.86 0 0 0-5.82-6.88 6.74 6.74 0 0 0-7.62 6.67v4.67l-1.8 1.81A1.64 1.64 0 0 0 4.64 18H8v.34A3.84 3.84 0 0 0 12 22a3.84 3.84 0 0 0 4-3.66V18h3.36a1.64 1.64 0 0 0 1.16-2.79zM14 18.34A1.88 1.88 0 0 1 12 20a1.88 1.88 0 0 1-2-1.66V18h4zM5.51 16l1.18-1.18a2 2 0 0 0 .59-1.42V8.73A4.73 4.73 0 0 1 8.9 5.17 4.67 4.67 0 0 1 12.64 4a4.86 4.86 0 0 1 4.08 4.9v4.5a2 2 0 0 0 .58 1.42L18.49 16z" fill="#ffffff"></path></g></g></svg></a></li>
-        </ul>
-        <button className={`cross-btn ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>&#x2715;</button>
-      </div>
-      <div className="menu-toggle" onClick={toggleMenu}>
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
-      </div>
-    </nav>
+    <Navbar expand="lg" className="top-nav" data-bs-theme="light">
+        <Container className='min-w-full px-4'>
+            <Navbar.Brand href="/">
+                <img
+                alt=""
+                src={logo}
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                />{' '}
+                Book Stack
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="container-fluid">
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/books">Books</Nav.Link>
+                <Nav.Link href="/coming-soon">Favorites</Nav.Link>
+                <Nav.Link href="/about">About Us</Nav.Link>
+                <Nav.Link href="/contactus">Contact Us</Nav.Link>
+                <Nav.Link href="/faq">FAQ</Nav.Link>
+                { user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></> }
+                { user ? 
+                    <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></> }
+                {
+                    user ?
+                    <NavDropdown className="ms-auto"
+                        title="Sam" 
+                        id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#coming-soon">
+                            <Row>
+                                <Col xs={3}>
+                                    <img src={profileIcon} alt=""/>
+                                </Col>
+                                <Col xs={6}>
+                                    <Row>Sam</Row>
+                                    <Row>sam@dal.ca</Row>
+                                </Col>
+                            </Row>
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
+                        <NavDropdown.Item href="/manage-books">
+                            Book Management
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item onClick={() => logout()}>
+                            Signout
+                        </NavDropdown.Item>
+                    </NavDropdown> :
+                    <Container className='authentication-buttons'>
+                        <Button className="btn login" onClick={() => login()}>Login</Button>
+                        <Button className="btn signup" variant='outline-primary'>Sign Up</Button>
+                    </Container>
+                }
+            </Nav>
+            </Navbar.Collapse>
+        </Container>
+        </Navbar>
   );
 }
 
-export default Navbar;
+export default CommonNavbar;

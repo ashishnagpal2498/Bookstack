@@ -1,12 +1,14 @@
+// Move this to the MVC architecture
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Favorite = require('./models/Favorite');
+const Favorite = require('./models/favorite');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors());

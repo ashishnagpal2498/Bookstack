@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  box-sizing:border-box
+}
+
+.container-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.container-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container-content-center {
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+}
+.menu {
+  color: black !important;
+  font-weight: 600 !important;
+}
+.login_btn {
+  padding: 10px 40px;
+  border-radius: 50px;
+  color: white;
+  background-color: black;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid Black;
+  transition: all 0.3s;
+  font-weight: 700;
+}
+.login_btn:hover {
+  background-color: #fff;
+  color: black;
+  transition: all 0.3s;
+}
+.book_sec {
+  min-height: 100vh;
+}
+.book_sec .card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.borderRight {
+  border-right: 1px solid black;
+}
+.book-recom {
+  overflow-x: scroll;
+}
+.footer {
+  background-color: black;
+}
+.review .card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  max-height: 350px;
+}
+.about-sec {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #fff;
+}
+.scroll-book::-webkit-scrollbar {
+  width: 0px;
+}
+
+@media (min-width: 767px) {
+  #BookDetails {
+    justify-content: center !important;
+    width: 100vw;
+  }
+
+  #BookDetails .modal-dialog {
+    max-width: 50em;
+  }
+}
+
+/* Recommended===// */
+.npmreatingbook .star-svg {
+  width: 25px;
+}
+.book_recomm {
+  min-height: 83vh;
+}
+/* review Modal  */
+.yellow {
+  color: rgb(228, 157, 3);
+}
+.star-svg {
+  width: 35px;
+}
+.npmreating1 .star-svg {
+  width: 20px;
+  height: 20px;
+}
+.flActive {
+  padding: 8px 16px;
+  background-color: aqua;
+  color: #000;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modalReviewBody {
+  height: 40vh;
+  overflow-y: scroll;
+}
+
+.resever-btn{
+  background-color: var(--secondary-color) !important; 
+  border: 1px solid var(--secondary-color) !important;
+}
+.aspect-ratio{
+  aspect-ratio: 8/8;
+}
+@media (max-width: 375px) {
+  .modalReviewBody {
+    height: 30vh;
+  }
+}

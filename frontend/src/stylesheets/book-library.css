@@ -1,3 +1,5 @@
+/* Ashish Nagpal */
+
 /* Book Background */
 
 .background {
@@ -70,7 +72,7 @@
     padding: 20px 0;
 }
 
-.book-card {
+.book-library-card {
     position: relative;
     min-width: 230px;
     cursor: pointer;
@@ -84,7 +86,7 @@
 
 }
 
-.book-card.loading {
+.book-library-card.loading {
     cursor: default;
     pointer-events: none;
 }
