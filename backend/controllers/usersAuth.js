@@ -157,7 +157,7 @@ exports.updateUserpicture = async (req, res) => {
 exports.sendMailUpdatePassword = async (req, res) => {
     const { email } = req.body;
     const encryptedEmail = encrypt(email);
-    const resetUrl = `http://localhost:3000/resetpassword?data=${encryptedEmail}`;
+    const resetUrl = `${process.env.FRONTEND_URI}resetpassword?data=${encryptedEmail}`;
 
     // Email content
     const htmlContent = htmlTemplate.replace('[User Name]', email)
