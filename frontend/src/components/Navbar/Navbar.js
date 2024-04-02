@@ -1,6 +1,5 @@
 // Authors - [Arihant Dugar]
 import { React } from 'react'
-import { useNavigate } from 'react-router-dom';
 import '../../stylesheets/header-nav.css'
 import { localStorageUtil } from '../../util';
 import { NavDropdown, Row, Col, Container, Button, Navbar, Nav } from 'react-bootstrap';
@@ -8,13 +7,11 @@ import profileIcon from '../../assets/profile.png';
 import logo from '../../assets/logo.png';
 
 function CommonNavbar({ user, setUser }) {
-    //   const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
-    //   const navigate = useNavigate();
 
-      const logout = () => {
+    const logout = () => {
         setUser(null);
         localStorageUtil.removeItem('user');
-      }
+    }
 
     return (
         <Navbar expand="lg" className="top-nav" data-bs-theme="light">
@@ -41,10 +38,12 @@ function CommonNavbar({ user, setUser }) {
                         {user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></>}
                         {user ?
                             <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></>}
+                        {user ?
+                            <Nav.Link href="/manage-reservations">Manage Reservations</Nav.Link> : <></>}
                         {
                             user ?
                                 <NavDropdown className="ms-auto"
-                                    title="Sam"
+                                    title={user.name}
                                     id="basic-nav-dropdown">
                                     <NavDropdown.Item href="#coming-soon">
                                         <Row>
@@ -52,8 +51,8 @@ function CommonNavbar({ user, setUser }) {
                                                 <img src={profileIcon} alt="" />
                                             </Col>
                                             <Col xs={6}>
-                                                <Row>Sam</Row>
-                                                <Row>sam@dal.ca</Row>
+                                                <Row>{user.name}</Row>
+                                                <Row>{user.email}</Row>
                                             </Col>
                                         </Row>
                                     </NavDropdown.Item>
@@ -61,6 +60,9 @@ function CommonNavbar({ user, setUser }) {
                                     <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
                                     <NavDropdown.Item href="/manage-books">
                                         Book Management
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/manage-reservations">
+                                        Manage Reservations
                                     </NavDropdown.Item>
                                     <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
                                     <NavDropdown.Divider />

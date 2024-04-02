@@ -1,3 +1,4 @@
+// Author - Arihant Dugar
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import uploadIcon from "../../assets/upload-icon.png";
 import "../../stylesheets/add-book.css";
@@ -80,7 +81,7 @@ function AddBook() {
                   book_name: bookTitle,
                   image_url: url,
                   price: bookPrice,
-                  availability: bookAvailability
+                  availability: bookAvailability === 1 ? true : false,
                 };
                 axios.post(`${backend_url}/books/add`, bookData).then((response) => {
                   navigate('/manage-books');
@@ -128,7 +129,7 @@ function AddBook() {
         }
       }
       setValidated(true);
-    };
+  };
 
   return (
     <div className="add-book-div">

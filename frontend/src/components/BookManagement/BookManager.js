@@ -1,12 +1,15 @@
+// Author - Arihant Dugar
 import "../../stylesheets/book-manager.css";
 import { Modal, Card, Button, Row, Col, Container, Form } from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { backend_url } from '../../util/config';
+import {useNavigate} from "react-router-dom";
 
 function BookCard({ book, author, onDelete }) {
 
     const [showModal, setShowModal] = useState(false);
+    let navigate = useNavigate();
 
     const handleDelete = () => {
         setShowModal(true);
@@ -17,6 +20,10 @@ function BookCard({ book, author, onDelete }) {
         setShowModal(false);
     };
 
+    const handleEdit = () => {
+        navigate('/update-book/'+ book._id);
+    };
+
     const handleClose = () => setShowModal(false);
 
     return (
@@ -24,14 +31,14 @@ function BookCard({ book, author, onDelete }) {
             <Card id={"book-"+book._id} className="book-cards">
                 <Card.Body className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
-                    <img src={book.image_url} alt={book.book_name} className="mr-3" style={{ maxWidth: '60px' }} />
+                    <img src={book.image_url} alt={book.book_name} className="mr-3" style={{ maxWidth: '60px', maxHeight: '65px' }} />
                         <div>
                             <Card.Title>{book.book_name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-end">
-                        <Button className="me-2 edit-btn">Edit</Button>
+                    <div>
+                        <Button className="me-2 edit-btn" onClick={handleEdit}>Edit</Button>
                         <Button variant="danger" onClick={handleDelete}>Delete</Button>
                     </div>
                 </Card.Body>

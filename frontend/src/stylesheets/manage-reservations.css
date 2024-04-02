@@ -1,20 +1,20 @@
 /* Author - Arihant Dugar */
 
-.book-manager-div {
+.manage-reservations-div {
     width: 100vw;
     height: 100vh; 
     background-color: #D6B498 !important;
 }
 
-.book-manager-div .container {
+.manage-reservations-div .container {
     padding-top: 20px;
 }
 
-.book-cards {
+.reservation-cards {
     margin: 10px;
 }
 
-.book-cards img {
+.reservation-cards img {
     margin-right: 10px;
 }
 
@@ -30,7 +30,7 @@
     border: none !important;
 }
 
-#delete-confirmation .modal-title {
+#return-confirmation .modal-title {
     color: var(--primary-color);
 }
 
@@ -44,12 +44,12 @@
     border-color: var(--secondary-color);
 }
 
-.edit-btn.btn-primary {
+.return-btn.btn-primary {
     background: var(--primary-color);
     border-color: var(--primary-color);
 }
 
-.edit-btn.btn-primary:hover {
+.return-btn.btn-primary:hover {
     background: var(--secondary-color);
     border-color: var(--secondary-color);
 }
@@ -64,12 +64,12 @@
     border-color: var(--secondary-color);
 }
 
-.delete-btn.btn-primary {
+.return-btn.btn-primary {
     background: var(--primary-color);
     border-color: var(--primary-color);
 }
 
-.delete-btn.btn-primary:hover {
+.return-btn.btn-primary:hover {
     background: var(--secondary-color);
     border-color: var(--secondary-color);
 }

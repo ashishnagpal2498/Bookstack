@@ -55,10 +55,10 @@ const App = () => {
             <Route path="/profile" element={isAuthenticated() ? (<Profile />): <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/forgetps" element={<ForgetPasswordEmail />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
-            <Route path="/manage-books" element={<BookManager />} />
-            <Route path="/add-book" element={<AddBook />} />
-            <Route path="/update-book/:bookId" element={<UpdateBook />} />
-            <Route path="/manage-reservations" element={<ManageBookReservations />} />
+            <Route path="/manage-books" element={(isAuthenticated() && isAdmin()) ? <BookManager /> : <Navigate to="/login" /*replace="true"*/ />} />
+            <Route path="/add-book" element={(isAuthenticated() && isAdmin()) ? <AddBook /> : <Navigate to="/login" /*replace="true"*/ />} />
+            <Route path="/update-book/:bookId" element={(isAuthenticated() && isAdmin()) ? <UpdateBook /> : <Navigate to="/login" /*replace="true"*/ />} />
+            <Route path="/manage-reservations" element={(isAuthenticated() && isAdmin()) ? <ManageBookReservations />: <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/coming-soon" element={<ComingSoon />} />
           </Routes>
         </Router>
