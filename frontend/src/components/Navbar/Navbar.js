@@ -44,7 +44,7 @@ function CommonNavbar({ user, setUser }) {
                         {
                             user ?
                                 <NavDropdown className="ms-auto"
-                                    title="Sam"
+                                    title={user.name}
                                     id="basic-nav-dropdown">
                                     <NavDropdown.Item href="#coming-soon">
                                         <Row>
@@ -52,8 +52,8 @@ function CommonNavbar({ user, setUser }) {
                                                 <img src={profileIcon} alt="" />
                                             </Col>
                                             <Col xs={6}>
-                                                <Row>Sam</Row>
-                                                <Row>sam@dal.ca</Row>
+                                                <Row>{user.name}</Row>
+                                                <Row>{user.email}</Row>
                                             </Col>
                                         </Row>
                                     </NavDropdown.Item>

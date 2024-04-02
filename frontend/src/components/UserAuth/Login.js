@@ -39,7 +39,7 @@ function Login({user, setUser}) {
     const resp = await axios.post(`${backend_url}/users/login`, payload)
     console.log(resp);
     if (resp.data.message === "Login Successful") {
-      const newUser = { name: 'xyz', role: resp.data.user.role, user_id:resp.data.user._id };
+      const newUser = { name: resp.data.user.first_name + ' ' + resp.data.user.last_name, email: resp.data.user.email, role: resp.data.user.role, user_id:resp.data.user._id };
       setUser(newUser);
       localStorageUtil.setItem('user', newUser);
       // localStorage.setItem('id', resp.data.user._id);
