@@ -3,10 +3,12 @@ import { Modal, Card, Button, Row, Col, Container, Form } from 'react-bootstrap'
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { backend_url } from '../../util/config';
+import {useNavigate} from "react-router-dom";
 
 function BookCard({ book, author, onDelete }) {
 
     const [showModal, setShowModal] = useState(false);
+    let navigate = useNavigate();
 
     const handleDelete = () => {
         setShowModal(true);
@@ -15,6 +17,10 @@ function BookCard({ book, author, onDelete }) {
     const confirmDelete = () => {
         onDelete(book._id);
         setShowModal(false);
+    };
+
+    const handleEdit = () => {
+        navigate('/update-book/'+ book._id);
     };
 
     const handleClose = () => setShowModal(false);
@@ -31,7 +37,7 @@ function BookCard({ book, author, onDelete }) {
                         </div>
                     </div>
                     <div className="d-flex justify-content-end">
-                        <Button className="me-2 edit-btn">Edit</Button>
+                        <Button className="me-2 edit-btn" onClick={handleEdit}>Edit</Button>
                         <Button variant="danger" onClick={handleDelete}>Delete</Button>
                     </div>
                 </Card.Body>
