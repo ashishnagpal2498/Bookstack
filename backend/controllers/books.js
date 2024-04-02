@@ -1,4 +1,4 @@
-// Ashish Nagpal
+// Authors : [ Ashish Nagpal, Arihant Dugar ]
 const Author = require('../models/author');
 const Book = require('../models/books');
 const Genre = require('../models/genre');

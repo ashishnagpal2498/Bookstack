@@ -1,3 +1,4 @@
+// Author - Arihant Dugar
 import "../../stylesheets/manage-reservations.css";
 import { Modal, Card, Button, Row, Col, Container, Form, Alert } from 'react-bootstrap';
 import { useEffect, useState } from "react";

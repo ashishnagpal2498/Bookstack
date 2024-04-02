@@ -1,6 +1,5 @@
 // Authors - [Arihant Dugar]
 import { React } from 'react'
-import { useNavigate } from 'react-router-dom';
 import '../../stylesheets/header-nav.css'
 import { localStorageUtil } from '../../util';
 import { NavDropdown, Row, Col, Container, Button, Navbar, Nav } from 'react-bootstrap';
@@ -8,8 +7,6 @@ import profileIcon from '../../assets/profile.png';
 import logo from '../../assets/logo.png';
 
 function CommonNavbar({ user, setUser }) {
-    //   const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
-    //   const navigate = useNavigate();
 
     const logout = () => {
         setUser(null);
