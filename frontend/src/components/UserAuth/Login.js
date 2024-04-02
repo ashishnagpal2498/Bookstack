@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Book from '../../assets/Book.png';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { backend_url } from "../../util/config";
 function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -10,7 +12,7 @@ function Login() {
     password: '',
   });
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,30 +20,31 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+ 
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      Object.values(validationErrors).forEach(error => {
-        window.alert(error);
-      });
+      // setErrors(validationErrors);
+      const errorMessage = Object.values(validationErrors).join('\n');
+      Swal.fire(errorMessage);
       return;
     }
     const payload = {
       "email": formData.email,
       "password": formData.password
     }
-    // const resp  = await axios.post("http://localhost:3001/user/login", payload)
-    // if(resp.data.message === "Login Successful"){
-    //   // set cookies after discussion
-    // alert("Login Successful");
-    // navigate("/profile");
-    // }
-    // else{
-    //   alert(resp.data.message);
-    // }
+    console.log(payload);
+    const resp  = await axios.post(`${backend_url}/users/login`, payload)
+    console.log(resp);
+    if(resp.data.message === "Login Successful"){
+    localStorage.setItem('id', resp.data.user._id);
+    localStorage.setItem('email', resp.data.user.email);
+    localStorage.setItem('role', resp.data.user.role);
+    // need to change the navigation based on the role.
     navigate("/profile");
-
-    
+    }
+    else{
+      Swal.fire(resp.data.message);
+    }
     setFormData({
       email: '',
       password: '',
@@ -53,12 +56,12 @@ function Login() {
     const errors = {};
 
     if (!/\S+@\S+\.\S+/.test(data.email)) {
-      errors.email = 'Invalid Email format.';
+      errors.email = '!.Invalid Email format.';
   
     }
 
     if (!/^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]{8,}$/.test(data.password)) {
-      errors.password = 'Password should be at least 8 characters and accept alpha-numeric and special characters.';
+      errors.password = '!.Password does not match the format.';
       
     }
 
@@ -66,23 +69,23 @@ function Login() {
   };
   return (
     <div style={{backgroundColor:"#F3EDC8"}}>
-    <div className="main" style={{background:`url(${Book})`, backgroundSize:'75% auto', width:'100wh', height:'100vh',backgroundRepeat:'no-repeat'}}> 
-    <div className="Card-msg">
+    <div className="bg-cover w-screen h-screen bg-fixed bg-no-repeat scale-90 -mt-4 ml-56" style={{background:`url(${Book})`, backgroundSize:'75% auto', width:'100wh', height:'100vh',backgroundRepeat:'no-repeat'}}> 
+    <div className="w-72 h-80 mt-44 rounded-lg justify-center items-center flex flex-col shadow duration-500 float-left [margin-left:195px] scale-110 font-bold text-2xl">
       <h2>Welcome to BookStack</h2>
     </div>
-    <div className="Card-reg">
+    <div className="w-72 [height:26rem] mt-36 rounded-lg justify-center items-center flex flex-col shadow duration-500 float-left [margin-left:150px] scale-110 ">
       <h2 className='font-bold text-xl'>Login</h2>
       <form onSubmit={handleSubmit}>
 
         <div>
           {/* <label>Email:</label> */}
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Email' className='textbox' />
+          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder='Email' className='mt-4 rounded-lg [padding:3px]' />
           {/* {errors.email && <span>{errors.email}</span>} */}
         </div>
 
         <div>
           {/* <label>Password:</label> */}
-          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder='Password' className='textbox' />
+          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder='Password' className='mt-4 rounded-lg [padding:3px]' />
           {/* {errors.password && <span>{errors.password}</span>} */}
         </div>
 

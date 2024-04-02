@@ -1,25 +1,41 @@
 import React from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { backend_url } from "../../util/config";
 
 export function ForgetPasswordEmail() {
+    const validateForm = (ps) => {
+        const errors = {};
+    
+        if (!/\S+@\S+\.\S+/.test(ps)) {
+          errors.emmail = 'email does not match the format';
+      
+        }
+        return errors;
+      };
     const handlereset = () => {
+         const validationResults= validateForm(document.getElementById("mail").value)
+         if (Object.keys(validationResults).length > 0) {
+            const errorMessage = Object.values(validationResults).join('\n');
+            Swal.fire(errorMessage);
+            return;
+          }
         const payload = {
             "email": document.getElementById("mail").value
         };
-        // axios.post("http://localhost:3001/forgot-password", payload)
-        //     .then((resp) => {
-        //         console.log(resp);
-        //         if (resp.data.message === "Reset email sent successfully") {
-        //             Swal.fire("Recovery mail has been sent check your Email");
-        //         } else {
-        //             Swal.fire("Specified mail does not exist in our database");
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //         Swal.fire("Error while sending mail: ", error);
-        //     });
+        axios.post(`${backend_url}/users/resetlink`, payload)
+            .then((resp) => {
+                console.log(resp);
+                if (resp.data.message === "Reset email sent successfully") {
+                    Swal.fire("Recovery mail has been sent check your Email");
+                } else {
+                    Swal.fire("Specified mail does not exist in our database");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire("Error while sending mail: ", error);
+            });
         Swal.fire("Reset email sent successfully")
     };
 
