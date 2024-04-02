@@ -23,7 +23,6 @@ const frontend_url = process.env.FRONTEND_URI;
 app.use('/late-fees', lateFeeRoute);
 app.use('/notify', notificationsRoute);
 app.use('/books', booksRoute);
-app.use('/favorites', booksRoute); 
 app.use('/api/favorites', favoritesRoute);
 
 
