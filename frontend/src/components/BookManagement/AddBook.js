@@ -80,7 +80,7 @@ function AddBook() {
                   book_name: bookTitle,
                   image_url: url,
                   price: bookPrice,
-                  availability: bookAvailability
+                  availability: bookAvailability === 1 ? true : false,
                 };
                 axios.post(`${backend_url}/books/add`, bookData).then((response) => {
                   navigate('/manage-books');
@@ -128,7 +128,7 @@ function AddBook() {
         }
       }
       setValidated(true);
-    };
+  };
 
   return (
     <div className="add-book-div">
