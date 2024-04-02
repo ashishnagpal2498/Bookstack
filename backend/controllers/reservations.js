@@ -1,3 +1,4 @@
+// Authors: [Abhinav Acharya Tirumala Vinjamuri, Arihant Dugar]
 const reservationsSchema = require('../models/reservations');
 const usersSchema = require('../models/users');
 const booksSchema = require('../models/books');

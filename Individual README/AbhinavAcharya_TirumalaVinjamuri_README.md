@@ -23,6 +23,26 @@ This is the directory that contains a stable deployement version of the applicat
 2. Frontend Deployment Link - Netlify: https://bookstack-csci-group-13.netlify.app/
 3. Backend Deployment Link - Render: https://bookstack-grp13.onrender.com
 
+## Files Authored
+
+- backend/controllers/lateFeeSystem.js
+- backend/controllers/notifications.js
+- backend/controllers/reservations.js
+- backend/routes/lateFeeSystem.js
+- backend/routes/notifications.js
+- backend/routes/reservations.js
+- backend/models/lateFeeSystem.js
+- backend/models/reservations.js
+- backend/models/books.js
+- backend/models/users.js
+- backend/util/mailService.js
+- backend/util/transporter.js
+- backend/email_templates/*
+- frontend/src/components/LateFeeSystem/*
+- frontend/src/services/LateFeeSystem/*
+- frontend/src/services/Notifications/*
+- frontend/src/util/*
+
 ## Late Fee System
 
 Late Fee System is essentially supposed to penalize users who borrowed books from the library, but failed to return them before the due date. We have defined 2 tasks in this feature which will be talked about in the section below: Late fees can deny users from borrowing/ reserving books until they are cleared. The tasks for this feature involve functionalities for both readers and administrators. Readers are required to view the costs associated with each book that has not been returned, and raise a dispute if they find a charge unnacceptable. On the other hand, administrators have the responsibility to identify users who have incurred late fees. Once it has been confirmed that the readers have cleared these fees, the administrators should be able to clear them from the system, or notify them if they haven't cleared the fee yet. These tasks ensure a smooth operation of the book rental service and maintain a fair system for all users.
