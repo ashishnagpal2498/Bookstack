@@ -1,16 +1,38 @@
-// Authors - [Abhinav Acharya Tirumala Vinjamuri]
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
-    email: String,
-    first_name: String,
-    last_name: String,
-    password: String,
-    phone: String,
-    picture: String,
-    role: String,
-});
+const userSchema = new Schema({
+    first_name: {
+        type: String,
+        required: true
+    },
+    last_name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    picture: {
+        type: String
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user'
+    }
+},{ collection: 'users'});
 
-const users = mongoose.model('users', userSchema);
+const users = mongoose.model('User', userSchema);
 
 module.exports = users;
