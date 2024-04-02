@@ -31,19 +31,18 @@ function ReservationCard({ reservation, onStatusUpdate }) {
             const response = await axios.post(`${backend_url}/late-fees/create`, reservationData);
             if (response.status === 200) {
                 console.log('Late fees applied successfully:', response.data);
-                setShowSuccessMessage(true, () => {
-                    window.setTimeout(() => {
-                      setShowSuccessMessage(false);
-                    }, 3000);
-                });
+                setShowSuccessMessage(true);
+
+                window.setTimeout(() => {
+                    setShowSuccessMessage(false);
+                }, 3000);
                 
             } else {
                 console.error('Failed to apply late fees:', response.data);
-                setShowErrorMessage(true, () => {
-                    window.setTimeout(() => {
-                      setShowErrorMessage(false);
-                    }, 3000);
-                });
+                setShowErrorMessage(true);
+                window.setTimeout(() => {
+                    setShowErrorMessage(false);
+                }, 3000);
             }
         } catch (error) {
             console.error('Error applying late fees:', error.message);

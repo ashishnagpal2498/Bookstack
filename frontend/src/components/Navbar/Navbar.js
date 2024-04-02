@@ -11,74 +11,75 @@ function CommonNavbar({ user, setUser }) {
     //   const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
     //   const navigate = useNavigate();
 
-      const logout = () => {
+    const logout = () => {
         setUser(null);
         localStorageUtil.removeItem('user');
-      }
+    }
 
-  return (
-    <Navbar expand="lg" className="top-nav" data-bs-theme="light">
-        <Container className='min-w-full px-4'>
-            <Navbar.Brand href="/">
-                <img
-                alt=""
-                src={logo}
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-                />{' '}
-                Book Stack
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="container-fluid">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/books">Books</Nav.Link>
-                <Nav.Link href="/coming-soon">Favorites</Nav.Link>
-                <Nav.Link href="/about">About Us</Nav.Link>
-                <Nav.Link href="/contactus">Contact Us</Nav.Link>
-                <Nav.Link href="/faq">FAQ</Nav.Link>
-                { user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></> }
-                { user ? 
-                    <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></> }
-                {
-                    user ?
-                    <NavDropdown className="ms-auto"
-                        title="Sam" 
-                        id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#coming-soon">
-                            <Row>
-                                <Col xs={3}>
-                                    <img src={profileIcon} alt=""/>
-                                </Col>
-                                <Col xs={6}>
-                                    <Row>Sam</Row>
-                                    <Row>sam@dal.ca</Row>
-                                </Col>
-                            </Row>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
-                        <NavDropdown.Item href="/manage-books">
-                            Book Management
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/manage-reservations">
-                            Manage Reservations
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={() => logout()}>
-                            Signout
-                        </NavDropdown.Item>
-                    </NavDropdown> :
-                    <Container className='authentication-buttons'>
-                        <Button className="btn login" onClick={() => login()}>Login</Button>
-                        <Button className="btn signup" variant='outline-primary'>Sign Up</Button>
-                    </Container>
-                }
-            </Nav>
-            </Navbar.Collapse>
-        </Container>
+    return (
+        <Navbar expand="lg" className="top-nav" data-bs-theme="light">
+            <Container className='min-w-full px-4'>
+                <Navbar.Brand href="/">
+                    <img
+                        alt=""
+                        src={logo}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                    />{' '}
+                    Book Stack
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="container-fluid">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/books">Books</Nav.Link>
+                        <Nav.Link href="/coming-soon">Favorites</Nav.Link>
+                        <Nav.Link href="/about">About Us</Nav.Link>
+                        <Nav.Link href="/contactus">Contact Us</Nav.Link>
+                        <Nav.Link href="/faq">FAQ</Nav.Link>
+                        {user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></>}
+                        {user ?
+                            <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></>}
+                        {
+                            user ?
+                                <NavDropdown className="ms-auto"
+                                    title="Sam"
+                                    id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="#coming-soon">
+                                        <Row>
+                                            <Col xs={3}>
+                                                <img src={profileIcon} alt="" />
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Row>Sam</Row>
+                                                <Row>sam@dal.ca</Row>
+                                            </Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
+                                    <NavDropdown.Item href="/manage-books">
+                                        Book Management
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/manage-reservations">
+                                        Manage Reservations
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item onClick={() => logout()}>
+                                        Signout
+                                    </NavDropdown.Item>
+                                </NavDropdown> :
+                                <Container className='authentication-buttons'>
+                                    {/* < href="/faq">FAQ</Nav.Link> */}
+                                    <Button href="/login" className="btn login" >Login</Button>
+                                    <Button href="/register" className="btn signup" variant='outline-primary'>Sign Up</Button>
+                                </Container>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
         </Navbar>
     );
 }
