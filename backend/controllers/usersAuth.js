@@ -9,6 +9,15 @@ const cloud = require('./../util/cloudinaryService.js');
 const path = require('path');
 const key = '0123456789abcdef0123456789abcdef'; // 32 characters (256 bits)
 const iv = 'abcdef0123456789';  // Initialization vector
+var sendCustomMail = require('../util/mailService.js'); // mail service
+const dotenv = require('dotenv');
+const fs = require('fs');
+dotenv.config();
+
+const htmlTemplate = fs.readFileSync('./email_templates/html_content.html', 'utf8');
+
+const bookStackEmail = process.env.ADMIN_EMAIL;
+const frontendUrl = process.env.FRONTEND_URI;
 
 // Decrypt data
 function decrypt(encryptedText) {
@@ -40,7 +49,7 @@ exports.createNewUser = async (req, res) => {
     const newUser = new User({ first_name, last_name, email, password, phone, picture, role });
     try {
         await newUser.save();
-        res.status(200).json({message: "user added successfully"});
+        res.status(200).json({ message: "user added successfully" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server Error' });
@@ -65,11 +74,11 @@ exports.loginUser = async (req, res) => {
         console.error(err);
         res.status(500).json({ message: 'Server Error' });
     }
-    
+
 }
 
-exports.deleteUser =  async (req, res) => {
-    const {email} = req.body;
+exports.deleteUser = async (req, res) => {
+    const { email } = req.body;
     console.log(req);
 
     try {
@@ -111,68 +120,61 @@ exports.updateUser = async (req, res) => {
 
 exports.updateUserpicture = async (req, res) => {
 
-        const { email } = req.body;
-        // console.log(req);
-        console.log(req.body);
-        const pathPicture = req.file;
-        // console.log(pathPicture);
-        if(!pathPicture) {
-            res.status(409).json({message: "Image path not Found in backend"});
-        }
-        
-        const imagePath = path.join(__dirname, '..', 'public', 'temp', pathPicture.filename);
-        console.log(imagePath);
-        const pictpath = await cloud.uploadOnCloudinary(imagePath);
-        // console.log(pictpath);
+    const { email } = req.body;
+    // console.log(req);
+    console.log(req.body);
+    const pathPicture = req.file;
+    // console.log(pathPicture);
+    if (!pathPicture) {
+        res.status(409).json({ message: "Image path not Found in backend" });
+    }
 
-        try {
-            const updatedUser = await User.findOneAndUpdate(
-                { email },
-                { $set: { picture: pictpath.url } },
-                { new: true }
-            );
-            if (!updatedUser) {
-                return res.status(200).json({ message: 'User not found' });
-            }
-            res.json({ message: 'Picture updated successfully', user: updatedUser });
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({ message: 'Server Error' });
+    const imagePath = path.join(__dirname, '..', 'public', 'temp', pathPicture.filename);
+    console.log(imagePath);
+    const pictpath = await cloud.uploadOnCloudinary(imagePath);
+    // console.log(pictpath);
+
+    try {
+        const updatedUser = await User.findOneAndUpdate(
+            { email },
+            { $set: { picture: pictpath.url } },
+            { new: true }
+        );
+        if (!updatedUser) {
+            return res.status(200).json({ message: 'User not found' });
         }
-    
+        res.json({ message: 'Picture updated successfully', user: updatedUser });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+    }
+
 };
 
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'asdfzxcvbat@gmail.com', 
-        pass: 'zzxifjytfaepgswr'
-    }
-});
-
-exports.sendMailUpdatePassword =  async (req, res) => {
+exports.sendMailUpdatePassword = async (req, res) => {
     const { email } = req.body;
     const encryptedEmail = encrypt(email);
     const resetUrl = `http://localhost:3000/resetpassword?data=${encryptedEmail}`;
 
     // Email content
-    const mailOptions = {
-        from: 'asdfzxcvbat@gmail.com',
-        to: email,
-        subject: 'Reset Your Password',
-        text: `Greetings from BookStack! Below will be your link to reset the password\n\nClick on the following link to reset your password: ${resetUrl}`
-    };
+    const htmlContent = htmlTemplate.replace('[User Name]', email)
+        .replace('[Reminder Message]', 'Greetings from BookStack! Below will be your link to reset the password\n\nClick on the following link to reset your password: ' + resetUrl)
+        .replace('[Learn-more-link]', frontendUrl + 'about/');
 
-    // Send email
-    transporter.sendMail(mailOptions, (error, info) => {
+    sendCustomMail(fromEmail = bookStackEmail, toEmail = email, subject = "Reset Your Password", html = htmlContent, function (error, info) {
         if (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Failed to send reset email' });
-        } else {
-            // console.log('Email sent: ' + info.response);
-            res.status(200).json({ message: 'Reset email sent successfully' });
+            console.log('Error:', error);
+            return res.status(500).json({
+                message: error,
+                status: false
+            });
         }
+        // console.log('Email sent:');
+        return res.status(200).json({
+            message: "Reset email sent successfully",
+            status: true
+        });
     });
 }
 

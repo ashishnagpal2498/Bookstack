@@ -126,7 +126,7 @@ function Profile() {
   }
 
   return (
-    <div className="flex justify-center items-center h-full color bg-yellow-100 p-4">
+    <div className="flex justify-center items-center h-full bg-aboutUsBrown p-4">
       <div className="bg-white p-6 rounded shadow-2xl container-small">
         <div className=" mb-4 gap-2 flex flex-col justify-center align-items-center">
           <h1 className="text-2xl font-bold text-brown-900">Your Profile</h1>

@@ -26,13 +26,15 @@ import AddBook from './components/BookManagement/AddBook.js';
 import BookManager from './components/BookManagement/BookManager.js';
 import UpdateBook from './components/BookManagement/UpdateBook.js';
 import ManageBookReservations from './components/BookManagement/ManageBookReservations.js';
+import {localStorageUtil} from './util';
+import { useState } from 'react';
 
 const App = () => {
-
+  const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
   return (
     <div className="App flex flex-column h-screen">
       <div>
-        <Navbar />
+        <Navbar user={user} setUser={setUser}/>
       </div>
       <div className='flex-1'>
         <ToastContainer />
@@ -48,9 +50,9 @@ const App = () => {
             <Route path="/latefee/details" element={(isAuthenticated() && isAdmin()) ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={isAuthenticated() ? (<Profile />): <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/forgetps" element={<ForgetPasswordEmail />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/manage-books" element={<BookManager />} />
