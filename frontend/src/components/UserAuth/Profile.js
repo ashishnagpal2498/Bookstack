@@ -4,6 +4,8 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { backend_url } from "../../util/config";
+import { localStorageUtil } from "../../util";
+
 function Profile() {
   const [user, setUser] = useState(null);
   const [editing, setEditing] = useState(false);
@@ -16,7 +18,7 @@ function Profile() {
   useEffect(() => {
 
     const payload = {
-      email: localStorage.getItem('email'),
+      email: localStorageUtil.getItem('user')?.email,
     };
     axios
       .post(`${backend_url}/users/getuserinfo`, payload)
@@ -62,11 +64,11 @@ function Profile() {
       Swal.fire(errorMessage);
       return;
     }
-    const email = localStorage.getItem('email')
+    const email = localStorageUtil.getItem('user')?.email
     const payload = {
         first_name : firstName,
         last_name : lastName,
-        email : localStorage.getItem('email'),
+        email : localStorageUtil.getItem('user')?.email,
         phone: phone
     }
     // Update user data
@@ -88,7 +90,7 @@ function Profile() {
       return;
     }
     const formData = new FormData();
-    formData.append("email", localStorage.getItem('email'));
+    formData.append("email", localStorageUtil.getItem('user')?.email);
     formData.append("picture", file);
     console.log(file);
 
@@ -105,7 +107,7 @@ function Profile() {
 
   const handleDelete = async (e) => {
     const payload = {
-        "email": localStorage.getItem('email')
+        "email": localStorageUtil.getItem('user')?.email
     }
     const confirmDelete = window.confirm("Are you sure you want to delete your account?");
     if (confirmDelete) {
