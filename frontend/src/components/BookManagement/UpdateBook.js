@@ -41,6 +41,7 @@ function UpdateBook() {
             .catch(error => {
                 console.error("Error fetching genres and authors:", error);
             });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getBookDetail = async () => {
