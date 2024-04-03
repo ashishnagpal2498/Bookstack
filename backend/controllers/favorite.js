@@ -1,3 +1,4 @@
+//Author Aiwin Charalil Manuel
 const Favorite = require('../models/favorite');
 
 exports.checkFavorite = async (req, res) => {
