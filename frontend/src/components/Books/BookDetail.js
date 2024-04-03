@@ -194,6 +194,7 @@ function BookSingle() {
                       </div>
                       <a className="ps-3" href="#" onClick={handleShow}>
                         View Rating and Review
+                        {loggedInUserDetails && <HeartButton username={loggedInUserDetails?.user_id} bookName={bookDetail?.book_name} />}
                       </a>
                     </div>
                     <p>{bookDetail?.description}</p>
@@ -268,12 +269,8 @@ function BookSingle() {
                 {}
                 <div className="col-md-9 col-sm-8 col-12">
                   <h5>Name: {bookDetail?.book_name}</h5>
-                  {bookDetail?.authorIds.map((author,index) => (
-                    <div key={index}>
+                  {bookDetail?.authorIds.map((author) => (
                       <h6>Author: {author?.name}</h6>
-                      {/* Integrate HeartButton here */}
-                      {logedInUserDetails && <HeartButton username={logedInUserDetails?.user_id} bookName={bookDetail?.book_name} />}
-                    </div>
                   ))}
 
                   <a
