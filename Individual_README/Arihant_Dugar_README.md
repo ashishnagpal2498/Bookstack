@@ -44,6 +44,15 @@ This directory houses a stable deployment version of our application. The fronte
 - backend/routes/reservations.js
 - backend/models/books.js
 
+## Login Details for testing
+
+### Admin login credentials
+- Username: abhinava465@gmail.com
+- Password: securepassword
+
+### Reader login credentials
+- Username: ab806657@dal.ca
+- Password: pass@1234
 
 ## Book Management
 
