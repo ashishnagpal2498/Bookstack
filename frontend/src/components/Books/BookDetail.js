@@ -200,6 +200,7 @@ function BookSingle() {
                       </a>
                     </div>
                     <p>{bookDetail?.description}</p>
+                    {logedInUserDetails && <HeartButton username={logedInUserDetails?.user_id} bookName={bookDetail?.book_name} />}
                     {}
                   </div>
                 </div>
@@ -271,12 +272,10 @@ function BookSingle() {
                 {}
                 <div className="col-md-9 col-sm-8 col-12">
                   <h5>Name: {bookDetail?.book_name}</h5>
-                  {bookDetail?.authorIds.map((author,index) => (
-                    <div key={index}>
+                  {bookDetail?.authorIds.map((author) => (
+                  
                       <h6>Author: {author?.name}</h6>
-                      {/* Integrate HeartButton here */}
-                      {logedInUserDetails && <HeartButton username={logedInUserDetails?.user_id} bookName={bookDetail?.book_name} />}
-                    </div>
+                      
                   ))}
 
                   <a
