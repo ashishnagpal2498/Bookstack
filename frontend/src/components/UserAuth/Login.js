@@ -41,10 +41,6 @@ function Login({user, setUser}) {
       const newUser = { name: resp.data.user.first_name + ' ' + resp.data.user.last_name, email: resp.data.user.email, role: resp.data.user.role, user_id:resp.data.user._id };
       setUser(newUser);
       localStorageUtil.setItem('user', newUser);
-      // localStorage.setItem('id', resp.data.user._id);
-      // localStorage.setItem('email', resp.data.user.email);
-      // localStorage.setItem('role', resp.data.user.role);
-      // need to change the navigation based on the role.
       navigate("/profile");
     }
     else {

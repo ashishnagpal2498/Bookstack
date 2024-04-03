@@ -50,7 +50,7 @@ const App = () => {
             <Route path="/latefee/details" element={(isAuthenticated() && isAdmin()) ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+            <Route path="/login" element={(isAuthenticated()) ? <Profile /> : <Login user={user} setUser={setUser}/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={isAuthenticated() ? (<Profile />): <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/forgetps" element={<ForgetPasswordEmail />} />
