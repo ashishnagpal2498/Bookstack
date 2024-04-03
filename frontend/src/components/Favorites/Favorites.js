@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HeartButton from './HeartButton';
+import { backend_url } from "../../util/config";
+
 
 const Favorites = () => {
   
@@ -9,7 +11,7 @@ const Favorites = () => {
 
   const fetchFavorites = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/favorites?username=${encodeURIComponent(username)}`);
+      const response = await fetch(`${backend_url}/api/favorites?username=${encodeURIComponent(username)}`);
       const data = await response.json();
       setFavorites(data); 
     } catch (error) {
