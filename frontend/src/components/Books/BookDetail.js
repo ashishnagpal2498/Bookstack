@@ -12,13 +12,16 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { backend_url } from "../../util/config";
 import axios from "axios";
+import HeartButton from '../Favorites/HeartButton.js';
+
 
 function BookSingle() {
   const { bookId } = useParams();
   const location = useLocation();
+  let logedInUserDetails = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     window.scrollTo(0, 0);
-    let logedInUserDetails = JSON.parse(localStorage.getItem("user"));
+    
 
     if (logedInUserDetails) {
       axios({
@@ -265,8 +268,12 @@ function BookSingle() {
                 {}
                 <div className="col-md-9 col-sm-8 col-12">
                   <h5>Name: {bookDetail?.book_name}</h5>
-                  {bookDetail?.authorIds.map((author) => (
-                    <h6>Author: {author?.name}</h6>
+                  {bookDetail?.authorIds.map((author,index) => (
+                    <div key={index}>
+                      <h6>Author: {author?.name}</h6>
+                      {/* Integrate HeartButton here */}
+                      {logedInUserDetails && <HeartButton username={logedInUserDetails?.user_id} bookName={bookDetail?.book_name} />}
+                    </div>
                   ))}
 
                   <a

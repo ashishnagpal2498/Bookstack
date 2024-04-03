@@ -34,3 +34,19 @@ exports.deleteFavorite = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+exports.getAllFavorites = async (req, res) => {
+    // Assuming the username is mandatory for this endpoint
+    if (!req.query.username) {
+        return res.status(400).json({ error: "Username is required." });
+    }
+
+    try {
+        // Directly use the username in the query
+        const usernameQuery = { username: req.query.username };
+        const favorites = await Favorite.find(usernameQuery);
+        res.json(favorites);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
