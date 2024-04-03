@@ -3,7 +3,7 @@
 .book-manager-div {
     width: 100vw;
     height: 100vh; 
-    background-color: #D6B498 !important;
+    background-color: rgba(252, 232, 199, 1) !important;
 }
 
 .book-manager-div .container {

@@ -18,7 +18,7 @@ const Home = () => {
             <div className='home-info-text-div'>
               <h1>Welcome to Book Stack</h1>
               <h2> Your Ultimate Book Rental Destination</h2>
-              <a href="/coming-soon" className="btn-get-started scrollto">Explore Books</a>
+              <a href="/books" className="btn-get-started scrollto">Explore Books</a>
             </div>
           </div>
           <div className="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">

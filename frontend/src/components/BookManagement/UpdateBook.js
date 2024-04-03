@@ -36,6 +36,7 @@ function UpdateBook() {
                     const fetchedAuthors = authorsResponse.data.data;
                     setAuthors(fetchedAuthors);
                 }
+                // eslint-disable-next-line
                 getBookDetail();
             })
             .catch(error => {

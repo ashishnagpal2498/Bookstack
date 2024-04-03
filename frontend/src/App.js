@@ -33,9 +33,9 @@ const App = () => {
   const [user, setUser] = useState(localStorageUtil.getItem('user') || null);
   return (
     <div className="App flex flex-column h-screen">
-      <div>
+      {/* <div> */}
         <Navbar user={user} setUser={setUser}/>
-      </div>
+      {/* </div> */}
       <div className='flex-1'>
         <ToastContainer />
         <Router>

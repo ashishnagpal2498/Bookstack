@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../stylesheets/heartbutton.css';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { backend_url } from '../../util/config';
 
 const HeartButton = ({ username, bookName }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -9,7 +10,7 @@ const HeartButton = ({ username, bookName }) => {
     // Function to check if the item is already a favorite
     const checkFavorite = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/favorites/check?username=${encodeURIComponent(username)}&bookName=${encodeURIComponent(bookName)}`);
+        const response = await fetch(`${backend_url}/api/favorites/check?username=${encodeURIComponent(username)}&bookName=${encodeURIComponent(bookName)}`);
         const data = await response.json();
         if (data.isFavorite) {
           setIsFavorite(true);
@@ -25,7 +26,7 @@ const HeartButton = ({ username, bookName }) => {
   const toggleFavorite = async () => {
     const method = isFavorite ? 'DELETE' : 'POST';
     try {
-      const response = await fetch('http://localhost:3000/api/favorites', {
+      const response = await fetch(`${backend_url}/api/favorites`, {
         method,
         headers: {
           'Content-Type': 'application/json',

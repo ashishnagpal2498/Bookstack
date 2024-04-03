@@ -64,7 +64,7 @@ function Profile() {
       Swal.fire(errorMessage);
       return;
     }
-    const email = localStorageUtil.getItem('user')?.email
+    // const email = localStorage.getItem('email')
     const payload = {
         first_name : firstName,
         last_name : lastName,

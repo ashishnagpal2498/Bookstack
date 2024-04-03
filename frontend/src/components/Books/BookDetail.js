@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Rating from "react-rating";
+import { isAuthenticated, isAdmin } from '../../util';
 import { Link, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,21 +28,23 @@ function BookSingle() {
       })
         .then((result) => {
           console.log(result.data?.status);
-          setIsUserLogedIn(result.data?.status);
+          // setIsUserLogedIn(result.data?.status);
         })
         .catch((error) => {
           console.log(error);
-          setIsUserLogedIn(true);
+          // setIsUserLogedIn(true);
         });
     }
-
+// eslint-disable-next-line
     getBookDetail();
-  }, [location]);
+  },
+  // eslint-disable-next-line 
+  [location]);
 
   const [bookDetail, setBookDetail] = useState();
   const [show, setShow] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [isUserLogedIn, setIsUserLogedIn] = useState(true);
+  // const [isUserLogedIn, setIsUserLogedIn] = useState(true);
   const [ratingRatio, setRatingRatio] = useState(0);
   const [recommendedbookArray, setRecommendedBookArray] = useState([]);
 
@@ -65,14 +68,14 @@ function BookSingle() {
     console.log("aXZcXZcZdsf", value, index);
   };
 
-  const onPointerEnter = (value, index) => console.log("adsf", value, index);
-  const onPointerLeave = () => {
-    console.log("Leave");
+  // const onPointerEnter = (value, index) => console.log("adsf", value, index);
+  // const onPointerLeave = () => {
+  //   console.log("Leave");
 
-  };
-  const onPointerMove = (value, index) => {
-    console.log("abc", value, index);
-  };
+  // };
+  // const onPointerMove = (value, index) => {
+  //   console.log("abc", value, index);
+  // };
   const handleRecent = () => {
     setIsReleventOrRecent("recent");
     setMostRecent(ratingArray);
@@ -151,7 +154,7 @@ function BookSingle() {
                       </div>
 
                       <div className="col-12 text-center mt-2">
-                        {!isUserLogedIn && (
+                        { (isAuthenticated() && !isAdmin())&& (
                           <Button
                             onClick={() => callReservation()}
                             className="resever-btn"

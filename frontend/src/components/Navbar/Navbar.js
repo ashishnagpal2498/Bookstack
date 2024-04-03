@@ -1,12 +1,12 @@
 // Authors - [Arihant Dugar]
 import { React } from 'react'
 import '../../stylesheets/header-nav.css'
-import { localStorageUtil } from '../../util';
+import { localStorageUtil, isAdmin } from '../../util';
 import { NavDropdown, Row, Col, Container, Button, Navbar, Nav } from 'react-bootstrap';
 import profileIcon from '../../assets/profile.png';
 import logo from '../../assets/logo.png';
 
-function CommonNavbar({ user, setUser }) {
+function CommonNavbar({ user, setUser, admin }) {
 
     const logout = () => {
         setUser(null);
@@ -31,14 +31,14 @@ function CommonNavbar({ user, setUser }) {
                     <Nav className="container-fluid">
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/books">Books</Nav.Link>
-                        <Nav.Link href="/coming-soon">Favorites</Nav.Link>
+                        <Nav.Link href="/favorites">Favorites</Nav.Link>
                         <Nav.Link href="/about">About Us</Nav.Link>
                         <Nav.Link href="/contactus">Contact Us</Nav.Link>
                         <Nav.Link href="/faq">FAQ</Nav.Link>
-                        {user ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></>}
-                        {user ?
+                        {(user) ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></>}
+                        {(user && isAdmin()) ?
                             <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></>}
-                        {user ?
+                        {(user && isAdmin()) ?
                             <Nav.Link href="/manage-reservations">Manage Reservations</Nav.Link> : <></>}
                         {
                             user ?
@@ -58,12 +58,16 @@ function CommonNavbar({ user, setUser }) {
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
-                                    <NavDropdown.Item href="/manage-books">
-                                        Book Management
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item href="/manage-reservations">
-                                        Manage Reservations
-                                    </NavDropdown.Item>
+                                    {(user && isAdmin()) ?
+                                        <NavDropdown.Item href="/manage-books">
+                                            Book Management
+                                        </NavDropdown.Item> : <></>}
+                                    {(user && isAdmin()) ?
+                                        <NavDropdown.Item href="/manage-reservations">
+                                            Manage Reservations
+                                        </NavDropdown.Item> : <></>}
+
+
                                     <NavDropdown.Item href="#dark-mode">Dark Mode</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={() => logout()}>

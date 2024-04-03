@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { backend_url } from "../../util/config";
 import { localStorageUtil } from '../../util';
 
-function Login({user, setUser}) {
+function Login({ user, setUser }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -38,7 +38,7 @@ function Login({user, setUser}) {
     const resp = await axios.post(`${backend_url}/users/login`, payload)
     console.log(resp);
     if (resp.data.message === "Login Successful") {
-      const newUser = { name: resp.data.user.first_name + ' ' + resp.data.user.last_name, email: resp.data.user.email, role: resp.data.user.role, user_id:resp.data.user._id };
+      const newUser = { name: resp.data.user.first_name + ' ' + resp.data.user.last_name, email: resp.data.user.email, role: resp.data.user.role, user_id: resp.data.user._id };
       setUser(newUser);
       localStorageUtil.setItem('user', newUser);
       navigate("/profile");
@@ -55,12 +55,12 @@ function Login({user, setUser}) {
 
   const validateForm = (data) => {
     const errors = {};
-
+    // eslint-disable-next-line
     if (!/\S+@\S+\.\S+/.test(data.email)) {
       errors.email = '!.Invalid Email format.';
 
     }
-
+    // eslint-disable-next-line
     if (!/^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]{8,}$/.test(data.password)) {
       errors.password = '!.Password does not match the format.';
 
