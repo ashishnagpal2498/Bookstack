@@ -38,6 +38,7 @@ frontend/components/SendEmailPR.js
 - Users can register for a new account by providing their first name, last name, email, phone number, password, and confirm password.
 - Form validation checks if the entered information meets the required criteria (e.g., valid email format, password complexity).
 - Upon successful registration, users are redirected to the login page.
+- Users will assume a role of 'user' by default.
 
 ### Profile
 - Users can view and edit their profile information, including their first name, last name, email, and phone number.
