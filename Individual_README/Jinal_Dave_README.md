@@ -2,7 +2,7 @@
 # Assignment 3
 
 * *Date Created*: 03 Apr 2024
-* *Last Modification Date*: 03 Apr 2024
+* *Last Modification Date*: 04 Apr 2024
 * *Assignment Instruction URL*: https://dal.brightspace.com/d2l/le/content/311813/viewContent/4041434/View
 * *Project URL(Git Lab)*: https://git.cs.dal.ca/anagpal/csci-5709-grp-13
 * *Frontend - Deployment Link*: https://bookstack-csci-group-13.netlify.app/
