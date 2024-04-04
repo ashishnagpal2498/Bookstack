@@ -42,7 +42,7 @@ This is another feature linked within the  book details page where users can sha
 
 ### Prerequisites
 
-#### To work on a local copy of this assignment, I cloned the [project repository](https://git.cs.dal.ca/anagpal/csci-5709-grp-13) and switched to my branch named ''jinal-dave''. I had completed the front-end of both of my features with A1 assignment and I have implemented the backend as a part of my A3 assignment.
+To work on a local copy of this assignment, I cloned the [project repository](https://git.cs.dal.ca/anagpal/csci-5709-grp-13) and switched to my branch named ''jinal-dave''. I had completed the front-end of both of my features with A1 assignment and I have implemented the backend as a part of my A3 assignment.
 
 * Node.js - [Download Link](https://nodejs.org/en/download)
 * Visual studio code - [Download Link](https://code.visualstudio.com/download)
