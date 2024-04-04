@@ -41,7 +41,7 @@ function Login({ user, setUser }) {
       const newUser = { name: resp.data.user.first_name + ' ' + resp.data.user.last_name, email: resp.data.user.email, role: resp.data.user.role, user_id: resp.data.user._id };
       setUser(newUser);
       localStorageUtil.setItem('user', newUser);
-      navigate("/profile");
+      navigate("/");
     }
     else {
       Swal.fire(resp.data.message);

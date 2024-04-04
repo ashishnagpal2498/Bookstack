@@ -57,7 +57,7 @@ function CommonNavbar({ user, setUser, admin }) {
                                         </Row>
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#profile">Profile Settings</NavDropdown.Item>
+                                    <NavDropdown.Item href="/profile">Profile Settings</NavDropdown.Item>
                                     {(user && isAdmin()) ?
                                         <NavDropdown.Item href="/manage-books">
                                             Book Management
