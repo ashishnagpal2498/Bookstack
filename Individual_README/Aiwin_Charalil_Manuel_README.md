@@ -17,7 +17,7 @@
 1. Member 1
 
    - [Aiwin Charalil Manuel](aiwin.manuel@dal.ca)
-   - Branch Name:- [Aiwin-Charalil-Manuel](https://git.cs.dal.ca/anagpal/csci-5709-grp-13/-/tree/Aiwin_Charalil_Manuel?ref_type=heads)
+   - Branch Name:- [Aiwin_Charalil_Manuel](https://git.cs.dal.ca/anagpal/csci-5709-grp-13/-/tree/Aiwin_Charalil_Manuel?ref_type=heads)
 
 
 
