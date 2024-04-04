@@ -1,4 +1,4 @@
-// Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal]
+// Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal , Aiwin Charalil Manuel]
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
