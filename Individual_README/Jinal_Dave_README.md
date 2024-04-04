@@ -14,12 +14,12 @@
 * [Jinal Dave](jn270099@dal.ca) - *Developer*
 
 ## List of Files Created As A Part of My Assignment
-- books.js : backend/controllers/books.js
-- books.js : backend/models/books.js
-- books.js : backend/routes/books.js
-- App.css : frontend/src/stylesheets
-- BookDetail.js : frontend/src/components/Books/BookDetail.js
-- Recommended.js : frontend/src/components/Books/Recommended.js
+- books.js : \backend\controllers\books.js
+- books.js : \backend\models\books.js
+- books.js : \backend\routes\books.js
+- App.css : \frontend\src\stylesheets
+- BookDetail.js : \frontend\src\components\Books\BookDetail.js
+- Recommended.js : \frontend\src\components\Books\Recommended.js
 
 ## Description of Developed Features and Associated Tasks
 ### 1. Book Detail: 
@@ -94,6 +94,7 @@ npm install bootstrap
 * Reference Document link : [Adding Bootstrap](https://create-react-app.dev/docs/adding-bootstrap/)
 
 ### BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
 
 *Lines 154-159, 242-249*
 
@@ -126,6 +127,7 @@ The code above was created by adapting the code in [Bootstrap Button](https://ge
 - [Bootstrap Buttons](https://getbootstrap.com/docs/4.0/components/buttons/)'s code is used as reference to create button designs.
 
 ### BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
 
 *Lines 469-632*
 
@@ -327,6 +329,7 @@ The code above was created by adapting the code in [Bootsrap Modal](https://getb
 - [FortAwesome Icons](https://docs.fontawesome.com/web/setup/get-started)'s code was used to show fonts.
 
 ### BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
 
 *Lines 170-178, 207-216*
 
@@ -406,6 +409,7 @@ export default GeeksforGeeks;
 - [Toast messages in react tutorial](https://www.geeksforgeeks.org/reactjs-toast-notification/) 's Code was used as reference to create a toast success/error messages.
 
 ### BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
 
 *Line 88, 117*
 
@@ -460,6 +464,7 @@ export default function App() {
 - [Axios In React tutorial](https://www.freecodecamp.org/news/how-to-use-axios-with-react/) 's Code was used as reference to create a axios post request.
 
 ### Recommended.js
+Path: \frontend\src\components\Books\Recommended.js
 
 *Lines 89-104*
 
@@ -555,6 +560,7 @@ ReactDOM.render(
 - [React Paginate](https://www.npmjs.com/package/react-paginate)'s code is used as reference to create paginate designs.
 
 ### Recommended.js
+Path: \frontend\src\components\Books\Recommended.js
 
 *Lines 45-52*
 
@@ -581,6 +587,7 @@ The code above was created by adapting the code in [Bootstrap Button](https://ge
 
 
 ### Recommended.js
+Path: \frontend\src\components\Books\Recommended.js
 
 *Line 29*
 
@@ -631,4 +638,3 @@ export default function App() {
 ```
 
 - [Axios In React tutorial](https://www.freecodecamp.org/news/how-to-use-axios-with-react/) 's Code was used as reference to create a axios post request.
-
