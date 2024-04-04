@@ -84,14 +84,13 @@ body {
   }
 }
 
-/* Recommended===// */
 .npmreatingbook .star-svg {
   width: 25px;
 }
 .book_recomm {
   min-height: 83vh;
 }
-/* review Modal  */
+
 .yellow {
   color: rgb(228, 157, 3);
 }

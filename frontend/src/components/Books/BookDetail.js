@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -31,23 +31,23 @@ function BookSingle() {
       })
         .then((result) => {
           console.log(result.data?.status);
-          // setIsUserLogedIn(result.data?.status);
+          
         })
         .catch((error) => {
           console.log(error);
-          // setIsUserLogedIn(true);
+          
         });
     }
-// eslint-disable-next-line
+
     getBookDetail();
   },
-  // eslint-disable-next-line 
+  
   [location]);
 
   const [bookDetail, setBookDetail] = useState();
   const [show, setShow] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  // const [isUserLogedIn, setIsUserLogedIn] = useState(true);
+  
   const [ratingRatio, setRatingRatio] = useState(0);
   const [recommendedbookArray, setRecommendedBookArray] = useState([]);
 
@@ -71,14 +71,7 @@ function BookSingle() {
     console.log("aXZcXZcZdsf", value, index);
   };
 
-  // const onPointerEnter = (value, index) => console.log("adsf", value, index);
-  // const onPointerLeave = () => {
-  //   console.log("Leave");
-
-  // };
-  // const onPointerMove = (value, index) => {
-  //   console.log("abc", value, index);
-  // };
+  
   const handleRecent = () => {
     setIsReleventOrRecent("recent");
     setMostRecent(ratingArray);
@@ -295,12 +288,12 @@ function BookSingle() {
               <div className="row ">
                 <div className="col-md-3 col-sm-4 col-12">
                   <div>
-                    <h5>Publisher Details</h5>
+                    <h5>Publication</h5>
                   </div>
                 </div>
                 {}
                 <div className="col-md-9 col-sm-8 col-12">
-                  <h5>Publisher Name:</h5>
+                  <h5>Details:</h5>
                   <h6>
                     Publisher Date:{" "}
                     {`${new Date(bookDetail?.publisherDate).getDate()}-${
