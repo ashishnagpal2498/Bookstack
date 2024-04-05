@@ -8,7 +8,6 @@ import { backend_url } from "../../util/config";
 const booksPerPage = 5;
 
 const Recommended = () => {
-  // eslint-disable-next-line no-unused-vars
   const [books, setBooks] = useState([]);
 
   const [pageNumber, setPageNumber] = useState(0);

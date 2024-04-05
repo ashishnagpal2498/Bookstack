@@ -42,6 +42,15 @@ Deployment for Frontend is made through **Netlify**.
 
 Deployment for backend server is done on **Render**. ![](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
+## Login Details for testing
+
+### Admin login credentials
+- Username: abhinava465@gmail.com
+- Password: securepassword
+
+### Reader login credentials
+- Username: ab806657@dal.ca
+- Password: pass@1234
 
 # Testing
 I have implemented ``Book Library feature`` which includes following tasks :-

@@ -1,3 +1,5 @@
+// Author - Yogish Honnadevipura Gopalakrishna
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -59,9 +61,11 @@ exports.createNewUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     // console.log("login request made");
     const { email, password } = req.body;
+    // console.log(req.body);
 
     try {
         const user = await User.findOne({ email });
+        // console.log(user);
         if (!user) {
             return res.status(200).json({ message: 'User not found' });
         }
@@ -155,7 +159,7 @@ exports.updateUserpicture = async (req, res) => {
 exports.sendMailUpdatePassword = async (req, res) => {
     const { email } = req.body;
     const encryptedEmail = encrypt(email);
-    const resetUrl = `http://localhost:3000/resetpassword?data=${encryptedEmail}`;
+    const resetUrl = `${process.env.FRONTEND_URI}resetpassword?data=${encryptedEmail}`;
 
     // Email content
     const htmlContent = htmlTemplate.replace('[User Name]', email)
@@ -202,9 +206,11 @@ exports.resetPassword = async (req, res) => {
 
 exports.getUserData = async (req, res) => {
     const email = req.body.email;
+    console.log(email);
 
     try {
         const user = await User.findOne({ email });
+        console.log(user);
         if (!user) {
             return res.status(200).json({ message: 'User not found' });
         }

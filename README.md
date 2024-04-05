@@ -47,6 +47,16 @@ This is the directory that contains a stable deployement version of the applicat
 2. Frontend Deployment Link - Netlify: https://bookstack-csci-group-13.netlify.app/
 3. Backend Deployment Link - Render: https://bookstack-grp13.onrender.com
 
+## Login Details for testing
+
+### Admin login credentials
+- Username: abhinava465@gmail.com
+- Password: securepassword
+
+### Reader login credentials
+- Username: ab806657@dal.ca
+- Password: pass@1234
+
 ## Landing Page
 
 This is where the users reach / land on when they access our site for the first time. Landing pages are generally used to show the use-case, detail, purpose and features offered by the application. This helps users familiarize with the website and makes it intuitive for them to navigate around the website; with that in mind, we developed the landing page with utmost care as it is the first page that the users see. As the saying goes, **First impression should be the best impression**, it is really crucial that we showcase everything in a visually attractive manner as this is the page where we want to introduce ourselves, and the application. The only way to do that is to make it visually appealing by using a cozy color scheme, well adjusted components, and a clean layout.

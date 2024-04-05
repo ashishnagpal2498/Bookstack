@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// Author - Yogish Honnadevipura Gopalakrishna
 import React from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -49,7 +49,9 @@ export function ResetPassword() {
 
         axios.post(`${backend_url}/users/updatepassword`, payload)
             .then((resp) => {
+                console.log(resp.data);
                 if (resp.data.message === 'Password updated successfully') {
+                    
                     navigate("/login");
                     Swal.fire('Password has been Reset');
                     
@@ -59,9 +61,7 @@ export function ResetPassword() {
             })
             .catch((error) => {
                 console.log(error);
-                Swal.fire('Please Retype the Password correctly');
             });
-        alert("password updated successfully");
     };
 
     return (

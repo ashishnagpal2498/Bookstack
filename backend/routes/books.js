@@ -1,4 +1,4 @@
-// Ashish Nagpal
+// Authors - [Ashish Nagpal, Jinal Dave]
 const express = require('express');
 const bookController = require('../controllers/books');
 
@@ -12,6 +12,8 @@ router.get("/genres", bookController.getAllGenres);
 router.get("/authors", bookController.getAllAuthors);
 
 router.post("/add", bookController.addBook);
+
+router.put("/update/:id", bookController.updateBook);
 
 router.delete("/delete", bookController.deleteBook);
 

@@ -69,7 +69,7 @@ exports.disputeLateFeeCharge = async (req, res) => {
         // send mail to admin
         const htmlContent = htmlTemplate.replace('[User Name]', admin.first_name + ' ' + admin.last_name)
                             .replace('[Reminder Message]', user.first_name + ' ' + user.last_name + ' has a dispute in their late fee charge. Please look into it!')
-                            .replace('[Learn-more-link]', frontendUrl + 'latefee/details/' + user_id);
+                            .replace('[Learn-more-link]', frontendUrl + 'latefee');
         
         sendCustomMail(fromEmail = bookStackEmail, toEmail = admin.email, subject = "Late Fee Reminder", html = htmlContent, function (error, info) {
             if (error) {

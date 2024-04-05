@@ -1,8 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Rating from "react-rating";
+import { isAuthenticated, isAdmin } from '../../util';
 import { Link, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,14 +13,16 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { backend_url } from "../../util/config";
 import axios from "axios";
+import HeartButton from '../Favorites/HeartButton.js';
+
 
 function BookSingle() {
-  // eslint-disable-next-line no-unused-vars
   const { bookId } = useParams();
   const location = useLocation();
+  let logedInUserDetails = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     window.scrollTo(0, 0);
-    let logedInUserDetails = JSON.parse(localStorage.getItem("user"));
+    
 
     if (logedInUserDetails) {
       axios({
@@ -28,39 +31,33 @@ function BookSingle() {
       })
         .then((result) => {
           console.log(result.data?.status);
-          setIsUserLogedIn(result.data?.status);
+          
         })
         .catch((error) => {
           console.log(error);
-          setIsUserLogedIn(true);
+          
         });
     }
 
     getBookDetail();
-  }, [location]);
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  //   getBookDetail();
-  // }, [location]);
+  },
+  
+  [location]);
 
   const [bookDetail, setBookDetail] = useState();
   const [show, setShow] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [isUserLogedIn, setIsUserLogedIn] = useState(true);
-  // eslint-disable-next-line no-unused-vars
+  
   const [ratingRatio, setRatingRatio] = useState(0);
   const [recommendedbookArray, setRecommendedBookArray] = useState([]);
 
   const [rating, setRating] = useState(0);
   const [ratingArray, setRatingArray] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [mostRelevant, setmostRelevant] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [mostRecent, setMostRecent] = useState([]);
 
   const [isReleventOrRecent, setIsReleventOrRecent] = useState("recent");
   const [description, setDescription] = useState("");
-  // setRating(rate);
   const handleClose = () => {
     setShow(false);
     console.log("handleclose", rating);
@@ -69,24 +66,12 @@ function BookSingle() {
     setShow(true);
     console.log("handleopen", rating);
   };
-  // Optinal callback functions
-  // eslint-disable-next-line no-unused-vars
   const handleRating = (value, index) => {
     setRating(value);
     console.log("aXZcXZcZdsf", value, index);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const onPointerEnter = (value, index) => console.log("adsf", value, index);
-  // eslint-disable-next-line no-unused-vars
-  const onPointerLeave = () => {
-    console.log("Leave");
-    // setRating(0);
-  };
-  // eslint-disable-next-line no-unused-vars
-  const onPointerMove = (value, index) => {
-    console.log("abc", value, index);
-  };
+  
   const handleRecent = () => {
     setIsReleventOrRecent("recent");
     setMostRecent(ratingArray);
@@ -105,7 +90,6 @@ function BookSingle() {
         setBookDetail(api.data.book);
         setRatingArray(api.data.book.rating);
         setMostRecent(api.data.book?.rating);
-        // setRatingRatio(api.data.rating);
 
         if (api.data.book?.rating.length > 0) {
           const bookRatingRatio =
@@ -116,7 +100,6 @@ function BookSingle() {
           setRatingRatio(bookRatingRatio.toFixed(1));
         }
 
-        // setmostRelevant(api.data.book?.rating);
         setRecommendedBookArray(api.data.data);
       }
     } catch (error) {
@@ -167,7 +150,7 @@ function BookSingle() {
                       </div>
 
                       <div className="col-12 text-center mt-2">
-                        {!isUserLogedIn && (
+                        { (isAuthenticated() && !isAdmin())&& (
                           <Button
                             onClick={() => callReservation()}
                             className="resever-btn"
@@ -210,27 +193,20 @@ function BookSingle() {
                       </a>
                     </div>
                     <p>{bookDetail?.description}</p>
-                    {/* <p>
-                      Get ready to swing from vine to vine and roam the untamed
-                      wilderness alongside Mowgli, the fearless hero of Rudyard
-                      Kipling's legendary tale, "The Jungle Book."
-                    </p> */}
+                    {logedInUserDetails && <HeartButton username={logedInUserDetails?.user_id} bookName={bookDetail?.book_name} />}
+                    {}
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col-12">
                 <div className="card p-3 text-center">
-                  <h5>your Review for this Book</h5>
+                  <h5>Do you want to rate and review this book?</h5>
                   <div className="card-body">
                     <div className="d-flex align-items-center gap-2 npmreatingbook">
-                      {/* <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i> */}
+                      {}
                       <Rating
                         stop={5}
-                        // fractions={rating}
+                        
                         initialRating={rating}
                         emptySymbol={
                           <FontAwesomeIcon
@@ -286,12 +262,13 @@ function BookSingle() {
                     <h5>About</h5>
                   </div>
                 </div>
-                {/* </div>
-            <div className="row"> */}
+                {}
                 <div className="col-md-9 col-sm-8 col-12">
                   <h5>Name: {bookDetail?.book_name}</h5>
                   {bookDetail?.authorIds.map((author) => (
-                    <h6>Author: {author?.name}</h6>
+                  
+                      <h6>Author: {author?.name}</h6>
+                      
                   ))}
 
                   <a
@@ -311,13 +288,12 @@ function BookSingle() {
               <div className="row ">
                 <div className="col-md-3 col-sm-4 col-12">
                   <div>
-                    <h5>Publisher Details</h5>
+                    <h5>Publication</h5>
                   </div>
                 </div>
-                {/* </div>
-            <div className="row"> */}
+                {}
                 <div className="col-md-9 col-sm-8 col-12">
-                  <h5>Publisher Name:</h5>
+                  <h5>Details:</h5>
                   <h6>
                     Publisher Date:{" "}
                     {`${new Date(bookDetail?.publisherDate).getDate()}-${
@@ -331,11 +307,7 @@ function BookSingle() {
           <hr className="m-0" />
           <div className="container-fluid">
             <div className="row ">
-              {/* <div className="col-12">
-              <div>
-                <h5>Show Similar</h5>
-              </div>
-            </div> */}
+              {}
             </div>
             <div className="row align-items-center">
               <div className="col-12 ">
@@ -410,7 +382,7 @@ function BookSingle() {
           </div>
         </div>
 
-        {/* Models */}
+        {}
 
         <div
           class="modal fade"
@@ -423,7 +395,7 @@ function BookSingle() {
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="BookDetailsLabel">
-                  BookDetails
+                  Book Details
                 </h1>
                 <button
                   type="button"
@@ -439,7 +411,7 @@ function BookSingle() {
                   </div>
                   <div className="col-sm-6">
                     <h5 className="book-title">{bookDetail?.book_name}</h5>
-                    {/* <p>Welcome to Mowgli's World</p> */}
+                    {}
                   </div>
                 </div>
 
@@ -496,7 +468,7 @@ function BookSingle() {
         </div>
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
-            {/* <Modal.Title>Book 1</Modal.Title> */}
+            {}
             <Modal.Title>Customer Ratings & Reviews</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalReviewBody">
@@ -535,7 +507,7 @@ function BookSingle() {
                 />
               </div>
               <div className="mx-1">
-                {/* ( {mostRecent.length} description) */}
+                {}
                 <button
                   className="mx-2 btn btn-primary"
                   onClick={() => {

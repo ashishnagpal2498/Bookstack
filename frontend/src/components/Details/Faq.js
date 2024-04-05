@@ -1,3 +1,4 @@
+// Author - Arihant Dugar
 import React from 'react';
 import '../../stylesheets/faq.css';
 import { Container, Row, Accordion } from 'react-bootstrap';

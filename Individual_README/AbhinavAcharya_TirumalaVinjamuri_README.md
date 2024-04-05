@@ -43,6 +43,16 @@ This is the directory that contains a stable deployement version of the applicat
 - frontend/src/services/Notifications/*
 - frontend/src/util/*
 
+## Login Details for testing
+
+### Admin login credentials
+- Username: abhinava465@gmail.com
+- Password: securepassword
+
+### Reader login credentials
+- Username: ab806657@dal.ca
+- Password: pass@1234
+
 ## Late Fee System
 
 Late Fee System is essentially supposed to penalize users who borrowed books from the library, but failed to return them before the due date. We have defined 2 tasks in this feature which will be talked about in the section below: Late fees can deny users from borrowing/ reserving books until they are cleared. The tasks for this feature involve functionalities for both readers and administrators. Readers are required to view the costs associated with each book that has not been returned, and raise a dispute if they find a charge unnacceptable. On the other hand, administrators have the responsibility to identify users who have incurred late fees. Once it has been confirmed that the readers have cleared these fees, the administrators should be able to clear them from the system, or notify them if they haven't cleared the fee yet. These tasks ensure a smooth operation of the book rental service and maintain a fair system for all users.

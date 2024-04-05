@@ -1,4 +1,4 @@
-// Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal]
+// Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal, Arihant Dugar, Jinal Dave]
 // Import models
 const Author = require("./author.js");
 const Genre = require("./genre.js");

@@ -1,4 +1,4 @@
-// Ashish Nagpal
+// Authors : [ Ashish Nagpal, Arihant Dugar, Jinal Dave ]
 const Author = require('../models/author');
 const Book = require('../models/books');
 const Genre = require('../models/genre');
@@ -169,5 +169,31 @@ exports.addRating = async (req, res) => {
       message: "Something wents wrong",
       status: false,
     });
+  }
+};
+
+exports.updateBook = async (req, res) => {
+  try {
+      const { description, content_link, authorIds, genreIds, book_name, price, availability } = req.body;
+      const bookId = req.params.id; 
+
+      const existingBook = await Book.findById(bookId);
+      if (!existingBook) {
+          return res.status(404).json({ error: 'Book not found' });
+      }
+
+      existingBook.description = description;
+      existingBook.content_link = content_link;
+      existingBook.authorIds = authorIds;
+      existingBook.genreIds = genreIds;
+      existingBook.book_name = book_name;
+      existingBook.price = price;
+      existingBook.availability = availability;
+      const updatedBook = await existingBook.save();
+
+      res.status(200).json(updatedBook);
+  } catch (error) {
+      console.error('Error updating book:', error);
+      res.status(500).json({ error: 'Failed to update book ' + error });
   }
 };
