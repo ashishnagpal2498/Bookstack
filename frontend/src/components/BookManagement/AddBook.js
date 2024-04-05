@@ -220,7 +220,6 @@ function AddBook() {
                   <Form.Label htmlFor="book-cover-img">Drag & Drop book image or <span className="highlighted-text">Browse</span></Form.Label>
                   <br />Supported formats: JPEG, PNG
                   <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
-                  <br /><br /><div id="selectedFileName">{bookCoverImg.name}</div>
                 </div>
               </Form.Group>
             </Col>
