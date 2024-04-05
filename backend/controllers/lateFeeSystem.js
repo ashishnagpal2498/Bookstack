@@ -240,7 +240,7 @@ exports.getActiveLateFeeDetails = async (req, res) => {
         // console.log(_id, book__id);
         const lateFeeDocument = await lateFeeSchema.findOne({ user_id: new ObjectID(user_id) });
         // console.log(lateFeeDocument)
-        const book = lateFeeDocument.books.filter(book => book.paid === false)[0];
+        const book = lateFeeDocument?.books.filter(book => book.paid === false)[0];
         if (!lateFeeDocument || !book) {
             return res.status(404).json({
                 message: "Active Late Fee details not found!",
@@ -289,9 +289,9 @@ exports.getPastLateFees = async (req, res) => {
     try {
         const { user_id } = req.params;
         const lateFeeDocument = await lateFeeSchema.findOne({ user_id: new ObjectID(user_id) });
-        let past_late_fees = lateFeeDocument.books.filter(book => book.paid === true);
+        let past_late_fees = lateFeeDocument?.books.filter(book => book.paid === true);
         // check if past late fee is empty
-        if (past_late_fees.length === 0) {
+        if (past_late_fees?.length === 0 ||past_late_fees === null || past_late_fees === undefined) {
             return res.status(200).json({
                 message: "No Past Late Fees!",
                 past_late_fees: {}
@@ -299,9 +299,9 @@ exports.getPastLateFees = async (req, res) => {
         }
         // console.log(typeof(past_late_fees))
         // fetch book details of each paid late fee
-        for (let i = 0; i < past_late_fees.length; i++) {
+        for (let i = 0; i < past_late_fees?.length; i++) {
             let past_late_fee = past_late_fees[i].toObject();
-            const book_document = await booksSchema.findOne({ _id: new ObjectID(past_late_fees[i].book_id) });
+            const book_document = await booksSchema?.findOne({ _id: new ObjectID(past_late_fees[i].book_id) });
             // if no book is found
             if (!book_document) {
                 continue;
