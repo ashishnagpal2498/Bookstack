@@ -1,6 +1,7 @@
 // Author - Yogish Honnadevipura Gopalakrishna
 
 const express = require('express');
+const Cart = require('../models/cart.js');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -51,6 +52,8 @@ exports.createNewUser = async (req, res) => {
     const newUser = new User({ first_name, last_name, email, password, phone, picture, role });
     try {
         await newUser.save();
+        const newCart = new Cart({ email, reservations: [] });
+        await newCart.save();
         res.status(200).json({ message: "user added successfully" });
     } catch (err) {
         console.error(err);
@@ -90,6 +93,7 @@ exports.deleteUser = async (req, res) => {
         if (!deletedUser) {
             return res.status(200).json({ message: 'User not found' });
         }
+        await Cart.findOneAndDelete({ email });
         res.json({ message: 'User deleted successfully', user: deletedUser });
     } catch (err) {
         console.error(err);

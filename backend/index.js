@@ -8,6 +8,7 @@ const notificationsRoute = require('./routes/notifications.js');
 const booksRoute = require('./routes/books.js');
 const favoritesRoute = require('./routes/favorite');
 const reservationsRoute = require('./routes/reservations.js');
+const cartRoute = require('./routes/cart.js');
 
 const usersRoute = require('./routes/userAuth.js');
 // Initialize express app and middleware
@@ -28,6 +29,7 @@ app.use('/books', booksRoute);
 app.use('/api/favorites', favoritesRoute);
 app.use('/reservations', reservationsRoute);
 app.use('/users', usersRoute);
+app.use('/cart', cartRoute);
 
 
 // Connect to mongoDB
