@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { backend_url } from "../../util/config";
 import axios from "axios";
 import HeartButton from '../Favorites/HeartButton.js';
+import { localStorageUtil } from "../../util";
 
 
 function BookSingle() {
@@ -127,7 +128,20 @@ function BookSingle() {
   };
 
   const callReservation = async () => {
+    const payload = {
+      email: localStorageUtil.getItem('user')?.email,
+      object_id: bookId
+    }
+    console.log(payload);
     try {
+      const response = await axios.post(backend_url+"/cart/addbook", payload);
+      console.log(response);
+      if(response.data.message === 'Book added'){
+        toast.success("Book Added to cart successfully")
+      }
+      else{
+        toast.info(response.data.message);
+      }
     } catch (error) {}
   };
 
@@ -155,7 +169,7 @@ function BookSingle() {
                             onClick={() => callReservation()}
                             className="resever-btn"
                           >
-                            Reserve
+                            Add to Cart
                           </Button>
                         )}
                       </div>

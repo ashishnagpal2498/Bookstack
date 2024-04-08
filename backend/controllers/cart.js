@@ -6,10 +6,10 @@ dotenv.config();
 
 exports.getWholeCart = async (req, res) => {
     const { email } = req.body;
-    console.log(email);
+    // console.log(email);
     try {
         const cart = await Cart.findOne({ email }).populate('reservations');
-        console.log(cart);
+        // console.log(cart);
         if (!cart) {
             return res.status(200).json({ message: 'Cart not found' });
         }
@@ -31,7 +31,7 @@ exports.addToCart = async (req, res) => {
         }
 
         if (cart.reservations.includes(object_id)) {
-            return res.status(400).json({ message: 'Book already in cart' });
+            return res.status(200).json({ message: 'Book already in cart' });
         }
 
         // const book = await books.findById({ _id: new ObjectID(object_id) });
@@ -48,7 +48,7 @@ exports.addToCart = async (req, res) => {
         cart.reservations.push(object_id);
         cart = await cart.save();
 
-        res.json(cart);
+        res.status(200).json({ message: "Book added", success: true });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server Error' });

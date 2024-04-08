@@ -26,6 +26,7 @@ import AddBook from './components/BookManagement/AddBook.js';
 import BookManager from './components/BookManagement/BookManager.js';
 import UpdateBook from './components/BookManagement/UpdateBook.js';
 import ManageBookReservations from './components/BookManagement/ManageBookReservations.js';
+import CartComp from './components/Cart/cart.js';
 import {localStorageUtil} from './util';
 import { useState } from 'react';
 
@@ -55,6 +56,7 @@ const App = () => {
             <Route path="/profile" element={isAuthenticated() ? (<Profile />): <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/forgetps" element={<ForgetPasswordEmail />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/cartdetails" element={isAuthenticated() ? <CartComp />: <Navigate to="/login"/>} />
             <Route path="/manage-books" element={(isAuthenticated() && isAdmin()) ? <BookManager /> : <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/add-book" element={(isAuthenticated() && isAdmin()) ? <AddBook /> : <Navigate to="/login" /*replace="true"*/ />} />
             <Route path="/update-book/:bookId" element={(isAuthenticated() && isAdmin()) ? <UpdateBook /> : <Navigate to="/login" /*replace="true"*/ />} />
