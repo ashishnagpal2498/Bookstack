@@ -127,7 +127,7 @@ function BookSingle() {
     }
   };
 
-  const callReservation = async () => {
+  const addToCartFunc = async () => {
     const payload = {
       email: localStorageUtil.getItem('user')?.email,
       object_id: bookId
@@ -166,7 +166,7 @@ function BookSingle() {
                       <div className="col-12 text-center mt-2">
                         { (isAuthenticated() && !isAdmin())&& (
                           <Button
-                            onClick={() => callReservation()}
+                            onClick={() => addToCartFunc()}
                             className="resever-btn"
                           >
                             Add to Cart

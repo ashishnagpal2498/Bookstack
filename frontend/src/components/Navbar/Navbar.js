@@ -35,14 +35,17 @@ function CommonNavbar({ user, setUser, admin }) {
                         <Nav.Link href="/about">About Us</Nav.Link>
                         <Nav.Link href="/contactus">Contact Us</Nav.Link>
                         <Nav.Link href="/faq">FAQ</Nav.Link>
-                        {(user) ? <Nav.Link href="/cartdetails">Cart</Nav.Link> : <></>}
+                        
                         {(user) ? <Nav.Link href="/latefee">Late Fee System</Nav.Link> : <></>}
                         {(user && isAdmin()) ?
                             <Nav.Link href="/manage-books">Book Management</Nav.Link> : <></>}
                         {(user && isAdmin()) ?
                             <Nav.Link href="/manage-reservations">Manage Reservations</Nav.Link> : <></>}
+                            {(user) ? <Nav.Link href="/cartdetails">Cart</Nav.Link> : <></>}
                         {
+
                             user ?
+                        
                                 <NavDropdown className="ms-auto"
                                     title={user.name}
                                     id="basic-nav-dropdown">

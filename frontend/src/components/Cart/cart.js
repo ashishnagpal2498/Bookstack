@@ -40,9 +40,9 @@ function CartComp() {
     setCartData(cartData.filter((book) => book._id !== bookId));
   };
 
-  const handleReserve = async (bookId) => {
+//   const handleReserve = async (bookId) => {
     
-  }
+//   }
 
   return (
     <div className="cart bg-gray-100 p-4">
@@ -77,12 +77,12 @@ function CartComp() {
             >
               Remove from Cart
             </button>
-            <button
+            {/* <button
               className="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600 ml-2"
               onClick={() => handleReserve(book._id)}
             >
               Reserve
-            </button>
+            </button> */}
           </div>
         </div>
       ))}
