@@ -96,7 +96,7 @@ npm install bootstrap
 ### BookDetail.js
 Path: \frontend\src\components\Books\BookDetail.js
 
-*Lines 154-159, 242-249*
+*Lines 168-173, 256-263*
 
 ```
 <Button
@@ -129,7 +129,7 @@ The code above was created by adapting the code in [Bootstrap Button](https://ge
 ### BookDetail.js
 Path: \frontend\src\components\Books\BookDetail.js
 
-*Lines 469-632*
+*Lines 483-646*
 
 ```
 <Modal show={show} onHide={handleClose} centered>
@@ -331,7 +331,7 @@ The code above was created by adapting the code in [Bootsrap Modal](https://getb
 ### BookDetail.js
 Path: \frontend\src\components\Books\BookDetail.js
 
-*Lines 170-178, 207-216*
+*Lines 184-192, 224-230*
 
 ```
 <Rating
@@ -368,7 +368,7 @@ The code above was created by adapting the code in [Reacting Rating](https://www
 
 ### BookDetail.js
 
-*Line 119*
+*Line 120*
 
 ```
 toast.success("Review added successfully.");                  
@@ -411,7 +411,7 @@ export default GeeksforGeeks;
 ### BookDetail.js
 Path: \frontend\src\components\Books\BookDetail.js
 
-*Line 88, 117*
+*Line 89, 118*
 
 ```
         const api = await axios.get(`${backend_url}/books/${bookId}`);
