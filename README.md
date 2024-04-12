@@ -2,9 +2,9 @@
 
 Group project for 5709 Advanced Web services.
 
-# Book Stack - v2
+# Book Stack - v3
 
-This version showcases various UI pages that provide contextual information about the application `Book Stack` and its purpose.
+This version of our application have 85% of features completed. 
 
 ## Authors
 
@@ -37,10 +37,6 @@ This version showcases various UI pages that provide contextual information abou
    - Name:- [Yogish Honnadevipura Gopalakrishna](yg926299@dal.ca)
    - Branch Name:- yogish
 
-## Description
-
-This is the directory that contains a stable deployement version of the application. The front-end is deployed on Netlify which we configured by adding a remote that pushes the code to GitHub. The backend is deployed on Render using the same process. We have employed MongoDB for the database.
-
 ## Links
 
 1. Gitlab Repo: https://git.cs.dal.ca/anagpal/csci-5709-grp-13/-/tree/main?ref_type=heads
@@ -57,44 +53,136 @@ This is the directory that contains a stable deployement version of the applicat
 - Username: ab806657@dal.ca
 - Password: pass@1234
 
-## Landing Page
+# Installing
 
-This is where the users reach / land on when they access our site for the first time. Landing pages are generally used to show the use-case, detail, purpose and features offered by the application. This helps users familiarize with the website and makes it intuitive for them to navigate around the website; with that in mind, we developed the landing page with utmost care as it is the first page that the users see. As the saying goes, **First impression should be the best impression**, it is really crucial that we showcase everything in a visually attractive manner as this is the page where we want to introduce ourselves, and the application. The only way to do that is to make it visually appealing by using a cozy color scheme, well adjusted components, and a clean layout.
+1. Clone the project repository by using the URL - https://git.cs.dal.ca/anagpal/csci-5709-grp-13
 
-## Contact Us
+2. Go into the project directory and install the required dependency for frontend and backend application using ```npm install``` command.
+
+3. Set up the environment variables by looking at the ``.env.example`` file
+
+4. Once the dependencies are installed, start the development server by ```npm start``` command.
+
+5. The server for frontend application will be running on port - 3000 [http://localhost:3000](http://localhost:3000). For backend the server will be running on port 8080.
+
+# Deployment
+
+This directory contains a stable deployement version of the application. The ```front-end``` is deployed on Netlify which we configured by adding a remote that pushes the code to GitHub. The ```backend``` is deployed on Render using the same process. We have employed ```MongoDB``` for the database.
+
+Deployment for Frontend is made through **Netlify**. 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c9aa70e1-579d-4e9f-9e3a-f00b2c17b318/deploy-status)](https://app.netlify.com/sites/bookstack-csci-group-13/deploys)
+
+Deployment for backend server is done on **Render**. ![](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+
+# Project Overview
+
+## 1. Details
+
+### Landing Page
+
+This is where the users reach `/` land on when they access our site for the first time. This helps users familiarize with the website and makes it intuitive for them to navigate around the website; with that in mind, we developed the landing page with utmost care as it is the first page that the users see. As the saying goes, **First impression should be the best impression**, it is really crucial that we showcase everything in a visually attractive manner as this is the page where we want to introduce ourselves, and the application. The only way to do that is to make it visually appealing by using a cozy color scheme, well adjusted components, and a clean layout.
+
+### Contact Us
 
 This is where the users can reach out to us if they have any questions, feedback, or issues regarding our application. Contact us pages are essential for building trust and credibility with the users, as well as providing them with the best customer service possible. We want to make it easy and convenient for the users to contact us, so we offer multiple channels and options for them to choose from. We also want to show our personality and values, so we use friendly and engaging language that reflects our brand identity. The contact us page is the last impression that we leave on the users, so we want to make it a positive and memorable one.
 
-## FAQ
+### FAQ
 
 This is where the users can find answers to the most common questions that they may have about our application. FAQ pages are useful for providing quick and clear information, reducing the need for customer support, and improving the user experience. We want to make our FAQ page as helpful and comprehensive as possible. We also want to make our FAQ page easy to navigate, so we organize the questions into categories and use an accordian for a question-and-answer format. The FAQ page is an opportunity for us to address any concerns or objections that the users may have, as well as to highlight the benefits and features of our application.
 
-## Late Fee System
+## 2. Late Fee System
 
 Late Fee System is essentially supposed to penalize users who borrowed books from the library, but failed to return them before the due date. We have defined 2 tasks in this feature which will be talked about in the section below: Late fees can deny users from borrowing/ reserving books until they are cleared. The tasks for this feature involve functionalities for both readers and administrators. Readers are required to view the costs associated with each book that has not been returned, and raise a dispute if they find a charge unnacceptable. On the other hand, administrators have the responsibility to identify users who have incurred late fees. Once it has been confirmed that the readers have cleared these fees, the administrators should be able to clear them from the system, or notify them if they haven't cleared the fee yet. These tasks ensure a smooth operation of the book rental service and maintain a fair system for all users.
 
-To understand the task flow of this feature better: 
-
-#### Admin Workflow:
-
-  1. **Admin logs in**: The admin starts by logging into the system.
-  2. **Navigate to Reservations**: The admin navigates to the reservations section of the system.
-  3. **Add Late Fee**: If a user has not returned a book in time, the admin can click to add a late fee to that specific user.
-  4. **Navigate to Late Fee System Page**: The admin then navigates to the Late Fee System page.
-  5. **View Late Fee Users**: On this page, the admin can see the users to whom they have applied late fees.
-  6. **Search Late Fee Users**: The admin has the ability to search from a list of late fee users.
-  7. **Select a Late Fee User**: The admin can select a user from the list of late fee users.
-  8. **Notify User**: Once a user is selected, the admin can notify them to clear their late fee.
-  9. **Clear Late Fee**: Finally, the admin has the ability to clear the applied late fee, which removes the user from the list.
-
-#### Reader Workflow:
-  1. **Reader logs in**: The reader starts by logging into the system.
-  2. **Access Late Fee System Page**: The reader then accesses the Late Fee System page.
-  3. **View Details**: On this page, the reader can see their details such as active late fee and past late fees.
-
-## Notifications
+## 3. Notifications
 
 Notifications are essential for reminding users or admins about various purposes. Admins can use the service to remind users regarding their uncleared late fees, update in availability of a book, etc., whereas the users can use the service to notify the admin if they have a dispute in their late fee, send an invoice/ confirmation of a successful book reservation. 
+
+## 4. User Registration and Authentication
+
+### Registration
+- Users can register for a new account by providing their first name, last name, email, phone number, password, and confirm password.
+- Form validation checks if the entered information meets the required criteria (e.g., valid email format, password complexity).
+- Upon successful registration, users are redirected to the login page.
+- Users will assume a role of 'user' by default.
+
+### Login
+- Users can log in to their account using their email and password.
+- Form validation ensures that the entered email is in a valid format and that the password meets specific criteria (minimum length, alphanumeric characters, etc.).
+- Upon successful login, users are redirected to their profile page.
+
+### Profile
+- Users can view and edit their profile information, including their first name, last name, email, and phone number.
+- The profile page includes an option to upload a new profile picture.
+- Users can delete their account, which requires confirmation.
+
+### Password Reset
+- Users who forget their password can request a password reset link by entering their registered email address.
+- Form validation checks if the entered email is in a valid format.
+- Upon successful submission, users receive a reset email with instructions on how to reset their password.
+
+## 5. Book Library
+``Book Library feature`` includes following tasks :-View All, Search Books, Filter Books, Sort by Name, Price.  
+
+1. The user can view all the books available in the library and explore books.
+
+2. Using filters, the user can narrow down the results.
+
+3. User can also search the book by entering a keyword related to it.
+
+4. Lastly, uer can sort the books based on names.
+
+## 6. Book Management:
+
+This Feature involves the management of all books within the Book Stack application. It includes functionalities such as viewing, editing, and deleting books from the system. Admin can search book from the list of books as well.
+
+### Add Book:
+
+- Admin can add new books using this functionality. They need to input essential details such as book title, author, genre, description, etc., to successfully add a book.
+
+### Delete Book:
+
+- With this feature, admin can delete books. Deleting a book removes it permanently from the system.
+
+### Update Book:
+
+- This task enables admin to update the details of existing books. Admin can modify information such as the book title, author, genre, description, etc., as needed.
+
+### Update Reservation on Book Return:
+
+- When a user returns a reserved book, this functionality helps admin update the reservation status of the book accordingly. It ensures that the book becomes available for reservation by other users.
+
+### Apply Late Fees for Book:
+
+- This task involves the application of late fees for books that are returned past their due date. Users are notified of the late fee and required to settle the amount before further borrowing privileges are granted.
+
+## 7. Book Detail: 
+This feature shows the detailed view of the book that is clicked by the reader from the listing screen under 'Books' option of nav bar. A user can see the full book details by clicking on the option under "About" section. This page also shows a section of recommendations that will list similar books. The reader can navigate back and forth from the book detail screen to the book recommendation screen. For easy usability, the pagination option is included. Below are the tasks included within this feature: 
+
+### View Book detail 
+To show all related details of the book; such as book name, description, author, etc. When the user is logged in and they have a late-fees associated, they won't be able to see the reserve button below the book image.
+
+### Similar recommendations 
+
+This section is enclosed within the bottom part of the page where the similar book to the current one is shown.
+
+### View Rating & review
+
+A reader can get better insights about the book content by checking the associated ratings and reviews for the currently viewing book using this option lablled as "View Rating and Review". The relevant sorting options are included for checking the most recent and the most relevant reviews.  
+
+## 8. Book Feedback: 
+This is another feature linked within the  book details page where users can share their reading experience with the rest of the community by adding reviews or rating to it. Following are the tasks included within this: 
+
+- Reviews: A reader can submit their comment regarding the currently opened book using the input option available under "Do you want to rate and review this book?".
+- Rating: A reader can also rate a book using the same section and submit the details.
+
+## 9. Add to Cart
+The "Add to Cart" feature facilitates the process of purchasing books. Initially, the system checks whether the user has logged in. If not, the user is redirected to the login page. Once logged in, the user can navigate from the dashboard to the book details page. Here, they can review the desired book and, if they choose to purchase it, they can click on the "add to cart" button. Upon clicking this button, the system adds the book to the shopping cart and confirms the action with a prompt stating "Book added to Cart successfully." This feature provides a user-friendly approach to selecting and securing books for purchase.
+
+## 10. Reserve Book 
+
+## 11. Favorites
+
 
 ## Built With
 
@@ -104,14 +192,705 @@ Notifications are essential for reminding users or admins about various purposes
 4. [NodeJS](https://nodejs.org/en) - Javascript runtime environment for building fast and scalable web applications
 5. [ExpressJS](https://expressjs.com/) - Node framework for building REST apis
 6. [React Bootstrap](https://react-bootstrap.netlify.app/) - Styling Framework
+7. [ExpressJS](https://expressjs.com/) 
 
-## Sources Used
 
-### frontend/tailwind.config.js
+# Sources Used
+
+## Frontend 
+
+### Learning Materials
+
+To have understanding of HTML and CSS concepts and refresh the knowledge on the topics we checked following videos :-
+1. [Advanced HTML/CSS Concepts Crash Course](https://www.youtube.com/watch?v=XhqEuyWjbdo) - *codedamn*
+
+2. [Flexbox CSS In 20 Minutes](https://www.youtube.com/watch?v=JJSoEo8JSnc) - *Traversy Media*
+
+Using the above materials, we learnt about HTML5 semantics, CSS selectors, pseudo selectors and flex boxes.
+
+### Code 
+
+### 1.  book-library.css
+
+*Lines 110 - 118*
+
+```css
+.book-shelf {
+    position: absolute;
+    bottom: 40px;
+    width: 60%;
+    background: linear-gradient(30deg,rgba(254,228,175,255), #996443); /* Used here */
+    padding: 5px;
+    text-align: center;
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.4);
+} 
+
+```
+
+The code above was created by adapting the code in [Mdn](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient) as shown below: 
+
+```css
+background: linear-gradient(#e66465, #9198e5);
+background: linear-gradient(45deg, blue, red)
+
+```
+
+- The code was used by studying about linear-gradient CSS function and then implementing according to requirement of the assignment.
+
+- The above code was used because we wanted to implement the book shelf having a real visual of how actually the shelf looks like.
+
+- We combined the above 2 linear-gradient functions provided and used background having gradient effect along with rotation at 30 degree.
+
+### 2. filters.css
+
+*Lines 161 - 168 and 185 - 189*
+
+```css
+.search-box input:not(:placeholder-shown):not(:focus)+label {
+    opacity: 0;
+    pointer-events: none;
+}
+...
+...
+.search-box input:not(:placeholder-shown)~#remove-search {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
+}
+```
+
+The code above was created by adapting the code in [StackOverflow](https://stackoverflow.com/a/61130966) as shown below: 
+
+```css
+input:not(:placeholder-shown) {
+  border: 1px solid red;
+}
+```
+
+- The query was present on stackoverflow as ``` Detect if an input has text in it using CSS -- on a page We am visiting and do not control? ```. We skimmed through all the answers and used the best possible answer for my requirement.
+
+- We had a requirement that the remove text button and search label should be visible and not visible based on the text present in the input box. 
+
+- We modified the code to use specifically for label and remove-search icon in combination with *CSS selectors*.
+
+### 3. FilterBtn.js, Search.js
+
+*Lines 7 and 40 respectively*
+
+```html
+<!-- Filter Icon -->
+<span id='filter-icon'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="filter"><path d="M2 7h.142a3.981 3.981 0 0 0 7.716 0H30a1 1 0 0 0 0-2H9.858a3.981 3.981 0 0 0-7.716 0H2a1 1 0 0 0 0 2zm4-3a2 2 0 1 1-2 2 2 2 0 0 1 2-2zm24 11h-.142a3.981 3.981 0 0 0-7.716 0H2a1 1 0 0 0 0 2h20.142a3.981 3.981 0 0 0 7.716 0H30a1 1 0 0 0 0-2zm-4 3a2 2 0 1 1 2-2 2 2 0 0 1-2 2zm4 7H19.858a3.981 3.981 0 0 0-7.716 0H2a1 1 0 0 0 0 2h10.142a3.981 3.981 0 0 0 7.716 0H30a1 1 0 0 0 0-2zm-14 3a2 2 0 1 1 2-2 2 2 0 0 1-2 2z"></path></svg> </span>
+
+<!-- Search Icon -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="search"><g data-name="Layer 2"><path d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z" data-name="search"></path></g></svg>
+
+```
+The code above was created by adapting the code in [Iconscout](https://iconscout.com/icons/cross) having multiple icons options. 
+
+
+```html
+<svg></svg>
+```
+
+- The icons code was present on the site available.
+- We wanted to display the icons to make the UI user friendly.
+- We modified the code by adding appropriate CSS on the ``HTML`` element.
+
+### 4. FilterMenu.js
+
+*Lines 25 and 47 respectively*
+
+```js
+ useEffect(() => {
+        axios.get(`${backend_url}/books/genres`)
+            .then(response => {
+                if (response.data.status) {
+                    const fetchedGenres = response.data.data.map(genre => genre.name);
+                    setGenres(fetchedGenres);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching genres:", error);
+            });
+
+        axios.get(`${backend_url}/books/authors`)
+            .then(response => {
+                if (response.data.status) {
+                    const fetchedAuthors = response.data.data.map(author => author.name);
+                    setAuthors(fetchedAuthors);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching authors:", error);
+            });
+    }, []);
+```
+
+The code above was created by adapting the code in [blog.logrocket](https://blog.logrocket.com/useeffect-react-hook-complete-guide/#:~:text=This%20may%20sound%20strange%20initially,UI%20because%20they%20run%20asynchronously) as shown below:
+```js
+ useEffect(() => {
+    console.log("useEffect local storage");
+    const persistedTitle = localStorage.getItem("title");
+    setTitle(persistedTitle || []);
+  }, []);
+```
+
+- The code was used to have an understanding on different use-case of useEffect Hook.
+- We used the code because we wanted to make the call only once when the component mounts in React.
+- We used the empty square brackets and called the genres and authors API to fetch all the available filters using axios.
+
+### 5. BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
+
+*Lines 168-173, 256-263*
+
+```js
+<Button
+ onClick={() => callReservation()}
+  className="resever-btn"
+>
+  Reserve
+</Button>
+...
+<Button
+  onClick={() => {
+    addRating();
+  }}
+  className="resever-btn"
+>
+  Submit
+</Button>                          
+
+```
+
+The code above was created by adapting the code in [Bootstrap Button](https://getbootstrap.com/docs/4.0/components/buttons/) after thoroughly studying the original source as shown below: 
+
+```js
+<button class="btn btn-primary" type="submit">Button</button>
+
+```
+
+- [Bootstrap Buttons](https://getbootstrap.com/docs/4.0/components/buttons/)'s code is used as reference to create button designs.
+
+### 6. BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
+
+*Lines 483-646*
+
+```js
+<Modal show={show} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            {}
+            <Modal.Title>Customer Ratings & Reviews</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="modalReviewBody">
+            <div className="d-flex align-items-center gap-2">
+              <h2 className="">
+                {ratingArray.length > 0 &&
+                  (
+                    ratingArray.reduce((acc, val) => {
+                      var objreating =
+                        acc + parseFloat(val.noOfStars.toFixed(1));
+                      return objreating;
+                    }, 0) / ratingArray.length
+                  ).toFixed(1)}
+              </h2>
+
+              <div className="d-flex align-items-center gap-2">
+                <Rating
+                  stop={5}
+                  readonly
+                  initialRating={ratingRatio}
+                  emptySymbol={
+                    <FontAwesomeIcon
+                      icon={regularStar}
+                      size="1x"
+                      className="medium"
+                    />
+                  }
+                  fullSymbol={
+                    <FontAwesomeIcon
+                      icon={solidStar}
+                      size="1x"
+                      className="medium"
+                      style={{ color: "#f5c842" }}
+                    />
+                  }
+                />
+              </div>
+              <div className="mx-1">
+                {}
+                <button
+                  className="mx-2 btn btn-primary"
+                  onClick={() => {
+                    setShowFilter(!showFilter);
+                  }}
+                >
+                  {!showFilter ? "Show Filters" : "Hide Filters"}
+                </button>
+              </div>
+            </div>
+
+            <div
+              className={`${
+                showFilter ? "d-flex" : "d-none"
+              } flex-wrap mt-3 justify-content-center`}
+            >
+              <div>
+                <FontAwesomeIcon
+                  icon={faFilter}
+                  className="fs-3 mx-sm-2 mx-1"
+                />
+              </div>
+              <div>
+                <button
+                  className={`cursor-pointer mx-sm-2 mx-1 ${
+                    isReleventOrRecent !== "relevent" ? "flActive" : ""
+                  }`}
+                  onClick={handleRecent}
+                >
+                  Most Recent
+                </button>
+              </div>
+              <div>
+                <button
+                  className={`cursor-pointer mx-sm-2 mx-1 ${
+                    isReleventOrRecent === "relevent" ? "flActive" : ""
+                  }`}
+                  onClick={handleRelevant}
+                >
+                  Most Relevant
+                </button>
+              </div>
+            </div>
+            {isReleventOrRecent === "recent" ? (
+              <>
+                {mostRecent.map((mostRecentData, index) => (
+                  <div
+                    key={index}
+                    className="my-2 d-flex align-items-center npmreating1"
+                  >
+                    <div className="mx-2">
+                      <i className="fa-solid fa-user"></i>
+                    </div>
+                    <div className="mx-2">
+                      <div className="d-flex align-items-center gap-2">
+                        <Rating
+                          stop={5}
+                          readonly
+                          initialRating={mostRecentData.noOfStars}
+                          emptySymbol={
+                            <FontAwesomeIcon
+                              icon={regularStar}
+                              size="1x"
+                              className="medium"
+                            />
+                          }
+                          fullSymbol={
+                            <FontAwesomeIcon
+                              icon={solidStar}
+                              size="1x"
+                              className="medium"
+                              style={{ color: "#f5c842" }}
+                            />
+                          }
+                        />
+                      </div>
+                      <h6 className="mt-1">{mostRecentData.description}</h6>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {mostRelevant?.map((mostRelevantData, index) => (
+                  <div
+                    key={index}
+                    className="my-2 d-flex align-items-center npmreating1"
+                  >
+                    <div className="mx-2">
+                      <i className="fa-solid fa-user"></i>
+                    </div>
+                    <div className="mx-2">
+                      <div className="d-flex align-items-center gap-2">
+                        <Rating
+                          stop={5}
+                          readonly
+                          initialRating={mostRelevantData.noOfStars}
+                          emptySymbol={
+                            <FontAwesomeIcon
+                              icon={regularStar}
+                              size="1x"
+                              className="medium"
+                            />
+                          }
+                          fullSymbol={
+                            <FontAwesomeIcon
+                              icon={solidStar}
+                              size="1x"
+                              className="medium"
+                              style={{ color: "#f5c842" }}
+                            />
+                          }
+                        />
+                      </div>
+                      <h6 className="mt-1">{mostRelevantData.description}</h6>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+          </Modal.Body>
+        </Modal>                         
+
+```
+
+The code above was created by adapting the code in [Bootsrap Modal](https://getbootstrap.com/docs/4.0/components/modal/) as shown below: 
+
+```js
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+```
+
+- [Bootsrap Modal](https://getbootstrap.com/docs/4.0/components/modal/)'s Code was used for the modal popup design to keep the consistency of bootsrap design and responsiveness by thoroughly studying and understanding the concept and logic.
+- [FA Icons](https://fontawesome.com/v4/icons/)'s Code was used to show the fonts and icons.
+- [FortAwesome Icons](https://docs.fontawesome.com/web/setup/get-started)'s code was used to show fonts.
+
+### 7. BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
+
+*Lines 184-192, 224-230*
+
+```js
+<Rating
+ stop={5}
+ initialRating={ratingRatio}
+ emptySymbol={
+   <FontAwesomeIcon
+     icon={regularStar}
+     size="1x"
+     className="medium"
+   />  
+  ...
+   <Rating
+stop={5}
+
+initialRating={rating}
+emptySymbol={
+  <FontAwesomeIcon
+    icon={regularStar}
+    size="1x"
+    className="medium"
+  />                    
+
+```
+
+The code above was created by adapting the code in [Reacting Rating](https://www.npmjs.com/package/react-rating) after thoroughly studying the original source as shown below: 
+
+```js
+<Rating />
+
+```
+
+- [React Rating](https://www.npmjs.com/package/react-rating)'s code is used as reference to create rating designs.
+
+### 8. BookDetail.js
+
+*Line 120*
+
+```js
+toast.success("Review added successfully.");                  
+
+```
+
+The code above was created by adapting the code in [Toast messages in react tutorial](https://www.geeksforgeeks.org/reactjs-toast-notification/) after thoroughly studying the original source as shown below: 
+
+```js
+import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+ 
+toast.configure();
+function GeeksforGeeks() {
+    const notify = () => {
+        // inbuilt-notification
+        toast.warning("Danger");
+        // inbuilt-notification
+        toast.success("successful");
+        // inbuilt-notification
+        toast.info("GeeksForGeeks");
+        // inbuilt-notification
+        toast.error("Runtime error");
+        // default notification
+        toast("Hello Geeks");
+    };
+    return (
+        <div className="GeeksforGeeks">
+            <button onClick={notify}>Click Me!</button>
+        </div>
+    );
+}
+export default GeeksforGeeks;
+
+```
+
+- [Toast messages in react tutorial](https://www.geeksforgeeks.org/reactjs-toast-notification/) 's Code was used as reference to create a toast success/error messages.
+
+### 9. BookDetail.js
+Path: \frontend\src\components\Books\BookDetail.js
+
+*Line 89, 118*
+
+```js
+        const api = await axios.get(`${backend_url}/books/${bookId}`);
+...
+        const api = await axios.post(backend_url + "/books/rating", data);
+
+```
+
+The code above was created by adapting the code in [Axios In React tutorial](https://www.freecodecamp.org/news/how-to-use-axios-with-react/) after thoroughly studying the original source as shown below: 
+
+```js
+import axios from "axios";
+import React from "react";
+
+const baseURL = "https://jsonplaceholder.typicode.com/posts";
+
+export default function App() {
+  const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(`${baseURL}/1`).then((response) => {
+      setPost(response.data);
+    });
+  }, []);
+
+  function createPost() {
+    axios
+      .post(baseURL, {
+        title: "Hello World!",
+        body: "This is a new post."
+      })
+      .then((response) => {
+        setPost(response.data);
+      });
+  }
+
+  if (!post) return "No post!"
+
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
+      <button onClick={createPost}>Create Post</button>
+    </div>
+  );
+}
+
+```
+
+- [Axios In React tutorial](https://www.freecodecamp.org/news/how-to-use-axios-with-react/) 's Code was used as reference to create a axios post request.
+
+### 10. Recommended.js
+Path: \frontend\src\components\Books\Recommended.js
+
+*Lines 89-104*
+
+```js
+<ReactPaginate
+      previousLabel={"<<"}
+      nextLabel={">>"}
+      breakLabel={"..."}
+      pageCount={pageCount}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={2}
+      onPageChange={handlePageChange}
+      containerClassName={"pagination justify-content-end"}
+      activeClassName={"active"}
+      pageLinkClassName={"page-link"}
+      previousLinkClassName={"page-link"}
+      nextLinkClassName={"page-link"}
+      breakLinkClassName={"page-link"}
+      disabledClassName={"disabled"}
+ />                  
+
+```
+
+The code above was created by adapting the code in [Reacting Paginate](https://www.npmjs.com/package/react-paginate) after thoroughly studying the original source as shown below: 
+
+```js
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
+
+// Example items, to simulate fetching from another resources.
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
+function Items({ currentItems }) {
+  return (
+    <>
+      {currentItems &&
+        currentItems.map((item) => (
+          <div>
+            <h3>Item #{item}</h3>
+          </div>
+        ))}
+    </>
+  );
+}
+
+function PaginatedItems({ itemsPerPage }) {
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+
+  // Simulate fetching items from another resources.
+  // (This could be items from props; or items loaded in a local state
+  // from an API endpoint with useEffect and useState)
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = items.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(items.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+  return (
+    <>
+      <Items currentItems={currentItems} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
+    </>
+  );
+}
+
+// Add a <div id="container"> to your HTML to see the component rendered.
+ReactDOM.render(
+  <PaginatedItems itemsPerPage={4} />,
+  document.getElementById('container')
+);
+
+```
+
+- [React Paginate](https://www.npmjs.com/package/react-paginate)'s code is used as reference to create paginate designs.
+
+### 11. Recommended.js
+Path: \frontend\src\components\Books\Recommended.js
+
+*Lines 45-52*
+
+```js
+ <Button
+            className="m-4"
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            Back
+          </Button>               
+
+```
+
+The code above was created by adapting the code in [Bootstrap Button](https://getbootstrap.com/docs/4.0/components/buttons/) after thoroughly studying the original source as shown below: 
+
+```
+<button class="btn btn-primary" type="submit">Button</button>
+
+```
+
+- [Bootstrap Buttons](https://getbootstrap.com/docs/4.0/components/buttons/)'s code is used as reference to create button designs.
+
+
+### 12. Recommended.js
+Path: \frontend\src\components\Books\Recommended.js
+
+*Line 29*
+
+```js
+const api = await axios.get(backend_url + "/books/all");
+
+```
+
+The code above was created by adapting the code in [Axios In React tutorial](https://www.freecodecamp.org/news/how-to-use-axios-with-react/) after thoroughly studying the original source as shown below: 
+
+```js
+import axios from "axios";
+import React from "react";
+
+const baseURL = "https://jsonplaceholder.typicode.com/posts";
+
+export default function App() {
+  const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(`${baseURL}/1`).then((response) => {
+      setPost(response.data);
+    });
+  }, []);
+
+  function createPost() {
+    axios
+      .post(baseURL, {
+        title: "Hello World!",
+        body: "This is a new post."
+      })
+      .then((response) => {
+        setPost(response.data);
+      });
+  }
+
+  if (!post) return "No post!"
+
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
+      <button onClick={createPost}>Create Post</button>
+    </div>
+  );
+}
+
+```
+
+- [Axios In React tutorial](https://www.freecodecamp.org/news/how-to-use-axios-with-react/) 's Code was used as reference to create a axios post request.
+
+
+### 13. frontend/tailwind.config.js
 
 _Lines 1 - 26_
 
-```
+```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -141,7 +920,7 @@ module.exports = {
 
 This code above was created by adapting the code in [Configuration - A guide to configuring and customizing your Tailwind installation.](https://tailwindcss.com/docs/configuration) as shown below:
 
-```
+```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [],
@@ -155,11 +934,11 @@ module.exports = {
 - The above code is the default configuration that is provided by Tailwind CSS that provides certain styles and configurations to components and elements. Since nothing is defined yet in the configuration file, everything is defaulted to the default configuration that can be found in [default configuration](https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js).
 - We modifed it so that we can define some custom colors for the application's background, and components. This is important as it makes it easier to make the entire application look and feel consistent throughout even though different members might work on different parts of the application.
 
-### frontend/src/components/LateFeeSystem/AdminSide/LateFeeSystemSearch.js
+### 14. frontend/src/components/LateFeeSystem/AdminSide/LateFeeSystemSearch.js
 
 _Lines 45-80_
 
-```
+```js
         <div className='bg-aboutUsBrown h-full py-8'>
             <div className="container-xl mx-auto px-4 py-8 text-black bg-white rounded-lg">
                 <div className="flex flex-col relative ">
@@ -198,13 +977,13 @@ _Lines 45-80_
         </div>
 ```
 
-- The above code is the is created by using Tailwind CSS classes according to the necessity and use case. I had not used any pre-built templates/ layouts to achieve the UI. Instead, I used tailwind class names and custom styling to achieve the look that I had proposed in wireframes and semi-functional prototypes.
+- The above code is the is created by using Tailwind CSS classes according to the necessity and use case. We had not used any pre-built templates/ layouts to achieve the UI. Instead, We used tailwind class names and custom styling to achieve the look that We had proposed in wireframes and semi-functional prototypes.
 - The code also showcases the use of ternary operators to display an error message (User feedback) if any error occurs while fetching the data.
 - The code is also mobile responsive which was achieved through tailwind css breakpoints such as **md:, sm:** which allows us to manipulate styling based on certain device widths.
 
 _Lines 7 - 42_
 
-```
+```js
     const navigate = useNavigate();
     const [apiResults, setApiResults] = useState([]);
     const [apiMessage, setApiMessage] = useState('');
@@ -243,14 +1022,14 @@ _Lines 7 - 42_
     };
 ```
 
-- I have setup state variables to achieve the dynamic update of UI. Furthermore, creating multiple state variables for multiple parameters of the request's response made the code more decoupled and easier to manage.
+- We have setup state variables to achieve the dynamic update of UI. Furthermore, creating multiple state variables for multiple parameters of the request's response made the code more decoupled and easier to manage.
 - The use of useEffect for search instead of a button makes the search functionality rapidly fast.
 
-### frontend/src/components/LateFeeSystem/AdminSide/LateFeeSytemUserDetails.js
+### 15. frontend/src/components/LateFeeSystem/AdminSide/LateFeeSytemUserDetails.js
 
 _Lines 8 - 88_
 
-```
+```js
     const navigate = useNavigate();
     const location = useLocation();
     const { user_id } = location.state;
@@ -340,7 +1119,7 @@ _Lines 8 - 88_
 
 _Lines 169 - 190_
 
-```
+```js
 <div className="fixed z-100 inset-0 overflow-y-auto">
   <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div className="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -364,9 +1143,9 @@ _Lines 169 - 190_
     </div>
 </div>
 ```
-- This code is referenced and adapted from [Tailwind CSS Modal - Flowbite](https://flowbite.com/docs/components/modal/). I had changed the entire look and feel of the modal according to the needs of my feature's UI.
+- This code is referenced and adapted from [Tailwind CSS Modal - Flowbite](https://flowbite.com/docs/components/modal/). We had changed the entire look and feel of the modal according to the needs of my feature's UI.
 The original code is shown below:
-```
+```js
 
 <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
 Toggle modal
@@ -395,10 +1174,10 @@ Toggle modal
     </div>
 </div>
 ```
-- The original code has many unnecessary components (buttons, text) that I had removed as they were not useful to my usecase. I also made it mobile responsive by setting breakpoint styling.
+- The original code has many unnecessary components (buttons, text) that we had removed as they were not useful to my usecase. we also made it mobile responsive by setting breakpoint styling.
 
 _Lines 196 - 243_
-```
+```js
                         <table class="w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
@@ -448,11 +1227,9 @@ _Lines 196 - 243_
                             </tbody>
                         </table>
 ```
-- The code above is for a table that I referenced and extended from [Tailwind CSS Table - Flowbite](https://flowbite.com/docs/components/tables/). The original code is as shown below:
+- The code above is for a table that we referenced and extended from [Tailwind CSS Table - Flowbite](https://flowbite.com/docs/components/tables/). The original code is as shown below:
 
-```
-
-
+```js
 <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -519,193 +1296,13 @@ _Lines 196 - 243_
 </div>
 
 ```
-- While the original code had defined the structure that I needed, the data, and the size of the table were not what I wanted. I had added more columns according to my data, defined some custom styling based on the type of the data that I was handling, and also made it mobile responsive by setting breakpoint styling.
+- While the original code had defined the structure that we needed, the data, and the size of the table were not what we wanted. we had added more columns according to my data, defined some custom styling based on the type of the data that we was handling, and also made it mobile responsive by setting breakpoint styling.
 
-### frontend/src/services/LateFeeSystem & Notifications
-- The Javascript files located in these folders contain several functions that interact with a backend server to manage the API calls for both of my features (**Late Fee System** and **Notifications**).
-- These functions use the fetch API to make HTTP requests to various endpoints on the server.
-- Here’s a brief description of each function:
-
-  1. **createLateFee(user_id, book_id, reserved_date):** This function creates a late fee for a specific user and book. It sends a POST request to the /late-fees/create endpoint with the user ID, book ID, and reserved date in the request body.
-  2. **checkActiveLateFee(user_id):** This function checks if a specific user has any active late fees. It sends a GET request to the /late-fees/check-restriction/{user_id} endpoint.
-  3. **getActiveLateFeesUsers():** This function retrieves a list of users who have active late fees. It sends a GET request to the /late-fees/active-users endpoint.
-  4. **getUserDetails(user_id):** This function retrieves the details of a specific user. It sends a GET request to the /late-fees/user-details/{user_id} endpoint.
-  5. **getActiveLateFeeDetails(user_id):** This function retrieves the details of the active late fees for a specific user. It sends a GET request to the /late-fees/active-fee-details/{user_id} endpoint.
-  6. **getPastLateFees(user_id):** This function retrieves the details of past late fees for a specific user. It sends a GET request to the /late-fees/past-fee-details/{user_id} endpoint.
-  7. **clearActiveLateFee(user_id):** This function clears the active late fee for a specific user. It sends a POST request to the /late-fees/clear-fee endpoint with the user ID in the request body.
-  8. **remindUserLateFee(user_id):** This function sends a late fee reminder to a specific user. It sends a POST request to the /notify/late-fee-reminder-user/{user_id} endpoint.
-  9. **disputeLateFeeCharge(user_id):** This function allows a specific user to dispute a late fee charge. It sends a POST request to the /notify/late-fee-dispute-charge/{user_id} endpoint.
-  
-- Each function uses the **async/await** syntax to handle the asynchronous nature of the fetch API, and they all return the response data as a JavaScript object. If an error occurs during the fetch operation, the error is logged to the console and the function returns null.
-- Using this structure makes it easier to call the APIs inside the components, as we don't need to manage all the input/ response/ await validations again.
-
-### frontend/src/util/config.js
-
-```
-export const backend_url = process.env.REACT_APP_ENV === 'production' ? process.env.REACT_APP_BACKEND_URL : 'http://localhost:8080';
-```
-
-- This line of code makes it easier to develop and test the feature by using specific endpoints based on an environment variable.
-
-### frontend/src/util/localStorage.js
-
-```
-// Author - Abhinav Acharya Tirumala Vinjamuri
-// Util function for Local Storage so that we don't need to worry about converting it into a string and back to object...
-
-export const localStorageUtil = {
-    setItem: function (key, value) {
-        localStorage.setItem(key, JSON.stringify(value));
-    }, 
-    
-    getItem: function (key) {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : null;
-    },
-
-    removeItem: function (key) {
-        localStorage.removeItem(key);
-    },
-
-    clear: function () {
-        localStorage.clear();
-    }
-
-}
-```
-
-- This line of code makes it easier to use data set in local storage session of the user's browser without handling it again and again.
-
-### frontend/src/util/authenticationService.js
-
-```
-// Author - Abhinav Acharya Tirumala Vinjamuri
-import { localStorageUtil } from "./localStorage";
-
-export const isAuthenticated = () => {
-    if (localStorageUtil.getItem('user')) {
-        return true;
-    }
-    return false;
-}
-
-export const isAdmin = () => {
-    if (!localStorageUtil.getItem('user')) {
-        return false;
-    }
-    if (localStorageUtil.getItem('user')?.role === 'admin') {
-        return true;
-    }
-    return false;
-}
-```
-
-- This line of code makes it easier to check if a user is currently logged in, or even check their role to verify if they're an admin. (for route guarding certain endpoints).
-
-### frontend/src/App.js
-
-_Lines 47 - 48_
-
-```
-<Route path="/latefee" element={isAuthenticated() ? (isAdmin() ? <LateFeeSystemSearch /> : <LateFeeDetails />) : <Navigate to="/login" /*replace="true"*/ />} />
-<Route path="/latefee/details" element={(isAuthenticated() && isAdmin()) ? <LateFeeSystemUserDetails /> : <Navigate to="/login" /*replace="true"*/ />} />
-```
-
-- The first line checks if the user is authenticated (as determined by the **isAuthenticated()** function), it checks if the user is an admin (using the **isAdmin()** function). If the user is an admin, it renders the **LateFeeSystemSearch** component; otherwise, it renders the **LateFeeDetails** component. If the user is not authenticated, it redirects the user to the **/login** page.
-- The second line checks if the user is authenticated and is an admin, if so, it renders the **LateFeeSystemUserDetails** component. If the user is not authenticated or is not an admin, it redirects the user to the **/login** page.
-
-### backend/models/
-
-- This folder is created to define the schema of the collections that we have defined / proposed during our project proposal. 
-- The schema of each collection is developed by referencing the data contracts that can be found at **./data-contracts/**.
-
-### backend/controllers/lateFeeSystem.js
-
-- This JavaScript file is a controller for managing late fees of our book rental system. It exports several functions that interact with a MongoDB database using Mongoose schemas and the native MongoDB driver’s ObjectId function. Here’s a brief description of the exported functions from the file:
-
-  1. **createLateFee(req, res):** creates a new late fee for a user. The function validates the user and book details, checks if a late fee already exists for the user, and then either updates the existing late fee or creates a new one. It calculates the due amount as 50% of the book price. If an error occurs, it logs the error and sends a 500 status code response.
-  2. **checkActiveLateFee(req, res)**: checks if a user has any active late fees. The function validates the user details, checks if a late fee exists for the user, and then checks if there are any unpaid late fees. If there are unpaid late fees, it returns true; otherwise, it returns false. If an error occurs, it logs the error and sends a 500 status code response.
-  3. **getActiveLateFeesUsers(req, res)**: fetches a list of all users who have active late fees. The function retrieves all documents with unpaid late fees, iterates over them, and for each document, it fetches the user and book details, constructs a user dictionary, and adds it to a list. If there are no users with active late fees, it returns a message indicating so. 
-  4. **getUserDetails(req, res)**: Fetches user details to display on the admin late fee details page. It validates the user details and returns the user’s picture, name, email, and phone. If an error occurs, it sends a 500 status code response.
-  5. **getActiveLateFeeDetails(req, res)**: Fetches active late fee details to display on the admin and user late fee details page. It validates the user and late fee details, and returns the book picture, book name, reserved date, due date, and amount due. If an error occurs, it sends a 500 status code response.
-  6. **getPastLateFees(req, res)**: Fetches past late fees to display on the admin and user late fee details page. It validates the user and late fee details, and returns the book picture, book name, paid date, and amount paid. If an error occurs, it sends a 500 status code response.
-  7. **clearActiveLateFee(req, res)**: Clears active late fees for a user. It validates the user and late fee details, and sets the paid status to true and adds a paid date. If an error occurs, it sends a 500 status code response.  
-
-### backend/controllers/notifications.js
-- This javascript file is a controller for managing the notifications of our book rental app. Here's a brief description of the exported functions of the file:
-  1. **remindUserLateFee(req, res)**: Sends a late fee reminder to a user. It validates the user details, constructs an email content, and sends an email to the user. If an error occurs, it sends a 500 status code response.
-  2. **disputeLateFeeCharge(req, res)**: Notifies the admin of uncleared late fees. It validates the user and admin details, constructs an email content, and sends an email to the admin. If an error occurs, it sends a 500 status code response.
-- For sending emails, I have 2 more utilities setup that I'm using inside this controller file. I have created an HTML template that is used to send as the email's body. I am initiating the transport of the email notifications using node's SMTP utility called [nodemailer](https://www.nodemailer.com/). More on that later. 
-
-### backend/routes/lateFeeSystem.js & Notifications.js
-
-- Both of these files are structured to define a set of routes for handling different API requests in an Express.js application.
-
-### backend/util/mailService.js
-
-_Lines 1 - 23_
-```
-var nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
-dotenv.config();
-
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.ADMIN_EMAIL,
-    pass: process.env.ADMIN_PASS,
-  }
-});
-
-module.exports = transporter;
-
-```
-- This function sends an email using a pre-configured transporter object. It takes the sender’s email address, recipient’s email address, email subject, HTML content for the email body, and a callback function as parameters. The function constructs the email options and sends the email using the transporter.sendMail() method. 
-- This function is referred and adapted from [Nodemailer](https://www.nodemailer.com/), and changed to fit the MVC architecture that I've setup in the project. The original code is as shown below:
-```
-let transporter = nodemailer.createTransport({
-    sendmail: true,
-    newline: 'unix',
-    path: '/usr/sbin/sendmail'
-});
-transporter.sendMail({
-    from: 'sender@example.com',
-    to: 'recipient@example.com',
-    subject: 'Message',
-    text: 'I hope this message gets delivered!'
-}, (err, info) => {
-    console.log(info.envelope);
-    console.log(info.messageId);
-});
-``` 
-- To use it in different places without rewriting the code, I decoupled the code to declare them as constants and exported them to use in specific places.
-
-### backend/util/transporter.js
-
-_Lines 1 - 14_
-```
-var nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
-dotenv.config();
-
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.ADMIN_EMAIL,
-    pass: process.env.ADMIN_PASS,
-  }
-});
-
-module.exports = transporter;
-
-```
-- This file exports a transporter object, which is configured to send emails using Gmail’s SMTP service. The transporter is created using the nodemailer.createTransport() method and configured with Gmail as the service, and the email and password of the sender, which are fetched from environment variables. Reference - [Nodemailer](https://www.nodemailer.com/).
-
-### Navbar.js
+### 16. Navbar.js
 
 _Lines 24 - 84_
 
-```
+```js
 <Navbar expand="lg" className="top-nav" data-bs-theme="light">
         <Container className='min-w-full px-4'>
             <Navbar.Brand href="/">
@@ -770,7 +1367,7 @@ _Lines 24 - 84_
 
 - The code above was created by adapting the code in [Navbars | React Bootstrap](https://react-bootstrap.netlify.app/docs/components/navbar). Since navbar is an essential component, we had used the component from Bootstrap CSS.
 
-```
+```js
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
@@ -817,11 +1414,11 @@ _Lines 24 - 84_
 - A navbar is crucial to the application as it contains some useful links that helps users navigate through the application.
 - We changed the alignment of items in the navbar and the color scheme to match the theme of the application.
 
-### Home.js
+### 17. Home.js
 
 _Lines 14-92_
 
-```
+```js
       <div className='home-div'>
         <Container id="hero" className='mb-5'>
         <div className="row">
@@ -904,7 +1501,7 @@ _Lines 14-92_
 ```
 - The code above was created by adapting the code in [Scaffold Template Home Page](https://bootstrapmade.com/demo/Scaffold/).
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1860,10 +2457,10 @@ _Lines 14-92_
 - We separated footer div to a different component called Footer.js.
 
 
-### ContactUs.js
+### 18. ContactUs.js
 
 _Lines 80-153_
-```
+```js
  <div className="contact-us-div">
       <Container className='contact-us-container'>
         <h2>Contact Us</h2>
@@ -1941,7 +2538,7 @@ _Lines 80-153_
 ```
 - The code above was created by adapting the code in [Forms | React Bootstrap](https://react-bootstrap.netlify.app/docs/forms/overview) and [Modals | React Bootstrap](https://react-bootstrap.netlify.app/docs/components/modal).
 
-```
+```js
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -1968,7 +2565,7 @@ _Lines 80-153_
 - We added multiple input fields and validations that checked for proper format of the information that we need from the user. For example, phone numbers, email, etc.
 - We changed the color coding of the modal to match the rest of the website.
 
-```
+```js
       <Modal.Dialog>
         <Modal.Header closeButton>
           <Modal.Title>Modal title</Modal.Title>
@@ -1989,9 +2586,9 @@ _Lines 80-153_
 - We changed the alignment of the text and button in the modal that is different from the original code.
 - We changed the color coding of the modal to match the rest of the website.
 
-### Faq.js
+### 19. Faq.js
 
-```
+```js
 <Container className='contact-us-container'>
                 <Row>
                     <div className='col-lg-6 col-md-12'>
@@ -2037,7 +2634,7 @@ _Lines 80-153_
 ```
 - The code above was created by adapting the code in [Accordions | React Bootstrap](https://react-bootstrap.netlify.app/docs/components/accordion). 
 
-```
+```js
     <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="0">
         <Accordion.Header>Accordion Item #1</Accordion.Header>
@@ -2070,17 +2667,172 @@ _Lines 80-153_
 - We changed the color scheme of the accordion to match the rest of the application.
 - We added multiple items in the accordion, and changed the text to suit our needs.
 
+
+## Backend
+
+### backend/models/
+
+- This folder is created to define the schema of the collections that we have defined / proposed during our project proposal. 
+- The schema of each collection is developed by referencing the data contracts that can be found at **./data-contracts/**.
+
+### backend/controllers
+We defined in the application architecture of assignment 2 that we will be using MVC architecture. Thereby when the router calls the controller the specified method is executed. The controller files are where the business logic exists, interacts with the MongoDB database and returns the response of the request.
+
+### backend/routes
+The main purpose of the routes folder is to divide the routing logic to inculcate the single responsibility principle. In our application, the backend server takes the **HTTP request** and forwards it to its respective **router**. Basically, the request enters the `index.js` file and forwards it to the respective router.
+
+### 1. models/books.js
+
+```js
+// Authors - [Abhinav Acharya Tirumala Vinjamuri, Ashish Nagpal, Arihant Dugar, Jinal Dave]
+const Author = require('./author.js');
+const Genre = require('./genre.js');
+const mongoose = require('mongoose');
+
+const BookSchema = new mongoose.Schema({
+    description: {
+        type: String,
+        required: true
+    },
+    content_link: {
+        type: String,
+        required: true
+    },
+    publisherDate: {
+        type: Date,
+        required: true
+    },
+    // Mapping with Author Collection
+    authorIds: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Author'
+    }],
+    // Mapping with Genre Collection
+    genreIds: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Genre'
+    }],
+    book_name: {
+        type: String,
+        required: true
+    },
+    image_url: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    }
+});
+
+module.exports = mongoose.model('books', BookSchema, 'books');
+
+```
+
+The code above was created by adapting the code in [medium.com](https://medium.com/@akhilanand.ak01/setup-a-basic-node-js-server-using-expressjs-mongoose-65f2a6dbfd58) article as shown below:
+
+
+```js
+const mongoose = require('mongoose');
+
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  // Add more fields as per your product requirements
+});
+
+module.exports = mongoose.model('Product', productSchema);
+```
+
+- The code was used to revisit the concepts of using **mongoose** with **mongoDB** database and **nodeJs** server using ExpressJs.
+- We used the code because We wanted to create schema using mongoose and map it to mongoDB collection.
+- We used the reference to create books schema with different fields type along with referencing other collection using `ObjectId`.
+
+
+### 2. backend/util/mailService.js
+
+_Lines 1 - 23_
+```js
+var nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.ADMIN_EMAIL,
+    pass: process.env.ADMIN_PASS,
+  }
+});
+
+module.exports = transporter;
+
+```
+- This function sends an email using a pre-configured transporter object. It takes the sender’s email address, recipient’s email address, email subject, HTML content for the email body, and a callback function as parameters. The function constructs the email options and sends the email using the transporter.sendMail() method. 
+- This function is referred and adapted from [Nodemailer](https://www.nodemailer.com/), and changed to fit the MVC architecture that we've setup in the project. The original code is as shown below:
+
+```js
+let transporter = nodemailer.createTransport({
+    sendmail: true,
+    newline: 'unix',
+    path: '/usr/sbin/sendmail'
+});
+transporter.sendMail({
+    from: 'sender@example.com',
+    to: 'recipient@example.com',
+    subject: 'Message',
+    text: 'I hope this message gets delivered!'
+}, (err, info) => {
+    console.log(info.envelope);
+    console.log(info.messageId);
+});
+``` 
+- To use it in different places without rewriting the code, we decoupled the code to declare them as constants and exported them to use in specific places.
+
+### 3. backend/util/transporter.js
+
+_Lines 1 - 14_
+```js
+var nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.ADMIN_EMAIL,
+    pass: process.env.ADMIN_PASS,
+  }
+});
+
+module.exports = transporter;
+
+```
+- This file exports a transporter object, which is configured to send emails using Gmail’s SMTP service. The transporter is created using the nodemailer.createTransport() method and configured with Gmail as the service, and the email and password of the sender, which are fetched from environment variables. Reference - [Nodemailer](https://www.nodemailer.com/).
+
+
 ### Images & Icons
 
 - The icons that we used in all pages were taken from [Freepik](https://www.freepik.com/).
+
 - Freepik provides free images for personal and commercial use that we can edit and use in our application.
+
+-  *Books on Wooden Shelves Inside Library* by Stanislav Kondratiev, visit https://www.pexels.com/photo/books-on-wooden-shelves-inside-library-2908984/
+
+- *Percy Jackson and the Olympians* by Rick Riordan visit https://www.readriordan.com/2022/02/15/cover-reveals-percy-jackson-and-the-olympians/
+
+- "Harry Potter and the Half-Blood Prince Book Cover" by Lordcolus is licensed under CC BY 2.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/2.0/?ref=openverse. 
+
 - We changed the color scheme of the images to match the rest of the application.
 
 
 ## Acknowledgments
 1. **Node.js Community:** We are grateful to the Node.js community for their extensive resources and tutorials. The asynchronous nature of Node.js has taught us to think differently about programming logic and structure.
 2. **Express.js Framework:** Express.js has been instrumental in understanding how to set up a server, handle requests, and build APIs. The simplicity and flexibility of Express.js have made backend development more approachable.
-3. **Tailwind CSS:** Tailwind CSS has revolutionized my approach to styling web pages. Its utility-first philosophy encourages component composition and promotes consistency across the project. It streamlined the development as I did not needed to develop separate styling for achieving mobile responsive from scratch.
+3. **Tailwind CSS:** Tailwind CSS has revolutionized my approach to styling web pages. Its utility-first philosophy encourages component composition and promotes consistency across the project. It streamlined the development as we did not needed to develop separate styling for achieving mobile responsive from scratch.
 4. **Coding Community:** The coding community’s dedication to sharing knowledge through articles, blogs, and videos has been invaluable. Their insights have helped us improve our skills and contribute more effectively to our projects.
 5. **React Ecosystem:** Our experience with React has not only enhanced our technical skills but also shaped our problem-solving approach. The React documentation and community have provided clear explanations and examples that have greatly facilitated our understanding of complex concepts. The concept of state, props, and hooks in React has deepened our understanding of data flow within an application and underscored the importance of effective state management.
 
