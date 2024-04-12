@@ -1,3 +1,5 @@
+// Author - Aiwin Charalil Manuel
+
 const express = require('express');
 const router = express.Router();
 const favoritesController = require('../controllers/favorite');

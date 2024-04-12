@@ -1,3 +1,4 @@
+//Author Aiwin Charalil Manuel
 import React from 'react';
 import '../../stylesheets/about.css'; 
 
@@ -24,7 +25,7 @@ const About = () => {
         <p>
         So, what are you waiting for? Grab your favorite drink, cozy up in your favorite reading corner, and dive into Book Stack today. Let's redefine the rules of reading, sharing, and connecting together. Because with Book Stack, the adventure never ends – it's a never-ending story waiting for you to turn the page!
         </p>
-      </div> {/* Close the wrapper */}
+      </div> 
     </div>
   );
 }

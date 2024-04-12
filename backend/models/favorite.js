@@ -1,4 +1,4 @@
-// Authors - [Abhinav Acharya Tirumala Vinjamuri]
+// Author - Aiwin Charalil Manuel
 const mongoose = require('mongoose');
 
 const favoriteSchema = new mongoose.Schema({

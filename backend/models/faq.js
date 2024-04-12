@@ -1,3 +1,5 @@
+// Author - Aiwin Charalil Manuel
+
 const mongoose = require('mongoose');
 
 const faqSchema = new mongoose.Schema({

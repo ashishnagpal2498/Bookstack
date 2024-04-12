@@ -1,3 +1,5 @@
+// Author - Aiwin Charalil Manuel
+
 import React, { useState, useEffect } from 'react';
 import '../../stylesheets/heartbutton.css';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -7,7 +9,6 @@ const HeartButton = ({ username, bookName }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    // Function to check if the item is already a favorite
     const checkFavorite = async () => {
       try {
         const response = await fetch(`${backend_url}/api/favorites/check?username=${encodeURIComponent(username)}&bookName=${encodeURIComponent(bookName)}`);
