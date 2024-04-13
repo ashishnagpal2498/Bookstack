@@ -23,7 +23,7 @@ const BookLibrary = () => {
   const [searchValue,setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("price");
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 8; 
+  const booksPerPage = 12; 
 
   const toggleFilterMenu = () => {
     setOpenFilterMenu(!openFilterMenu);
