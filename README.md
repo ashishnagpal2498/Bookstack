@@ -180,9 +180,10 @@ This is another feature linked within the  book details page where users can sha
 The "Add to Cart" feature facilitates the process of purchasing books. Initially, the system checks whether the user has logged in. If not, the user is redirected to the login page. Once logged in, the user can navigate from the dashboard to the book details page. Here, they can review the desired book and, if they choose to purchase it, they can click on the "add to cart" button. Upon clicking this button, the system adds the book to the shopping cart and confirms the action with a prompt stating "Book added to Cart successfully." This feature provides a user-friendly approach to selecting and securing books for purchase.
 
 ## 10. Reserve Book 
+The Reserve Book feature in Bookstack empowers users to reserve books with ease by placing holds and checking availability. Users can effortlessly reserve a book by placing it on hold and inquire about its availability through intuitive interactions. The process flow begins as users navigate to the Bookstack application and access the Reserve Book feature. From there, they can seamlessly place holds on desired books and check their availability status, ensuring a streamlined experience for managing their reading materials
 
 ## 11. Favorites
-
+The favourite feature allows user to add their favourite book to a single list . The user visit the page of his favourite book. On that page there will be a button on shape of a heart , which the user can click to add the button to favourites. After adding a book to favourites the colour of the button changes to red to indicate that the book has been added to favourite successfully.
 
 ## Built With
 

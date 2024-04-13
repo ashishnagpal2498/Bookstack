@@ -8,6 +8,10 @@
     --secondary-color: #835834;
 }
 
+body {
+    padding-top: 55px;
+}
+
 .top-nav {
     display: flex;
     align-items: center;
@@ -15,8 +19,9 @@
     background-color: var(--primary-color);
     color: var(--white-color);
     gap: 2em;
-    position: sticky !important;
+    position: fixed !important;
     top: 0;
+    width: 100%;
     z-index: 5;
 }
 
